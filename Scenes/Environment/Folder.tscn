@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cftigmhgqn0o5"]
+
+[ext_resource type="Script" uid="uid://bmvsm2wwfdhrt" path="res://Scripts/Environment/Infectable.gd" id="1_a1sfu"]
+[ext_resource type="Texture2D" uid="uid://c57gmrid7ke0b" path="res://addons/2d_shapes/Rectangle.svg" id="2_7ul6t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6nyw"]
+size = Vector2(40, 41)
+
+[node name="File" type="Area2D" unique_id=1434683303]
+modulate = Color(1, 1, 0, 1)
+scale = Vector2(3, 3)
+script = ExtResource("1_a1sfu")
+points_worth = 50
+infection_time = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=232275585]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_l6nyw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1384779032]
+scale = Vector2(3, 3)
+texture = ExtResource("2_7ul6t")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

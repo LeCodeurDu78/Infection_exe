@@ -36,7 +36,6 @@ func _ready():
 # MAIN LOOP
 # ========================
 func _physics_process(delta):
-	print(virus.discretion)
 	$DetectionArea.scale = detectionVector * virus.discretion 
 	scan_timer += delta
 
