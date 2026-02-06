@@ -1,45 +1,108 @@
 extends Control
 
-@onready var xp_label := $Infection/XPLabel
-@onready var threat_label := $Infection/ThreatLabel
-@onready var mutation_manager := get_tree().root.get_node("Main/VirusSpawner/Virus/MutationManager") as MutationManager
+## Heads-Up Display (HUD)
+## Shows XP, threat level, and mutation cooldowns
 
-func _process(_delta):
-	var points := GameManager.get_virus_xp()
-	xp_label.text = "XP : " + points
+# ========================
+# NODE REFERENCES
+# ========================
+@onready var xp_label: Label = $Infection/XPLabel
+@onready var threat_label: Label = $Infection/ThreatLabel
+@onready var cooldown_container: Control = $MutationsCooldowns
 
-	# Ajoute si tu as un label pour les points :
-	#$ScoreLabel.text = "Data Volée : %d" % GameManager.points 
+# ========================
+# CONSTANTS
+# ========================
+const THREAT_COLORS := {
+	GameManager.ThreatLevel.LOW: Color.GREEN,
+	GameManager.ThreatLevel.MEDIUM: Color.ORANGE,
+	GameManager.ThreatLevel.CRITICAL: Color.RED
+}
 
-	match GameManager.get_threat_level():
-		GameManager.ThreatLevel.LOW:
-			threat_label.text = "Menace : FAIBLE"
-			threat_label.modulate = Color.GREEN
+const THREAT_TEXTS := {
+	GameManager.ThreatLevel.LOW: "Menace : FAIBLE",
+	GameManager.ThreatLevel.MEDIUM: "Menace : MOYENNE",
+	GameManager.ThreatLevel.CRITICAL: "Menace : CRITIQUE"
+}
 
-		GameManager.ThreatLevel.MEDIUM:
-			threat_label.text = "Menace : MOYENNE"
-			threat_label.modulate = Color.ORANGE
+# ========================
+# REFERENCES
+# ========================
+var mutation_manager: MutationManager = null
 
-		GameManager.ThreatLevel.CRITICAL:
-			threat_label.text = "Menace : CRITIQUE"
-			threat_label.modulate = Color.RED
+# ========================
+# LIFECYCLE
+# ========================
+func _ready() -> void:
+	add_to_group("hud")
+	call_deferred("_find_mutation_manager")
 
-	for i in range(1, 6):
-		var progress = $MutationsCooldowns.get_node("MutationCooldown" + str(i))
-		progress.modulate = Color(1, 1, 1, 0)
+func _find_mutation_manager() -> void:
+	"""Find mutation manager in scene"""
+	if is_instance_valid(GameManager.virus_node):
+		mutation_manager = GameManager.virus_node.get_node_or_null("MutationManager")
 
-	if mutation_manager:
-		var cooldowns := mutation_manager.get_all_cooldowns()
-		var max_cooldowns := mutation_manager.get_all_max_cooldowns()
+func _process(_delta: float) -> void:
+	_update_xp_display()
+	_update_threat_display()
+	_update_cooldown_displays()
+
+# ========================
+# XP DISPLAY
+# ========================
+func _update_xp_display() -> void:
+	"""Update XP label"""
+	xp_label.text = "XP : " + GameManager.get_virus_xp_text()
+
+# ========================
+# THREAT DISPLAY
+# ========================
+func _update_threat_display() -> void:
+	"""Update threat level label and color"""
+	var threat_level := GameManager.get_threat_level()
+	threat_label.text = THREAT_TEXTS.get(threat_level, "Menace : INCONNUE")
+	threat_label.modulate = THREAT_COLORS.get(threat_level, Color.WHITE)
+
+# ========================
+# COOLDOWN DISPLAY
+# ========================
+func _update_cooldown_displays() -> void:
+	"""Update mutation cooldown progress bars"""
+	# Hide all cooldown displays initially
+	_hide_all_cooldowns()
+	
+	if not mutation_manager:
+		return
+	
+	var cooldown_info := mutation_manager.get_cooldown_info()
+	var index := 0
+	
+	for keybind in cooldown_info:
+		index += 1
+		var progress_bar := _get_cooldown_bar(index)
+		if not progress_bar:
+			continue
 		
-		if cooldowns.size() > 0:
-			for i in range(len(cooldowns)):
-				var cooldown = cooldowns.get("mutation" + str(i + 1), 1)
-				if cooldown <= 0:
-					continue
-					
-				var progress = $MutationsCooldowns.get_node("MutationCooldown" + str(i + 1))
-			
-				var max_cooldown = max_cooldowns.get("mutation" + str(i + 1), 1)
-				progress.value = cooldown / max_cooldown * 100 
-				progress.modulate = Color(1, 1, 1, 1)
+		var info: Dictionary = cooldown_info[keybind]
+		var current: float = info.get("current", 0.0)
+		var maximum: float = info.get("max", 1.0)
+		
+		if current > 0.0:
+			_show_cooldown(progress_bar, current, maximum)
+
+func _hide_all_cooldowns() -> void:
+	"""Hide all cooldown progress bars"""
+	for i in range(1, 7):  # Support up to 6 mutations
+		var bar := _get_cooldown_bar(i)
+		if bar:
+			bar.modulate.a = 0.0
+
+func _get_cooldown_bar(index: int) -> TextureProgressBar:
+	"""Get cooldown progress bar by index"""
+	var node_name := "MutationCooldown%d" % index
+	return cooldown_container.get_node_or_null(node_name)
+
+func _show_cooldown(bar: TextureProgressBar, current: float, maximum: float) -> void:
+	"""Display cooldown on progress bar"""
+	bar.value = (current / maximum) * 100.0
+	bar.modulate.a = 1.0

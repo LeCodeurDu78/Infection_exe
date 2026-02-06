@@ -1,116 +1,143 @@
 extends CharacterBody2D
 
-# ========================
-# CONFIG
-# ========================
-@export var speed := 200.0
+## Enemy AI - Antivirus
+## Patrols, chases virus, and performs scans
 
+# ========================
+# ENUMS
+# ========================
+enum State { WANDER, CHASE }
+
+# ========================
+# EXPORTS
+# ========================
+@export var base_speed := 200.0
 @export var scan_scene: PackedScene
 @export var scan_cooldown := 4.0
-@export var detectionVector := Vector2(12, 12)
+@export var detection_radius := Vector2(12, 12)
 
 # ========================
 # STATE
 # ========================
-var state := "wander" # wander | chase | move_to_clean | clean
-var target: Node2D = null
+var current_state := State.WANDER
+var chase_target: Node2D = null
 
+# Wander state
 var wander_direction := Vector2.ZERO
 var wander_timer := 0.0
 
+# Scan state
 var scan_timer := 0.0
 
 # ========================
-# MANAGERS
+# REFERENCES
 # ========================
-@onready var virus : Node2D = get_tree().root.get_node("Main/VirusSpawner/Virus") as Node2D
+@onready var detection_area: Area2D = $DetectionArea
 
 # ========================
 # LIFECYCLE
 # ========================
-func _ready():
+func _ready() -> void:
 	randomize()
-	_pick_new_direction()
+	_pick_new_wander_direction()
+	
+	# Connect signals
+	if detection_area:
+		detection_area.body_entered.connect(_on_detection_body_entered)
+		detection_area.body_exited.connect(_on_detection_body_exited)
+	
+	# Connect to GameManager signals
+	GameManager.threat_level_changed.connect(_on_threat_level_changed)
 
-# ========================
-# MAIN LOOP
-# ========================
-func _physics_process(delta):
-	$DetectionArea.scale = detectionVector * virus.discretion 
-	scan_timer += delta
-
-	if scan_timer >= scan_cooldown:
-		launch_scan()
-		scan_timer = 0.0
-
-	if state == "wander":
-		_wander(delta)
-	elif state == "chase":
-		_chase()
-
+func _physics_process(delta: float) -> void:
+	_update_detection_radius()
+	_update_scan_timer(delta)
+	_update_movement(delta)
 	move_and_slide()
-
-# ========================
-# STATES
-# ========================
-func _wander(delta):
-	wander_timer -= delta
-	if wander_timer <= 0:
-		_pick_new_direction()
-
-	velocity = wander_direction * speed * get_speed_multiplier()
-
-func _pick_new_direction():
-	wander_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	wander_timer = randf_range(1.0, 3.0)
-
-func _chase():
-	if not is_instance_valid(target) or target.invisible:
-		target = null
-		state = "wander"
-		return
-
-	var dir = (target.global_position - global_position).normalized()
-	velocity = dir * speed * get_speed_multiplier()
-
-# ========================
-# SCAN
-# ========================
-func launch_scan():
-	if not scan_scene:
-		return
-
-	var scan = scan_scene.instantiate()
-
-	if target:
-		scan.global_position = target.global_position
-	else:
-		return
-
-	get_parent().add_child(scan)
 
 # ========================
 # DETECTION
 # ========================
-func _on_detection_entered(body):
-	if body.name == "InfectionZone" and not body.get_parent().invisible:
-			target = body.get_parent() as Node2D
-			state = "chase"
+func _update_detection_radius() -> void:
+	"""Update detection area based on virus discretion"""
+	if is_instance_valid(GameManager.virus_node):
+		detection_area.scale = detection_radius * GameManager.virus_node.discretion
 
-func _on_detection_exited(body):
-	if body.get_parent() == target:
-		target = null
-		state = "wander"
+func _on_detection_body_entered(body: Node2D) -> void:
+	"""Handle virus detection"""
+	if body.is_in_group("virus") and not body.is_invisible:
+		chase_target = body
+		current_state = State.CHASE
 
-func _on_body_entered(body):
-	if body.name == "Virus":
-		print("Virus éliminé")
-		body.queue_free()
+func _on_detection_body_exited(body: Node2D) -> void:
+	"""Handle virus leaving detection"""
+	if body == chase_target:
+		chase_target = null
+		current_state = State.WANDER
+
+# ========================
+# SCANNING
+# ========================
+func _update_scan_timer(delta: float) -> void:
+	"""Update scan timer and trigger scans"""
+	scan_timer += delta
+	
+	if scan_timer >= scan_cooldown:
+		_perform_scan()
+		scan_timer = 0.0
+
+func _perform_scan() -> void:
+	"""Launch a scan at target location"""
+	if not scan_scene or not is_instance_valid(chase_target):
+		return
+	
+	var scan := scan_scene.instantiate()
+	scan.global_position = chase_target.global_position
+	get_parent().add_child(scan)
+
+# ========================
+# MOVEMENT
+# ========================
+func _update_movement(delta: float) -> void:
+	"""Update movement based on current state"""
+	match current_state:
+		State.WANDER:
+			_update_wander(delta)
+		State.CHASE:
+			_update_chase()
+
+func _update_wander(delta: float) -> void:
+	"""Wander randomly"""
+	wander_timer -= delta
+	
+	if wander_timer <= 0.0:
+		_pick_new_wander_direction()
+	
+	velocity = wander_direction * base_speed * _get_speed_multiplier()
+
+func _pick_new_wander_direction() -> void:
+	"""Pick a new random direction for wandering"""
+	wander_direction = Vector2(
+		randf_range(-1.0, 1.0),
+		randf_range(-1.0, 1.0)
+	).normalized()
+	wander_timer = randf_range(1.0, 3.0)
+
+func _update_chase() -> void:
+	"""Chase the virus"""
+	if not is_instance_valid(chase_target) or chase_target.is_invisible:
+		chase_target = null
+		current_state = State.WANDER
+		return
+	
+	var direction := (chase_target.global_position - global_position).normalized()
+	velocity = direction * base_speed * _get_speed_multiplier()
 
 # ========================
 # DIFFICULTY
 # ========================
-func get_speed_multiplier() -> float:
+func _get_speed_multiplier() -> float:
+	"""Get speed multiplier based on threat level"""
 	match GameManager.get_threat_level():
 		GameManager.ThreatLevel.LOW:
 			return 1.0
@@ -119,3 +146,16 @@ func get_speed_multiplier() -> float:
 		GameManager.ThreatLevel.CRITICAL:
 			return 1.7
 	return 1.0
+
+func _on_threat_level_changed(_new_level: GameManager.ThreatLevel) -> void:
+	"""React to threat level changes"""
+	# Could add visual feedback or behavior changes here
+	pass
+
+# ========================
+# COLLISION
+# ========================
+func _on_body_entered(body: Node) -> void:
+	"""Handle collision with virus"""
+	if body.is_in_group("virus"):
+		body.queue_free()

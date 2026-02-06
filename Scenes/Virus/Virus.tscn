@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://drpmwud0urs68"]
 
-[ext_resource type="Texture2D" uid="uid://c02gsg1f7ra7j" path="res://addons/2d_shapes/Ellipse.svg" id="1_e5x8h"]
+[ext_resource type="Texture2D" uid="uid://c4rn6yaa8hjoc" path="res://addons/2d_shapes/Ellipse.svg" id="1_e5x8h"]
 [ext_resource type="Script" uid="uid://cb8nw3fx0gnae" path="res://Scripts/Virus/Virus.gd" id="1_msxgm"]
 [ext_resource type="Script" uid="uid://nijid8chg33l" path="res://Scripts/Mutations/MutationManager.gd" id="2_aog2q"]
 [ext_resource type="Script" uid="uid://cln4bqbrsdeut" path="res://Scripts/Mutations/Mutation.gd" id="3_xlukx"]
@@ -15,7 +15,7 @@ radius = 26.305893
 [sub_resource type="CircleShape2D" id="CircleShape2D_aog2q"]
 radius = 61.0
 
-[node name="Virus" type="CharacterBody2D" unique_id=1741660789]
+[node name="Virus" type="CharacterBody2D" unique_id=1741660789 groups=["virus"]]
 script = ExtResource("1_msxgm")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=566886992]
@@ -35,7 +35,7 @@ texture_filter = 1
 scale = Vector2(4, 4)
 texture = ExtResource("1_e5x8h")
 
-[node name="InfectionZone" type="Area2D" parent="." unique_id=387483876]
+[node name="InfectionZone" type="Area2D" parent="." unique_id=387483876 groups=["virus_infection_zone"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InfectionZone" unique_id=61449171]
 shape = SubResource("CircleShape2D_aog2q")

@@ -6,4 +6,5 @@
 script = ExtResource("1_euxvo")
 name = "Mutation Speed"
 description = "Augmente la vitesse du virus"
-level_max = 3
+level_min = 2
+level_max = 4

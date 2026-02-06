@@ -1,43 +1,70 @@
 extends Mutation
 
-@export var duration := 5.0
-@export var cooldown := 20.0
+## Invisibility Mutation
+## Temporarily makes the virus invisible to antivirus
 
-var duration_timer := 0.0
-var cooldown_timer := 0.0
+# ========================
+# EXPORTS
+# ========================
+@export var active_duration := 5.0
+@export var cooldown_duration := 20.0
 
-var active := false
-var on_cooldown := false
+# ========================
+# STATE
+# ========================
+var remaining_active_time := 0.0
+var remaining_cooldown_time := 0.0
+var is_active := false
+var is_on_cooldown := false
 
-func apply(virus):
-	if on_cooldown or active:
+# ========================
+# ACTIVATION
+# ========================
+func apply(virus: Node2D) -> void:
+	"""Activate invisibility"""
+	if is_on_cooldown or is_active:
 		return
+	
+	is_active = true
+	remaining_active_time = active_duration
+	virus.set_invisibility(true)
 
-	active = true
-	duration_timer = duration
-	virus.set_invisible(true)
+# ========================
+# UPDATE
+# ========================
+func process(virus: Node2D, delta: float) -> void:
+	"""Update invisibility and cooldown timers"""
+	if is_active:
+		_update_active(virus, delta)
+	elif is_on_cooldown:
+		_update_cooldown(delta)
 
+func _update_active(virus: Node2D, delta: float) -> void:
+	"""Update active invisibility timer"""
+	remaining_active_time -= delta
+	if remaining_active_time <= 0.0:
+		_end_invisibility(virus)
+
+func _update_cooldown(delta: float) -> void:
+	"""Update cooldown timer"""
+	remaining_cooldown_time -= delta
+	if remaining_cooldown_time <= 0.0:
+		is_on_cooldown = false
+
+func _end_invisibility(virus: Node2D) -> void:
+	"""End invisibility and start cooldown"""
+	is_active = false
+	is_on_cooldown = true
+	remaining_cooldown_time = cooldown_duration
+	virus.set_invisibility(false)
+
+# ========================
+# COOLDOWN INFO (for UI)
+# ========================
 func get_cooldown() -> float:
-	if on_cooldown:
-		return cooldown_timer
-	return 0.0
+	"""Returns current cooldown time"""
+	return remaining_cooldown_time if is_on_cooldown else 0.0
 
 func get_max_cooldown() -> float:
-	return cooldown
-
-func _end_invisibility(virus):
-	active = false
-	on_cooldown = true
-	cooldown_timer = cooldown
-	virus.set_invisible(false)
-
-func process(virus, delta):
-	if active:
-		duration_timer -= delta
-		if duration_timer <= 0:
-			_end_invisibility(virus)
-
-	elif on_cooldown:
-		cooldown_timer -= delta
-		if cooldown_timer <= 0:
-			on_cooldown = false
+	"""Returns maximum cooldown time"""
+	return cooldown_duration

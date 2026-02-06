@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bsorlsgev2hqs"]
 
 [ext_resource type="Script" uid="uid://ciby424h8ww8a" path="res://Scripts/Enemies/Antivirus.gd" id="1_cuva4"]
-[ext_resource type="Texture2D" uid="uid://c02gsg1f7ra7j" path="res://addons/2d_shapes/Ellipse.svg" id="1_kom5y"]
+[ext_resource type="Texture2D" uid="uid://c4rn6yaa8hjoc" path="res://addons/2d_shapes/Ellipse.svg" id="1_kom5y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kmwlk"]
 radius = 7.0
@@ -39,6 +39,6 @@ shape = SubResource("CircleShape2D_cuva4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2017024098]
 shape = SubResource("CircleShape2D_t2s5a")
 
-[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_entered"]
-[connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_exited"]
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_body_entered"]
+[connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_body_exited"]
 [connection signal="body_entered" from="KillArea" to="." method="_on_body_entered"]

@@ -6,4 +6,5 @@
 script = ExtResource("1_jukh2")
 name = "Invisible"
 description = "Turn the virus invisible"
-level_max = 3
+level_min = 2
+level_max = 4

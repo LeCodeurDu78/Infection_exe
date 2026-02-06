@@ -6,4 +6,5 @@
 script = ExtResource("1_ivgq2")
 name = "Light Packet"
 description = "Small short-range dash (varies with charge)"
-level_max = 3
+level_min = 2
+level_max = 4

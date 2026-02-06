@@ -1,62 +1,123 @@
 extends Area2D
 
-@export var warning_time := 2
-@export var scan_time := 1.5
+## Scan Zone created by Antivirus
+## Warns then scans/cleans infected areas and destroys virus
 
-var state := "warning"
-var timer := 0.0
+# ========================
+# ENUMS
+# ========================
+enum State { WARNING, SCANNING }
 
-var virus_inside := false
-var cleaning_targets: Array[Infectable] = []
+# ========================
+# EXPORTS
+# ========================
+@export var warning_duration := 2.0
+@export var scan_duration := 1.5
 
-func _ready():
-	modulate = Color(1, 0.5, 0.2, 0.4)
+# ========================
+# CONSTANTS
+# ========================
+const WARNING_COLOR := Color(1.0, 0.5, 0.2, 0.4)
+const SCAN_COLOR := Color(1.0, 0.0, 0.0, 0.6)
 
-	match GameManager.get_threat_level():
-		GameManager.ThreatLevel.LOW:
-			scale = Vector2(3, 3)
+const SCALE_PER_THREAT := {
+	GameManager.ThreatLevel.LOW: Vector2(3.0, 3.0),
+	GameManager.ThreatLevel.MEDIUM: Vector2(4.0, 4.0),
+	GameManager.ThreatLevel.CRITICAL: Vector2(5.0, 5.0)
+}
 
-		GameManager.ThreatLevel.MEDIUM:
-			scale = Vector2(4, 4)
+# ========================
+# STATE
+# ========================
+var current_state := State.WARNING
+var state_timer := 0.0
+var is_virus_inside := false
+var infected_targets: Array[Infectable] = []
 
-		GameManager.ThreatLevel.CRITICAL:
-			scale = Vector2(5, 5)
+# ========================
+# LIFECYCLE
+# ========================
+func _ready() -> void:
+	_setup_appearance()
+	_connect_signals()
 
-func _process(delta):
-	timer += delta
+func _setup_appearance() -> void:
+	"""Setup initial appearance based on threat level"""
+	modulate = WARNING_COLOR
+	
+	var threat_level := GameManager.get_threat_level()
+	scale = SCALE_PER_THREAT.get(threat_level, Vector2(3.0, 3.0))
 
-	match state:
-		"warning":
-			if timer >= warning_time:
-				_start_scan()
+func _connect_signals() -> void:
+	"""Connect area and body signals"""
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
+	area_entered.connect(_on_area_entered)
 
-		"scan":
-			_clean()
-			if timer >= scan_time:
+func _process(delta: float) -> void:
+	state_timer += delta
+	
+	match current_state:
+		State.WARNING:
+			if state_timer >= warning_duration:
+				_start_scanning()
+		
+		State.SCANNING:
+			_perform_cleaning()
+			if state_timer >= scan_duration:
 				queue_free()
 
-func _start_scan():
-	state = "scan"
-	timer = 0.0
-	modulate = Color(1, 0, 0, 0.6)
+# ========================
+# STATE TRANSITIONS
+# ========================
+func _start_scanning() -> void:
+	"""Transition from warning to scanning state"""
+	current_state = State.SCANNING
+	state_timer = 0.0
+	modulate = SCAN_COLOR
 
-func _clean():
-	if virus_inside:
-		get_tree().reload_current_scene()
-	if cleaning_targets.size() > 0:
-		for target in cleaning_targets:
-			target.clean()
+# ========================
+# SCANNING/CLEANING
+# ========================
+func _perform_cleaning() -> void:
+	"""Clean infected targets and destroy virus if present"""
+	# Destroy virus if inside scan zone
+	if is_virus_inside:
+		_destroy_virus()
 	
-	cleaning_targets.clear()
+	# Clean all infected targets
+	for target in infected_targets:
+		if is_instance_valid(target):
+			_clean_target(target)
+	
+	infected_targets.clear()
 
-func _on_body_entered(body):
-	if body.name == "Virus":
-		virus_inside = true
+func _destroy_virus() -> void:
+	"""Destroy the virus (game over)"""
+	if is_instance_valid(GameManager.virus_node):
+		GameManager.virus_node.queue_free()
 
-func _on_area_entered(area):
-	if area is Infectable and area.infected:
-		cleaning_targets.append(area)
+func _clean_target(target: Infectable) -> void:
+	"""Clean an infected target"""
+	# Since Infectable destroys itself when infected,
+	# we just need to ensure it's removed
+	if target.is_infected:
+		target.queue_free()
 
-func _on_body_exited(body):
-	if body.name == "Virus":
-		virus_inside = false
+# ========================
+# DETECTION
+# ========================
+func _on_body_entered(body: Node) -> void:
+	"""Detect virus entering scan zone"""
+	if body.is_in_group("virus"):
+		is_virus_inside = true
+
+func _on_body_exited(body: Node) -> void:
+	"""Detect virus leaving scan zone"""
+	if body.is_in_group("virus"):
+		is_virus_inside = false
+
+func _on_area_entered(area: Area2D) -> void:
+	"""Detect infected targets in scan zone"""
+	if area is Infectable and area.is_infected:
+		infected_targets.append(area)

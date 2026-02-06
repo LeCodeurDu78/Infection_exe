@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bwdie8itbhlxs"]
 
 [ext_resource type="Script" uid="uid://0p0hrgwaiugp" path="res://Scripts/UI/HUD.gd" id="1_omqfp"]
-[ext_resource type="Texture2D" uid="uid://c2bc75we5mmgu" path="res://Assets/Sprites/UI/progress-bar-circle.png" id="2_xaom8"]
-[ext_resource type="Texture2D" uid="uid://c65s8in3mujr0" path="res://Assets/Sprites/UI/progress-bar-frame.png" id="3_4bm6u"]
+[ext_resource type="Texture2D" uid="uid://ftngxwx1iwhw" path="res://Assets/Sprites/UI/progress-bar-circle.png" id="2_xaom8"]
+[ext_resource type="Texture2D" uid="uid://w5j5ukjqi6jv" path="res://Assets/Sprites/UI/progress-bar-frame.png" id="3_4bm6u"]
 
-[node name="HUD" type="Control" unique_id=358781637]
+[node name="HUD" type="Control" unique_id=358781637 groups=["hud"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

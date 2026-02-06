@@ -15,13 +15,13 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Infection.exe"
-run/main_scene="uid://dq3nvvlpjvinc"
+run/main_scene="uid://b2hcdo4owv0eb"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://Scripts/Core/GameManager.gd"
+GameManager="*uid://37e85alkwu3y"
 
 [input]
 

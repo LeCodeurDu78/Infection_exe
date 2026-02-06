@@ -1,18 +1,74 @@
 extends Node
 class_name AntivirusManager
 
+## Manages spawning and despawning of antivirus enemies
+## Responds to threat level changes
+
+# ========================
+# EXPORTS
+# ========================
 @export var antivirus_scene: PackedScene
 @export var spawn_points: Array[Node2D] = []
-
 @export var base_count := 2
 @export var max_count := 5
 
-var antivirus_list: Array = []
+# ========================
+# STATE
+# ========================
+var active_antiviruses: Array[Node] = []
 
-func _process(_delta):
-	update_antivirus_count()
+# ========================
+# LIFECYCLE
+# ========================
+func _ready() -> void:
+	# Connect to GameManager signals
+	GameManager.threat_level_changed.connect(_on_threat_level_changed)
+	
+	# Initial spawn
+	_update_antivirus_count()
 
-func get_target_count() -> int:
+# ========================
+# SPAWNING
+# ========================
+func _update_antivirus_count() -> void:
+	"""Update number of active antiviruses based on threat level"""
+	var target_count := _get_target_count()
+	
+	# Spawn more if needed
+	while active_antiviruses.size() < target_count:
+		_spawn_antivirus()
+	
+	# Remove excess if needed
+	while active_antiviruses.size() > target_count:
+		_remove_antivirus()
+
+func _spawn_antivirus() -> void:
+	"""Spawn a single antivirus at random spawn point"""
+	if not antivirus_scene or spawn_points.is_empty():
+		push_warning("AntivirusManager: Cannot spawn - missing scene or spawn points")
+		return
+	
+	var antivirus := antivirus_scene.instantiate()
+	var spawn_point: Variant = spawn_points.pick_random()
+	antivirus.global_position = spawn_point.global_position
+	
+	add_child(antivirus)
+	active_antiviruses.append(antivirus)
+
+func _remove_antivirus() -> void:
+	"""Remove one antivirus from the scene"""
+	if active_antiviruses.is_empty():
+		return
+	
+	var antivirus: Node = active_antiviruses.pop_back()
+	if is_instance_valid(antivirus):
+		antivirus.queue_free()
+
+# ========================
+# DIFFICULTY
+# ========================
+func _get_target_count() -> int:
+	"""Calculate how many antiviruses should be active"""
 	match GameManager.get_threat_level():
 		GameManager.ThreatLevel.LOW:
 			return base_count
@@ -22,27 +78,6 @@ func get_target_count() -> int:
 			return max_count
 	return base_count
 
-func update_antivirus_count():
-	var target = get_target_count()
-
-	while antivirus_list.size() < target:
-		spawn_antivirus()
-
-	while antivirus_list.size() > target:
-		remove_antivirus()
-
-func spawn_antivirus():
-	if not antivirus_scene or spawn_points.is_empty():
-		return
-
-	var av = antivirus_scene.instantiate()
-	var point = spawn_points.pick_random()
-	av.global_position = point.global_position
-
-	get_parent().add_child(av)
-	antivirus_list.append(av)
-
-func remove_antivirus():
-	var av = antivirus_list.pop_back()
-	if is_instance_valid(av):
-		av.queue_free()
+func _on_threat_level_changed(_new_level: GameManager.ThreatLevel) -> void:
+	"""React to threat level changes"""
+	_update_antivirus_count()

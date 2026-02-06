@@ -39,7 +39,7 @@ func release(virus):
 
 		is_dashing = true
 		timer = duration
-		virus.dash(power, dir)
+		virus.start_dash(power, dir)
 		on_cooldown = true
 	charge = 0.0
 
@@ -56,7 +56,7 @@ func process(virus, delta):
 		timer -= delta
 		if timer <= 0:
 			is_dashing = false
-			virus.is_dashing = false
+			virus.stop_dash()
 
 	if on_cooldown and not is_dashing:
 		timer += delta

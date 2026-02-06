@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://b2hcdo4owv0eb"]
+
+[ext_resource type="Script" uid="uid://um004dmcachn" path="res://Scripts/UI/StartMenu.gd" id="1_r73nm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7sc2f"]
+font_size = 60
+font_color = Color(0, 0.49019608, 0, 1)
+
+[node name="StartMenu" type="Control" unique_id=561783967]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_r73nm")
+
+[node name="Label" type="Label" parent="." unique_id=1524989136]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -187.0
+offset_top = 41.0
+offset_right = 189.0
+offset_bottom = 124.0
+grow_horizontal = 2
+text = "Infection.exe"
+label_settings = SubResource("LabelSettings_7sc2f")
+
+[node name="StartButton" type="Button" parent="." unique_id=273173788]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -100.0
+offset_right = 81.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="." unique_id=1571336128]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = 29.0
+offset_right = 81.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="." unique_id=1847094890]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = 148.0
+offset_right = 81.0
+offset_bottom = 221.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_quit_button_pressed"]

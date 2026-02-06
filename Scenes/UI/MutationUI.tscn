@@ -5,7 +5,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_1ga8f"]
 font_size = 60
 
-[node name="MutationUI" type="Control" unique_id=491561210]
+[node name="MutationUI" type="Control" unique_id=491561210 groups=["mutation_ui"]]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -44,5 +44,5 @@ offset_right = 989.0
 offset_bottom = 507.0
 text = "Mutation 2"
 
-[connection signal="pressed" from="MutationButton1" to="." method="_mutation1_pressed"]
-[connection signal="pressed" from="MutationButton2" to="." method="_mutation2_pressed"]
+[connection signal="pressed" from="MutationButton1" to="." method="_on_mutation_1_pressed"]
+[connection signal="pressed" from="MutationButton2" to="." method="_on_mutation_2_pressed"]
