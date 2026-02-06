@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AutoPropagationMutation" format=3 uid="uid://mutation_auto_propagation"]
+
+[ext_resource type="Script" uid="uid://ad0dtob2tfyw2" path="res://Scripts/MutationsAvailable/AutoPropagationMutation.gd" id="1_auto_propagation"]
+
+[resource]
+script = ExtResource("1_auto_propagation")
+name = "Auto-Propagation"
+description = "Infected node automatically propagates every X s"
+unlock_points = 40

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://3ibb2agxfqfc"
+
+[deps]
+
+files=["res://Mutations.name.translation", "res://Mutations.description.translation", "res://Mutations.tiers.translation", "res://Mutations.zone.translation", "res://Mutations.capacity.translation", "res://Mutations.cooldown.translation", "res://Mutations.duration.translation", "res://Mutations.Fait.translation"]
+
+source_file="res://Mutations.csv"
+dest_files=["res://Mutations.name.translation", "res://Mutations.description.translation", "res://Mutations.tiers.translation", "res://Mutations.zone.translation", "res://Mutations.capacity.translation", "res://Mutations.cooldown.translation", "res://Mutations.duration.translation", "res://Mutations.Fait.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PersistentCacheMutation" format=3 uid="uid://mutation_persistent_cache"]
+
+[ext_resource type="Script" uid="uid://xv0dtob2tfyw2" path="res://Scripts/MutationsAvailable/PersistentCacheMutation.gd" id="1_persistent_cache"]
+
+[resource]
+script = ExtResource("1_persistent_cache")
+name = "Persistent Cache"
+description = "Increases cleaning time on files by 10%"
+unlock_points = 10

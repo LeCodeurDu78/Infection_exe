@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ChainEchoMutation" format=3 uid="uid://bu7ab372bvn1s"]
+
+[ext_resource type="Script" uid="uid://ds177vvkpktpr" path="res://Scripts/MutationsAvailable/ChainEchoMutation.gd" id="1_chain_echo"]
+
+[resource]
+script = ExtResource("1_chain_echo")
+name = "Chain Echo"
+description = "Propagates an infection in a line over 3 nodes"
+unlock_points = 30

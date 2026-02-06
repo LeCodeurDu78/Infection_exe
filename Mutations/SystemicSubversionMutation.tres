@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SystemicSubversionMutation" format=3 uid="uid://mutation_systemic_subversion"]
+
+[ext_resource type="Script" uid="uid://ddxc4vxn3qx2" path="res://Scripts/MutationsAvailable/SystemicSubversionMutation.gd" id="1_systemic_subversion"]
+
+[resource]
+script = ExtResource("1_systemic_subversion")
+name = "Systemic Subversion"
+description = "Permanently reduces Core defenses"
+unlock_points = 60

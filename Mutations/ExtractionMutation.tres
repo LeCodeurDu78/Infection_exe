@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ExtractionMutation" format=3 uid="uid://dmvmfvt43khy6"]
+
+[ext_resource type="Script" uid="uid://cevbwpppqljhj" path="res://Scripts/MutationsAvailable/ExtractionMutation.gd" id="1_extraction"]
+
+[resource]
+script = ExtResource("1_extraction")
+name = "Extraction"
+description = "Recovers additional mutation points from files"
+unlock_points = 10

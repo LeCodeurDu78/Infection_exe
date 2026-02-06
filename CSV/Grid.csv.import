@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dv6ndbp0l48u1"
+
+[deps]
+
+files=["res://CSV/Grid.name.translation", "res://CSV/Grid.description.translation", "res://CSV/Grid.tiers.translation", "res://CSV/Grid.capacity.translation", "res://CSV/Grid.cooldown.translation", "res://CSV/Grid.duration.translation", "res://CSV/Grid.Fait.translation"]
+
+source_file="res://CSV/Grid.csv"
+dest_files=["res://CSV/Grid.name.translation", "res://CSV/Grid.description.translation", "res://CSV/Grid.tiers.translation", "res://CSV/Grid.capacity.translation", "res://CSV/Grid.cooldown.translation", "res://CSV/Grid.duration.translation", "res://CSV/Grid.Fait.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

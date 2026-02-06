@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CorruptCourierMutation" format=3 uid="uid://cq1e85bvh24yp"]
+
+[ext_resource type="Script" uid="uid://byir7f3y47mhs" path="res://Scripts/MutationsAvailable/CorruptCourierMutation.gd" id="1_corrupt_courier"]
+
+[resource]
+script = ExtResource("1_corrupt_courier")
+name = "Corrupt Courier"
+description = "Sends a small parasite that infects a neighboring file"
+unlock_points = 10

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SystemHookMutation" format=3 uid="uid://betjyri514g67"]
+
+[ext_resource type="Script" uid="uid://ctd3trps373ql" path="res://Scripts/MutationsAvailable/SystemHookMutation.gd" id="1_system_hook"]
+
+[resource]
+script = ExtResource("1_system_hook")
+name = "System Hook"
+description = "Reduces active powers' cooldowns (-15%)"
+unlock_points = 20

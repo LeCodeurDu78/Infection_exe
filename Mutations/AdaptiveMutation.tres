@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AdaptiveMutation" format=3 uid="uid://dq11dg6fh76md"]
+
+[ext_resource type="Script" uid="uid://ddxc4vxn3qxr" path="res://Scripts/MutationsAvailable/AdaptiveMutation.gd" id="1_adaptive"]
+
+[resource]
+script = ExtResource("1_adaptive")
+name = "Adaptive Mutation"
+description = "At each level, grants a small random bonus (strength, speed, stealth)"
+unlock_points = 60

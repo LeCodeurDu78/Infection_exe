@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LightPacketMutation" format=3 uid="uid://d2wgcvsnch3j1"]
+
+[ext_resource type="Script" uid="uid://l0kd1nu8x60w" path="res://Scripts/MutationsAvailable/LightPacketMutation.gd" id="1_ivgq2"]
+
+[resource]
+script = ExtResource("1_ivgq2")
+name = "Light Packet"
+description = "Small short-range dash (varies with charge)"
+level_max = 3

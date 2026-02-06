@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ChainPropagationMutation" format=3 uid="uid://dtb4yafgbet71"]
+
+[ext_resource type="Script" uid="uid://vdkrfo0a6e03" path="res://Scripts/MutationsAvailable/ChainPropagationMutation.gd" id="1_chain_propagation"]
+
+[resource]
+script = ExtResource("1_chain_propagation")
+name = "Chain Propagation"
+description = "30% chance to infect a neighboring node upon infection"
+unlock_points = 30

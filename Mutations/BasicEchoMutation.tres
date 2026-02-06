@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BasicEchoMutation" format=3 uid="uid://bnrqafdk3610u"]
+
+[ext_resource type="Script" uid="uid://bwevilyq2yasd" path="res://Scripts/MutationsAvailable/BasicEchoMutation.gd" id="1_basic_echo"]
+
+[resource]
+script = ExtResource("1_basic_echo")
+name = "Basic Echo"
+description = "Sends a signal that reveals nearby enemy caches"
+unlock_points = 10

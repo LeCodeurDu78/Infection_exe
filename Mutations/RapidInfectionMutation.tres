@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RapidInfectionMutation" format=3 uid="uid://nv4hthfxqonf"]
+
+[ext_resource type="Script" uid="uid://dac3ihr7f28jx" path="res://Scripts/MutationsAvailable/RapidInfectionMutation.gd" id="1_rapid_infection"]
+
+[resource]
+script = ExtResource("1_rapid_infection")
+name = "Rapid Infection"
+description = "+25% infection rate"
+unlock_points = 10

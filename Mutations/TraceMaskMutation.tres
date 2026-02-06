@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TraceMaskMutation" format=3 uid="uid://mutation_trace_mask"]
+
+[ext_resource type="Script" uid="uid://bv0dtob2tfhit" path="res://Scripts/MutationsAvailable/TraceMaskMutation.gd" id="1_trace_mask"]
+
+[resource]
+script = ExtResource("1_trace_mask")
+name = "Trace Mask"
+description = "Reduces scan detection radius"
+unlock_points = 10

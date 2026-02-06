@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DataCorruptionMutation" format=3 uid="uid://18jtydc6tjnn"]
+
+[ext_resource type="Script" uid="uid://de14v38qj6j0u" path="res://Scripts/MutationsAvailable/DataCorruptionMutation.gd" id="1_data_corruption"]
+
+[resource]
+script = ExtResource("1_data_corruption")
+name = "Data Corruption"
+description = "Infected nodes grant +15% mutation points"
+unlock_points = 30

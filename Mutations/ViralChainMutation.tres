@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ViralChainMutation" format=3 uid="uid://mutation_viral_chain"]
+
+[ext_resource type="Script" uid="uid://dcxc4vxn3qxr" path="res://Scripts/MutationsAvailable/ViralChainMutation.gd" id="1_viral_chain"]
+
+[resource]
+script = ExtResource("1_viral_chain")
+name = "Viral Chain"
+description = "Triggers rapid chain propagation around a node"
+unlock_points = 40

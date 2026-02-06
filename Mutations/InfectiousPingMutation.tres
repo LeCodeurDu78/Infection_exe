@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="InfectiousPingMutation" format=3 uid="uid://tvqq6u6ioprs"]
+
+[ext_resource type="Script" uid="uid://bufu1tycb4edb" path="res://Scripts/MutationsAvailable/InfectiousPingMutation.gd" id="1_infectious_ping"]
+
+[resource]
+script = ExtResource("1_infectious_ping")
+name = "Infectious Ping"
+description = "Sends a piercing infectious wave in a line"
+unlock_points = 30

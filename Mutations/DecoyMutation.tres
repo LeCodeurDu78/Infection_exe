@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DecoyMutation" format=3 uid="uid://mutation_decoy"]
+
+[ext_resource type="Script" uid="uid://pipitob2tfyw2" path="res://Scripts/MutationsAvailable/DecoyMutation.gd" id="1_decoy"]
+
+[resource]
+script = ExtResource("1_decoy")
+name = "Decoy"
+description = "Deploys a decoy that attracts antivirus for 8 s"
+unlock_points = 20

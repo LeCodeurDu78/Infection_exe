@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AmplifierMutation" format=3 uid="uid://bq1wbny1bk66u"]
+
+[ext_resource type="Script" uid="uid://dajeqr7wimu5" path="res://Scripts/MutationsAvailable/AmplifierMutation.gd" id="1_amplifier"]
+
+[resource]
+script = ExtResource("1_amplifier")
+name = "Amplifier"
+description = "Increases effectiveness of other mutations"
+unlock_points = 40

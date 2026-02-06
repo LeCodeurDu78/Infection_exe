@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LocalPatchMutation" format=3 uid="uid://mutation_local_patch"]
+
+[ext_resource type="Script" uid="uid://bv0dtob2tfy50" path="res://Scripts/MutationsAvailable/LocalPatchMutation.gd" id="1_local_patch"]
+
+[resource]
+script = ExtResource("1_local_patch")
+name = "Local Patch"
+description = "Boosts an infected node"
+unlock_points = 20

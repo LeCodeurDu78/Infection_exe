@@ -1,0 +1,9 @@
+[gd_resource type="Resource" format=3 uid="uid://dd028x8dqkbvn"]
+
+[ext_resource type="Script" uid="uid://becj85ic5wv0j" path="res://Scripts/MutationsAvailable/SpeedMutation.gd" id="1_euxvo"]
+
+[resource]
+script = ExtResource("1_euxvo")
+name = "Mutation Speed"
+description = "Augmente la vitesse du virus"
+level_max = 3

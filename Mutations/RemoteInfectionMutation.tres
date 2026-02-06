@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RemoteInfectionMutation" format=3 uid="uid://mutation_remote_infection"]
+
+[ext_resource type="Script" uid="uid://remdtob2tfyw2" path="res://Scripts/MutationsAvailable/RemoteInfectionMutation.gd" id="1_remote_infection"]
+
+[resource]
+script = ExtResource("1_remote_infection")
+name = "Remote Infection"
+description = "Infect a node at range (line of sight required)"
+unlock_points = 30

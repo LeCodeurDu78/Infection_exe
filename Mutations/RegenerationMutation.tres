@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RegenerationMutation" format=3 uid="uid://mutation_regeneration"]
+
+[ext_resource type="Script" uid="uid://he0dtob2tfyw2" path="res://Scripts/MutationsAvailable/RegenerationMutation.gd" id="1_regeneration"]
+
+[resource]
+script = ExtResource("1_regeneration")
+name = "Regeneration"
+description = "Slow HP regeneration (per second)"
+unlock_points = 20

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FirewallBypassMutation" format=3 uid="uid://13g3p56akb63"]
+
+[ext_resource type="Script" uid="uid://d3bsm5yykcxlc" path="res://Scripts/MutationsAvailable/FirewallBypassMutation.gd" id="1_firewall_bypass"]
+
+[resource]
+script = ExtResource("1_firewall_bypass")
+name = "Firewall Bypass"
+description = "Reduces firewall block chance"
+unlock_points = 20

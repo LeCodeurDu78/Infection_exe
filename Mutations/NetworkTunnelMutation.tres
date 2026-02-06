@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NetworkTunnelMutation" format=3 uid="uid://mutation_network_tunnel"]
+
+[ext_resource type="Script" uid="uid://bv0ftob2tfyw2" path="res://Scripts/MutationsAvailable/NetworkTunnelMutation.gd" id="1_network_tunnel"]
+
+[resource]
+script = ExtResource("1_network_tunnel")
+name = "Network Tunnel"
+description = "Increases range of remote attacks"
+unlock_points = 30

@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://bwdie8itbhlxs"]
+
+[ext_resource type="Script" uid="uid://0p0hrgwaiugp" path="res://Scripts/UI/HUD.gd" id="1_omqfp"]
+[ext_resource type="Texture2D" uid="uid://c2bc75we5mmgu" path="res://Assets/Sprites/UI/progress-bar-circle.png" id="2_xaom8"]
+[ext_resource type="Texture2D" uid="uid://c65s8in3mujr0" path="res://Assets/Sprites/UI/progress-bar-frame.png" id="3_4bm6u"]
+
+[node name="HUD" type="Control" unique_id=358781637]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_omqfp")
+
+[node name="Infection" type="Control" parent="." unique_id=1424472759]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="XPLabel" type="Label" parent="Infection" unique_id=967292221]
+layout_mode = 1
+offset_right = 147.0
+offset_bottom = 23.0
+text = "Infection : 100%"
+uppercase = true
+
+[node name="ThreatLabel" type="Label" parent="Infection" unique_id=615003444]
+layout_mode = 0
+offset_top = 23.0
+offset_right = 156.0
+offset_bottom = 46.0
+text = "Menace : CRITIQUE "
+uppercase = true
+
+[node name="MutationsCooldowns" type="HBoxContainer" parent="." unique_id=1790901363]
+layout_mode = 0
+offset_left = 785.0
+offset_right = 1152.0
+offset_bottom = 70.0
+alignment = 1
+
+[node name="MutationCooldown5" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=919000181]
+layout_mode = 2
+step = 0.1
+value = 75.0
+fill_mode = 5
+texture_under = ExtResource("2_xaom8")
+texture_over = ExtResource("3_4bm6u")
+texture_progress = ExtResource("2_xaom8")
+tint_under = Color(0, 0.54901963, 0, 1)
+tint_progress = Color(0, 0, 0, 0.84313726)
+
+[node name="MutationCooldown4" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=465915357]
+layout_mode = 2
+step = 0.1
+value = 75.0
+fill_mode = 5
+texture_under = ExtResource("2_xaom8")
+texture_over = ExtResource("3_4bm6u")
+texture_progress = ExtResource("2_xaom8")
+tint_under = Color(0, 0.54901963, 0, 1)
+tint_progress = Color(0, 0, 0, 0.84313726)
+
+[node name="MutationCooldown3" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=659561590]
+layout_mode = 2
+step = 0.1
+value = 75.0
+fill_mode = 5
+texture_under = ExtResource("2_xaom8")
+texture_over = ExtResource("3_4bm6u")
+texture_progress = ExtResource("2_xaom8")
+tint_under = Color(0, 0.54901963, 0, 1)
+tint_progress = Color(0, 0, 0, 0.84313726)
+
+[node name="MutationCooldown2" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=2096868223]
+layout_mode = 2
+step = 0.1
+value = 75.0
+fill_mode = 5
+texture_under = ExtResource("2_xaom8")
+texture_over = ExtResource("3_4bm6u")
+texture_progress = ExtResource("2_xaom8")
+tint_under = Color(0, 0.54901963, 0, 1)
+tint_progress = Color(0, 0, 0, 0.84313726)
+
+[node name="MutationCooldown1" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=547339981]
+layout_mode = 2
+step = 0.1
+value = 75.0
+fill_mode = 5
+texture_under = ExtResource("2_xaom8")
+texture_over = ExtResource("3_4bm6u")
+texture_progress = ExtResource("2_xaom8")
+tint_under = Color(0, 0.60784316, 0, 1)
+tint_progress = Color(0, 0, 0, 0.84313726)

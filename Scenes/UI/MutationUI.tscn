@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dgt0nxglup0w7"]
+
+[ext_resource type="Script" uid="uid://bs8ttcrsv5xgu" path="res://Scripts/UI/MutationUI.gd" id="1_ulxrk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ga8f"]
+font_size = 60
+
+[node name="MutationUI" type="Control" unique_id=491561210]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ulxrk")
+
+[node name="Label" type="Label" parent="." unique_id=994562086]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -274.0
+offset_top = 84.0
+offset_right = 274.0
+offset_bottom = 167.0
+grow_horizontal = 2
+text = "Choose a mutation"
+label_settings = SubResource("LabelSettings_1ga8f")
+
+[node name="MutationButton1" type="Button" parent="." unique_id=998090486]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 357.0
+offset_right = 290.0
+offset_bottom = 493.0
+text = "Mutation 1"
+
+[node name="MutationButton2" type="Button" parent="." unique_id=1504991706]
+layout_mode = 0
+offset_left = 850.0
+offset_top = 357.0
+offset_right = 989.0
+offset_bottom = 507.0
+text = "Mutation 2"
+
+[connection signal="pressed" from="MutationButton1" to="." method="_mutation1_pressed"]
+[connection signal="pressed" from="MutationButton2" to="." method="_mutation2_pressed"]

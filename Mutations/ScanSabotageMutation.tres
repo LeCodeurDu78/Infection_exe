@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ScanSabotageMutation" format=3 uid="uid://qrpkvg0xqp85"]
+
+[ext_resource type="Script" uid="uid://csu5jiialo5ss" path="res://Scripts/MutationsAvailable/ScanSabotageMutation.gd" id="1_scan_sabotage"]
+
+[resource]
+script = ExtResource("1_scan_sabotage")
+name = "Scan Sabotage"
+description = "Disables scans in an area for 6 s"
+unlock_points = 30
