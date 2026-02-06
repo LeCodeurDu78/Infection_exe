@@ -6,7 +6,7 @@ extends Control
 
 func _process(_delta):
 	var points := GameManager.get_virus_xp()
-	xp_label.text = "XP : " + points	
+	xp_label.text = "XP : " + points
 
 	# Ajoute si tu as un label pour les points :
 	#$ScoreLabel.text = "Data Volée : %d" % GameManager.points 

@@ -7,6 +7,7 @@ extends CharacterBody2D
 
 @export var scan_scene: PackedScene
 @export var scan_cooldown := 4.0
+@export var detectionVector := Vector2(12, 12)
 
 # ========================
 # STATE
@@ -22,7 +23,7 @@ var scan_timer := 0.0
 # ========================
 # MANAGERS
 # ========================
-@onready var coordinator := get_tree().current_scene.get_node("EnemyManager/AntivirusCoordinator")
+@onready var virus : Node2D = get_tree().root.get_node("Main/VirusSpawner/Virus") as Node2D
 
 # ========================
 # LIFECYCLE
@@ -30,15 +31,13 @@ var scan_timer := 0.0
 func _ready():
 	randomize()
 	_pick_new_direction()
-	coordinator.register_antivirus(self)
-
-func _exit_tree():
-	coordinator.unregister_antivirus(self)
 
 # ========================
 # MAIN LOOP
 # ========================
 func _physics_process(delta):
+	print(virus.discretion)
+	$DetectionArea.scale = detectionVector * virus.discretion 
 	scan_timer += delta
 
 	if scan_timer >= scan_cooldown:
@@ -68,7 +67,6 @@ func _pick_new_direction():
 
 func _chase():
 	if not is_instance_valid(target) or target.invisible:
-		coordinator.release_chase(self)
 		target = null
 		state = "wander"
 		return
@@ -96,14 +94,12 @@ func launch_scan():
 # DETECTION
 # ========================
 func _on_detection_entered(body):
-	if body.name == "Virus" and not body.invisible:
-		if coordinator.request_chase(self, body):
-			target = body
+	if body.name == "InfectionZone" and not body.get_parent().invisible:
+			target = body.get_parent() as Node2D
 			state = "chase"
 
 func _on_detection_exited(body):
-	if body == target:
-		coordinator.release_chase(self)
+	if body.get_parent() == target:
 		target = null
 		state = "wander"
 

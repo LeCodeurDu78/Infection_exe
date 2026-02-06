@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var speed := 400.0
 @export var infection_rate := 1.0
-@export var discretion := 0.5
+@export var discretion := 1.0
 var invisible := false
 
 var is_dashing := false

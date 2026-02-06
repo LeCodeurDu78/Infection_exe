@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://lsg5k3cjsfum" path="res://Mutations/InvisibleMutation.tres" id="4_lbsxr"]
 [ext_resource type="Resource" uid="uid://dd028x8dqkbvn" path="res://Mutations/SpeedMutation.tres" id="5_mf8yx"]
 [ext_resource type="Resource" uid="uid://d2wgcvsnch3j1" path="res://Mutations/LightPacketMutation.tres" id="6_lbsxr"]
+[ext_resource type="Resource" uid="uid://bmghdqudmqv68" path="res://Mutations/DiscretionMutation.tres" id="7_mf8yx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_msxgm"]
 radius = 26.305893
@@ -23,7 +24,7 @@ position_smoothing_enabled = true
 
 [node name="MutationManager" type="Node2D" parent="." unique_id=1431755883]
 script = ExtResource("2_aog2q")
-available_mutations = Array[ExtResource("3_xlukx")]([ExtResource("4_lbsxr"), ExtResource("6_lbsxr"), ExtResource("5_mf8yx")])
+available_mutations = Array[ExtResource("3_xlukx")]([ExtResource("4_lbsxr"), ExtResource("6_lbsxr"), ExtResource("5_mf8yx"), ExtResource("7_mf8yx")])
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1592964847]
 shape = SubResource("CircleShape2D_msxgm")
