@@ -267,7 +267,7 @@ func unlock_next_zone() -> void
 
 ### Court Terme (1-2 semaines)
 - [ ] Tester toutes les mutations
-- [✅] Ajouter sons/musique
+- [x] Ajouter sons/musique
 - [ ] Ajouter effets visuels (particules)
 - [ ] Créer menu d'options
 
