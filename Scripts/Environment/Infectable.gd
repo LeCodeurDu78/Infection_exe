@@ -32,6 +32,8 @@ func start_infection(virus_infection_rate: float) -> void:
 	if is_infected or infection_timer != null:
 		return
 	
+	EventBus.infection_started.emit(self, points_worth)
+	
 	# Create and configure timer
 	infection_timer = Timer.new()
 	infection_timer.wait_time = infection_time / virus_infection_rate
@@ -65,6 +67,7 @@ func _complete_infection() -> void:
 func cancel_infection() -> void:
 	"""Cancel ongoing infection"""
 	if infection_timer:
+		EventBus.infection_cancelled.emit(self)
 		infection_timer.stop()
 		infection_timer.queue_free()
 		infection_timer = null

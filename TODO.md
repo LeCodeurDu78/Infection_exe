@@ -107,28 +107,6 @@ const DIFFICULTY := {
 }
 ```
 
-#### 2. Event Bus Global
-```gdscript
-# Scripts/Core/EventBus.gd
-extends Node
-
-# UI Events
-signal hud_updated
-signal mutation_ui_opened
-signal mutation_ui_closed
-
-# Game Events
-signal infection_started
-signal level_completed
-signal game_paused
-signal game_resumed
-
-# Entity Events  
-signal virus_damaged(amount: int)
-signal antivirus_spawned(antivirus: Node2D)
-signal scan_launched(position: Vector2)
-```
-
 #### 3. Audio Manager
 ```gdscript
 # Scripts/Core/AudioManager.gd

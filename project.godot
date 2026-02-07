@@ -22,6 +22,15 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*uid://37e85alkwu3y"
+EventBus="*uid://cfgqrqdt7ro71"
+AudioManager="*uid://r1ltoi4mblh2"
+
+[global_group]
+
+virus_infection_zone=""
+virus=""
+hud=""
+mutation_ui=""
 
 [input]
 

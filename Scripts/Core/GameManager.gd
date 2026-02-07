@@ -2,15 +2,7 @@ extends Node
 
 ## Autoload singleton for game state management
 ## Handles infection tracking, threat levels, and global game state
-
-# ========================
-# SIGNALS
-# ========================
-signal infectable_registered
-signal target_infected(points: int)
-signal threat_level_changed(new_level: ThreatLevel)
-signal game_won
-signal game_lost
+## Uses EventBus for global event communication
 
 # ========================
 # ENUMS
@@ -49,12 +41,12 @@ func reset_game() -> void:
 func register_infectable() -> void:
 	"""Called when a new infectable object is created"""
 	total_infectables += 1
-	infectable_registered.emit()
 
 func on_target_infected(points: int) -> void:
 	"""Called when an infectable object is successfully infected"""
 	infected_count += 1
-	target_infected.emit(points)
+	EventBus.infection_completed.emit(null, points)
+	EventBus.data_collected.emit("infection", 1)
 	_check_threat_level_change()
 	_check_win_condition()
 
@@ -75,8 +67,10 @@ func _check_threat_level_change() -> void:
 	"""Internal: Check if threat level should change"""
 	var new_level := _calculate_threat_level()
 	if new_level != _current_threat_level:
+		var old_level := _current_threat_level
 		_current_threat_level = new_level
-		threat_level_changed.emit(new_level)
+		EventBus.threat_level_changed.emit(old_level, new_level)
+		EventBus.threat_level_warning.emit(new_level)
 
 func _calculate_threat_level() -> ThreatLevel:
 	"""Internal: Calculate threat level from infection percent"""
@@ -94,11 +88,12 @@ func _calculate_threat_level() -> ThreatLevel:
 func _check_win_condition() -> void:
 	"""Internal: Check if player has won"""
 	if get_infection_percent() >= 100.0:
-		game_won.emit()
+		EventBus.game_won.emit(100.0, 0.0)  # TODO: Add time tracking
 
 func on_virus_destroyed() -> void:
 	"""Called when the virus is destroyed"""
-	game_lost.emit()
+	EventBus.game_lost.emit("virus_destroyed")
+	EventBus.virus_destroyed.emit()
 
 # ========================
 # VIRUS DATA (for UI)

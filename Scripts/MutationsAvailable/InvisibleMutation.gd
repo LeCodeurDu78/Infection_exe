@@ -28,6 +28,7 @@ func apply(virus: Node2D) -> void:
 	is_active = true
 	remaining_active_time = active_duration
 	virus.set_invisibility(true)
+	EventBus.emit_notification("Invisibility Activated", "info")
 
 # ========================
 # UPDATE
@@ -50,6 +51,7 @@ func _update_cooldown(delta: float) -> void:
 	remaining_cooldown_time -= delta
 	if remaining_cooldown_time <= 0.0:
 		is_on_cooldown = false
+		EventBus.mutation_cooldown_finished.emit("Invisibility")
 
 func _end_invisibility(virus: Node2D) -> void:
 	"""End invisibility and start cooldown"""
@@ -57,6 +59,7 @@ func _end_invisibility(virus: Node2D) -> void:
 	is_on_cooldown = true
 	remaining_cooldown_time = cooldown_duration
 	virus.set_invisibility(false)
+	EventBus.mutation_cooldown_started.emit("Invisibility", cooldown_duration)
 
 # ========================
 # COOLDOWN INFO (for UI)

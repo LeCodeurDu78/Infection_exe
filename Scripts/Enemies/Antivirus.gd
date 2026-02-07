@@ -46,8 +46,8 @@ func _ready() -> void:
 		detection_area.body_entered.connect(_on_detection_body_entered)
 		detection_area.body_exited.connect(_on_detection_body_exited)
 	
-	# Connect to GameManager signals
-	GameManager.threat_level_changed.connect(_on_threat_level_changed)
+	# Connect to EventBus
+	EventBus.threat_level_changed.connect(_on_threat_level_changed)
 
 func _physics_process(delta: float) -> void:
 	_update_detection_radius()
@@ -68,10 +68,12 @@ func _on_detection_body_entered(body: Node2D) -> void:
 	if body.is_in_group("virus") and not body.is_invisible:
 		chase_target = body
 		current_state = State.CHASE
+		EventBus.antivirus_detected_virus.emit(self, body)
 
 func _on_detection_body_exited(body: Node2D) -> void:
 	"""Handle virus leaving detection"""
 	if body == chase_target:
+		EventBus.antivirus_lost_virus.emit(self)
 		chase_target = null
 		current_state = State.WANDER
 
@@ -94,6 +96,8 @@ func _perform_scan() -> void:
 	var scan := scan_scene.instantiate()
 	scan.global_position = chase_target.global_position
 	get_parent().add_child(scan)
+	
+	EventBus.scan_launched.emit(chase_target.global_position, scan.scale)
 
 # ========================
 # MOVEMENT
@@ -147,7 +151,7 @@ func _get_speed_multiplier() -> float:
 			return 1.7
 	return 1.0
 
-func _on_threat_level_changed(_new_level: GameManager.ThreatLevel) -> void:
+func _on_threat_level_changed(_old_level: GameManager.ThreatLevel, _new_level: GameManager.ThreatLevel) -> void:
 	"""React to threat level changes"""
 	# Could add visual feedback or behavior changes here
 	pass

@@ -21,8 +21,8 @@ var active_antiviruses: Array[Node] = []
 # LIFECYCLE
 # ========================
 func _ready() -> void:
-	# Connect to GameManager signals
-	GameManager.threat_level_changed.connect(_on_threat_level_changed)
+	# Connect to EventBus
+	EventBus.threat_level_changed.connect(_on_threat_level_changed)
 	
 	# Initial spawn
 	_update_antivirus_count()
@@ -54,14 +54,17 @@ func _spawn_antivirus() -> void:
 	
 	add_child(antivirus)
 	active_antiviruses.append(antivirus)
+	
+	EventBus.antivirus_spawned.emit(antivirus, spawn_point.global_position)
 
 func _remove_antivirus() -> void:
 	"""Remove one antivirus from the scene"""
 	if active_antiviruses.is_empty():
 		return
 	
-	var antivirus: Node = active_antiviruses.pop_back()
+	var antivirus: Variant = active_antiviruses.pop_back()
 	if is_instance_valid(antivirus):
+		EventBus.antivirus_despawned.emit(antivirus)
 		antivirus.queue_free()
 
 # ========================
@@ -78,6 +81,6 @@ func _get_target_count() -> int:
 			return max_count
 	return base_count
 
-func _on_threat_level_changed(_new_level: GameManager.ThreatLevel) -> void:
+func _on_threat_level_changed(_old_level: GameManager.ThreatLevel, _new_level: GameManager.ThreatLevel) -> void:
 	"""React to threat level changes"""
 	_update_antivirus_count()

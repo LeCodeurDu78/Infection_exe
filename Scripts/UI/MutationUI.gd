@@ -18,7 +18,7 @@ var mutation_manager: MutationManager = null
 # ========================
 @onready var mutation_button_1: Button = $MutationButton1
 @onready var mutation_button_2: Button = $MutationButton2
-#@onready var mutation_button_3: Button = $MutationButton3
+@onready var mutation_button_3: Button = $MutationButton3
 
 # ========================
 # LIFECYCLE
@@ -26,7 +26,7 @@ var mutation_manager: MutationManager = null
 func _ready() -> void:
 	add_to_group("mutation_ui")
 	visible = false
-
+	
 # ========================
 # SETUP
 # ========================
@@ -56,11 +56,11 @@ func _populate_buttons() -> void:
 		mutation_button_2.visible = true
 	
 	# Button 3
-	#if mutations.size() > 2 and mutation_button_3:
-	#	mutation_button_3.text = mutations[2].name
-	#	mutation_button_3.visible = true
-	#else:
-	#	mutation_button_3.visible = false
+	if mutations.size() > 2 and mutation_button_3:
+		mutation_button_3.text = mutations[2].name
+		mutation_button_3.visible = true
+	else:
+		mutation_button_3.visible = false
 
 func _show_ui() -> void:
 	"""Show UI and pause game"""

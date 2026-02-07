@@ -39,6 +39,6 @@ shape = SubResource("CircleShape2D_cuva4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2017024098]
 shape = SubResource("CircleShape2D_t2s5a")
 
-[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_body_entered"]
-[connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_body_exited"]
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_entered"]
+[connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_exited"]
 [connection signal="body_entered" from="KillArea" to="." method="_on_body_entered"]

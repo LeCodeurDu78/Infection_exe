@@ -40,6 +40,7 @@ var infected_targets: Array[Infectable] = []
 func _ready() -> void:
 	_setup_appearance()
 	_connect_signals()
+	EventBus.scan_started.emit(self)
 
 func _setup_appearance() -> void:
 	"""Setup initial appearance based on threat level"""
@@ -81,6 +82,8 @@ func _start_scanning() -> void:
 # ========================
 func _perform_cleaning() -> void:
 	"""Clean infected targets and destroy virus if present"""
+	var cleaned_count := 0
+	
 	# Destroy virus if inside scan zone
 	if is_virus_inside:
 		_destroy_virus()
@@ -89,8 +92,10 @@ func _perform_cleaning() -> void:
 	for target in infected_targets:
 		if is_instance_valid(target):
 			_clean_target(target)
+			cleaned_count += 1
 	
 	infected_targets.clear()
+	EventBus.scan_completed.emit(self, cleaned_count)
 
 func _destroy_virus() -> void:
 	"""Destroy the virus (game over)"""

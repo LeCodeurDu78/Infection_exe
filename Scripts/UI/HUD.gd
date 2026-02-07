@@ -36,6 +36,7 @@ var mutation_manager: MutationManager = null
 func _ready() -> void:
 	add_to_group("hud")
 	call_deferred("_find_mutation_manager")
+	EventBus.game_started.emit()
 
 func _find_mutation_manager() -> void:
 	"""Find mutation manager in scene"""

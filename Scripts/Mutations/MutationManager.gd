@@ -66,6 +66,7 @@ func _handle_mutation_inputs(delta: float) -> void:
 		# Handle different input types
 		if mutation.has_method("apply") and Input.is_action_just_pressed(keybind):
 			mutation.apply(virus_node)
+			EventBus.mutation_ability_used.emit(mutation.name)
 		
 		if mutation.has_method("hold") and Input.is_action_pressed(keybind):
 			mutation.hold(delta)
@@ -90,6 +91,7 @@ func unlock_mutations() -> void:
 		if _is_mutation_available(mutation, current_level):
 			if mutation not in mutations_to_offer:
 				mutations_to_offer.append(mutation)
+				EventBus.mutation_unlocked.emit(mutation)
 	
 	# Show UI when enough mutations are available
 	if mutations_to_offer.size() >= MIN_MUTATIONS_FOR_CHOICE:
@@ -106,6 +108,7 @@ func _show_mutation_choice() -> void:
 		return
 	
 	mutations_to_offer.shuffle()
+	EventBus.mutation_ui_opened.emit(mutations_to_offer)
 	mutation_ui.setup(self)
 
 # ========================
@@ -132,6 +135,11 @@ func activate_mutation(mutation: Mutation) -> void:
 	# Remove from available pool
 	available_mutations.erase(mutation)
 	mutations_to_offer.clear()
+	
+	# Emit events
+	EventBus.mutation_activated.emit(mutation)
+	EventBus.mutation_ui_closed.emit(mutation)
+	EventBus.emit_notification("Mutation Activated: %s" % mutation.name, "success")
 
 # ========================
 # COOLDOWN INFO (for UI)

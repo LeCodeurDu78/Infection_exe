@@ -6,8 +6,8 @@ extends CharacterBody2D
 # ========================
 # CONSTANTS
 # ========================
-@export var XP_LEVELS := [20, 40, 60, 80, 100]
-@export var MAX_LEVEL := 20
+const XP_LEVELS := [20, 40, 60, 80, 100]
+const MAX_LEVEL := 5
 const INVISIBLE_ALPHA := 0.4
 const VISIBLE_ALPHA := 1.0
 
@@ -35,8 +35,11 @@ var dash_velocity := Vector2.ZERO
 func _ready() -> void:
 	# Register with GameManager
 	GameManager.virus_node = self
-	GameManager.target_infected.connect(add_xp)
 	add_to_group("virus")
+	
+	# Notify spawn
+	EventBus.virus_spawned.emit(self)
+	EventBus.infection_completed.connect(add_xp)
 
 func _physics_process(_delta: float) -> void:
 	if is_dashing:
@@ -62,10 +65,11 @@ func _handle_movement() -> void:
 # ========================
 # LEVELING
 # ========================
-func add_xp(points: int) -> void:
+func add_xp(infected: Infectable, points: int) -> void:
 	"""Add XP and check for level up"""
 	xp += points
-	print("Gained ", points, " XP (Total: ", xp, ")")
+	EventBus.virus_xp_gained.emit(points, xp)
+	
 	while current_level < MAX_LEVEL and xp >= get_xp_for_next_level():
 		_level_up()
 
@@ -74,8 +78,11 @@ func _level_up() -> void:
 	xp -= get_xp_for_next_level()
 	current_level += 1
 	
+	EventBus.virus_leveled_up.emit(current_level)
+	EventBus.emit_notification("Level Up! Level %d" % current_level, "success")
+	EventBus.emit_screen_shake(0.5, 0.2)
+	
 	# Unlock new mutations
-	print("Leveled up to ", current_level, "! Unlocking new mutations...")
 	if has_node("MutationManager"):
 		$MutationManager.unlock_mutations()
 
@@ -88,10 +95,10 @@ func get_xp_for_next_level() -> int:
 # ========================
 # ABILITIES
 # ========================
-func set_invisibility(_visible: bool) -> void:
+func set_invisibility(visible: bool) -> void:
 	"""Toggle invisibility state"""
-	is_invisible = _visible
-	modulate.a = INVISIBLE_ALPHA if _visible else VISIBLE_ALPHA
+	is_invisible = visible
+	modulate.a = INVISIBLE_ALPHA if visible else VISIBLE_ALPHA
 
 func start_dash(speed: float, direction: Vector2) -> void:
 	"""Activate dash ability"""

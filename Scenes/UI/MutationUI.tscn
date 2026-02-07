@@ -5,7 +5,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_1ga8f"]
 font_size = 60
 
-[node name="MutationUI" type="Control" unique_id=491561210 groups=["mutation_ui"]]
+[node name="MutationUI" type="Control" unique_id=491561210]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -28,21 +28,30 @@ grow_horizontal = 2
 text = "Choose a mutation"
 label_settings = SubResource("LabelSettings_1ga8f")
 
-[node name="MutationButton1" type="Button" parent="." unique_id=998090486]
+[node name="MutationButton1" type="Button" parent="." unique_id=1696299493]
 layout_mode = 0
-offset_left = 156.0
-offset_top = 357.0
-offset_right = 290.0
-offset_bottom = 493.0
+offset_left = 154.0
+offset_top = 358.0
+offset_right = 293.0
+offset_bottom = 508.0
 text = "Mutation 1"
 
-[node name="MutationButton2" type="Button" parent="." unique_id=1504991706]
+[node name="MutationButton3" type="Button" parent="." unique_id=1504991706]
 layout_mode = 0
-offset_left = 850.0
-offset_top = 357.0
-offset_right = 989.0
-offset_bottom = 507.0
+offset_left = 505.0
+offset_top = 358.0
+offset_right = 644.0
+offset_bottom = 508.0
+text = "Mutation 3"
+
+[node name="MutationButton2" type="Button" parent="." unique_id=1906650337]
+layout_mode = 0
+offset_left = 843.0
+offset_top = 358.0
+offset_right = 982.0
+offset_bottom = 508.0
 text = "Mutation 2"
 
 [connection signal="pressed" from="MutationButton1" to="." method="_on_mutation_1_pressed"]
+[connection signal="pressed" from="MutationButton3" to="." method="_on_mutation_3_pressed"]
 [connection signal="pressed" from="MutationButton2" to="." method="_on_mutation_2_pressed"]
