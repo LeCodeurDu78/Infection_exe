@@ -1,3 +1,5 @@
+CollisionShape2D
+Node2D
 SpinBox
 LineEdit
 TextEdit
@@ -11,5 +13,3 @@ Label
 HBoxContainer
 Control
 HSeparator
-VScrollBar
-ScrollContainer

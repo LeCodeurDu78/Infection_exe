@@ -1,21 +1,21 @@
 [gd_scene format=3 uid="uid://dyimikbwgd0a2"]
 
 [ext_resource type="Script" uid="uid://bmvsm2wwfdhrt" path="res://Scripts/Environment/Infectable.gd" id="1_l6nyw"]
-[ext_resource type="Texture2D" uid="uid://c57gmrid7ke0b" path="res://addons/2d_shapes/Rectangle.svg" id="1_ql554"]
+[ext_resource type="Texture2D" uid="uid://cwdfxxi8u2lyj" path="res://Assets/Sprites/Files/file.png" id="2_l6nyw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l6nyw"]
-size = Vector2(40, 41)
+size = Vector2(80, 76)
 
 [node name="File" type="Area2D" unique_id=1434683303]
 script = ExtResource("1_l6nyw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=232275585]
-position = Vector2(0, 0.5)
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_l6nyw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1384779032]
-scale = Vector2(3, 3)
-texture = ExtResource("1_ql554")
+position = Vector2(0, -1)
+texture = ExtResource("2_l6nyw")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

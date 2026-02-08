@@ -2,26 +2,28 @@
 
 [ext_resource type="Script" uid="uid://ciby424h8ww8a" path="res://Scripts/Enemies/Antivirus.gd" id="1_cuva4"]
 [ext_resource type="Texture2D" uid="uid://c4rn6yaa8hjoc" path="res://addons/2d_shapes/Ellipse.svg" id="1_kom5y"]
+[ext_resource type="Texture2D" uid="uid://b40n2k385bqmp" path="res://Assets/Sprites/Antivirus/antivirus.png" id="2_kmwlk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kmwlk"]
 radius = 7.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cuva4"]
-radius = 6.75
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kmwlk"]
+radius = 17.666668
+height = 54.666668
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_t2s5a"]
-radius = 6.5
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2s5a"]
+size = Vector2(4.4461565, 22.32857)
 
 [node name="Antivirus" type="CharacterBody2D" unique_id=984074734]
 modulate = Color(1, 0, 0, 1)
-scale = Vector2(6, 6)
+scale = Vector2(2, 2)
 script = ExtResource("1_cuva4")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=185302011]
-texture = ExtResource("1_kom5y")
+texture = ExtResource("2_kmwlk")
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=112232356]
-scale = Vector2(12, 12)
+scale = Vector2(20, 20)
 
 [node name="DetectionCollider" type="CollisionShape2D" parent="DetectionArea" unique_id=186049321]
 shape = SubResource("CircleShape2D_kmwlk")
@@ -33,11 +35,60 @@ texture = ExtResource("1_kom5y")
 
 [node name="KillArea" type="Area2D" parent="." unique_id=1563325528]
 
-[node name="KillCollider" type="CollisionShape2D" parent="KillArea" unique_id=1930012759]
-shape = SubResource("CircleShape2D_cuva4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillArea" unique_id=769375581]
+position = Vector2(-1.6666667, 3)
+shape = SubResource("CapsuleShape2D_kmwlk")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="KillArea" unique_id=1692048496]
+position = Vector2(-23.633236, 22.851614)
+rotation = 0.58531296
+shape = SubResource("RectangleShape2D_t2s5a")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="KillArea" unique_id=1792130250]
+position = Vector2(19.333324, 22.66667)
+rotation = -0.6754825
+shape = SubResource("RectangleShape2D_t2s5a")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="KillArea" unique_id=1025493435]
+position = Vector2(-26.848272, -16.965157)
+rotation = -0.8605118
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_t2s5a")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="KillArea" unique_id=1375782892]
+position = Vector2(23.833326, -18.166666)
+rotation = 1.0685877
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_t2s5a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2017024098]
-shape = SubResource("CircleShape2D_t2s5a")
+position = Vector2(-1.6666667, 3)
+scale = Vector2(0.95, 0.95)
+shape = SubResource("CapsuleShape2D_kmwlk")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=910076966]
+position = Vector2(-23.633236, 22.851614)
+rotation = 0.58531296
+scale = Vector2(0.95, 0.95)
+shape = SubResource("RectangleShape2D_t2s5a")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=384028744]
+position = Vector2(19.333324, 22.66667)
+rotation = -0.6754825
+scale = Vector2(0.95, 0.95)
+shape = SubResource("RectangleShape2D_t2s5a")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=298062614]
+position = Vector2(-26.848272, -16.965157)
+rotation = -0.8605118
+scale = Vector2(0.95, 0.95)
+shape = SubResource("RectangleShape2D_t2s5a")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="." unique_id=1370344694]
+position = Vector2(23.833326, -18.166666)
+rotation = 1.0685877
+scale = Vector2(0.95, 0.95)
+shape = SubResource("RectangleShape2D_t2s5a")
 
 [connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_entered"]
 [connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_exited"]

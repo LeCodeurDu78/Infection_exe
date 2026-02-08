@@ -33,7 +33,6 @@ var encryption = false ## Never change if the project was executed before!
 
 func _ready() -> void:
 	load_data()
-	print("Data loaded: ", data) # Debug print to check the loaded data
 	if autosave:
 		$Timer.wait_time = interval
 		$Timer.start()

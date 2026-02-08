@@ -28,6 +28,7 @@ GameManager="*uid://37e85alkwu3y"
 EventBus="*uid://cfgqrqdt7ro71"
 AudioManager="*uid://r1ltoi4mblh2"
 SaveManager="*uid://dwndakl0j78w3"
+ParticleManager="*uid://xdax4v7pffxk"
 
 [global_group]
 

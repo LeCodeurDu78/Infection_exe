@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://mutation_particles_001"]
+
+[sub_resource type="Curve" id="Curve_scale"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.5, 1.2), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_mutation"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0, 1, 1, 0.5, 0, 1, 1, 1, 0, 1, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mutation"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 20.0
+angle_min = 0.0
+angle_max = 360.0
+direction = Vector3(0, -1, 0)
+spread = 60.0
+initial_velocity_min = 40.0
+initial_velocity_max = 80.0
+angular_velocity_min = 180.0
+angular_velocity_max = 360.0
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.3
+gravity = Vector3(0, -30, 0)
+scale_min = 0.6
+scale_max = 1.2
+scale_curve = SubResource("Curve_scale")
+color_ramp = SubResource("Gradient_mutation")
+
+[node name="MutationParticles" type="GPUParticles2D"]
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_mutation")
+lifetime = 1.2
+one_shot = true
+explosiveness = 0.7
+randomness = 0.5
+fixed_fps = 60

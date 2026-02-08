@@ -46,22 +46,22 @@ position = Vector2(788, 671)
 metadata/_edit_lock_ = true
 
 [node name="File1" parent="Environment" unique_id=1434683303 instance=ExtResource("2_qtv3y")]
-position = Vector2(764, 528)
+position = Vector2(851, 528)
 
 [node name="File2" parent="Environment" unique_id=1673036503 instance=ExtResource("2_qtv3y")]
-position = Vector2(851, 247)
+position = Vector2(846, 197)
 
 [node name="File3" parent="Environment" unique_id=1644609536 instance=ExtResource("2_qtv3y")]
 position = Vector2(571, 412)
 
 [node name="File4" parent="Environment" unique_id=139399125 instance=ExtResource("2_qtv3y")]
-position = Vector2(911, 492)
+position = Vector2(976, 352)
 
 [node name="File5" parent="Environment" unique_id=878660102 instance=ExtResource("2_qtv3y")]
-position = Vector2(699, 181)
+position = Vector2(698, 226)
 
 [node name="File6" parent="Environment" unique_id=1713860450 instance=ExtResource("2_qtv3y")]
-position = Vector2(549, 171)
+position = Vector2(551, 138)
 
 [node name="Folder1" parent="Environment" unique_id=198585932 instance=ExtResource("5_aw1lf")]
 position = Vector2(551, 283)

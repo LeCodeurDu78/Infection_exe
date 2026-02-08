@@ -42,10 +42,10 @@ func register_infectable() -> void:
 	"""Called when a new infectable object is created"""
 	total_infectables += 1
 
-func on_target_infected(points: int) -> void:
+func on_target_infected(_position: Vector2, points: int) -> void:
 	"""Called when an infectable object is successfully infected"""
 	infected_count += 1
-	EventBus.infection_completed.emit(null, points)
+	EventBus.infection_completed.emit(_position, points)
 	EventBus.data_collected.emit("infection", 1)
 	_check_threat_level_change()
 	_check_win_condition()

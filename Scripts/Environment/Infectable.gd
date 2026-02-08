@@ -59,7 +59,7 @@ func _complete_infection() -> void:
 		return
 	
 	is_infected = true
-	GameManager.on_target_infected(points_worth)
+	GameManager.on_target_infected(position, points_worth)
 	
 	# Visual feedback or destruction
 	queue_free()

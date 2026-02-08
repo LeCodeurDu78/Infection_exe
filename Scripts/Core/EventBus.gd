@@ -9,7 +9,7 @@ extends Node
 # INFECTION EVENTS
 # ========================
 signal infection_started(target: Node, points: int)
-signal infection_completed(target: Node, points: int)
+signal infection_completed(position: Vector2, points: int)
 signal infection_cancelled(target: Node)
 
 # ========================

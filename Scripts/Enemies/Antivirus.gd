@@ -14,7 +14,7 @@ enum State { WANDER, CHASE }
 @export var base_speed := 200.0
 @export var scan_scene: PackedScene
 @export var scan_cooldown := 4.0
-@export var detection_radius := Vector2(12, 12)
+@export var detection_radius := Vector2(20, 20)
 
 # ========================
 # STATE

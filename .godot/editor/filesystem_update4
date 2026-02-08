@@ -1,3 +1,14 @@
-res://Scripts/UI/OptionsMenu.gd
-res://Scripts/Core/AudioManager.gd
-res://Scenes/UI/OptionsMenu.tscn
+res://Scenes/Particles/InfectionParticles.tscn
+res://Scenes/Particles/DashTrailParticles.tscn
+res://Scenes/Particles/ScanWaveParticles.tscn
+res://Scenes/Particles/LevelUpParticles.tscn
+res://addons/save_and_load/SaveManager.gd
+res://Scripts/Core/EventBus.gd
+res://Scripts/Core/GameManager.gd
+res://Scripts/Core/ParticleManager.gd
+res://Scripts/Environment/Infectable.gd
+res://Scenes/Virus/Virus.tscn
+res://Scenes/Enemies/Antivirus.tscn
+res://Scripts/Enemies/Antivirus.gd
+res://Scenes/Environment/File.tscn
+res://Scenes/Main/Main.tscn

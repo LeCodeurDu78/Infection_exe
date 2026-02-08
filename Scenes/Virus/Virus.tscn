@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://drpmwud0urs68"]
 
-[ext_resource type="Texture2D" uid="uid://c4rn6yaa8hjoc" path="res://addons/2d_shapes/Ellipse.svg" id="1_e5x8h"]
 [ext_resource type="Script" uid="uid://cb8nw3fx0gnae" path="res://Scripts/Virus/Virus.gd" id="1_msxgm"]
 [ext_resource type="Script" uid="uid://nijid8chg33l" path="res://Scripts/Mutations/MutationManager.gd" id="2_aog2q"]
 [ext_resource type="Script" uid="uid://cln4bqbrsdeut" path="res://Scripts/Mutations/Mutation.gd" id="3_xlukx"]
@@ -8,12 +7,13 @@
 [ext_resource type="Resource" uid="uid://dd028x8dqkbvn" path="res://Mutations/SpeedMutation.tres" id="5_mf8yx"]
 [ext_resource type="Resource" uid="uid://d2wgcvsnch3j1" path="res://Mutations/LightPacketMutation.tres" id="6_lbsxr"]
 [ext_resource type="Resource" uid="uid://bmghdqudmqv68" path="res://Mutations/DiscretionMutation.tres" id="7_mf8yx"]
+[ext_resource type="Texture2D" uid="uid://cbhf15355fami" path="res://Assets/Sprites/Virus/virus.png" id="8_mf8yx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_msxgm"]
-radius = 26.305893
+radius = 47.042534
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aog2q"]
-radius = 61.0
+radius = 72.00694
 
 [node name="Virus" type="CharacterBody2D" unique_id=1741660789 groups=["virus"]]
 script = ExtResource("1_msxgm")
@@ -26,14 +26,14 @@ position_smoothing_enabled = true
 script = ExtResource("2_aog2q")
 available_mutations = Array[ExtResource("3_xlukx")]([ExtResource("4_lbsxr"), ExtResource("6_lbsxr"), ExtResource("5_mf8yx"), ExtResource("7_mf8yx")])
 
-[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1592964847]
-shape = SubResource("CircleShape2D_msxgm")
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=313566490]
 modulate = Color(0, 0.47843137, 0, 1)
 texture_filter = 1
 scale = Vector2(4, 4)
-texture = ExtResource("1_e5x8h")
+texture = ExtResource("8_mf8yx")
+
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1592964847]
+shape = SubResource("CircleShape2D_msxgm")
 
 [node name="InfectionZone" type="Area2D" parent="." unique_id=387483876 groups=["virus_infection_zone"]]
 
