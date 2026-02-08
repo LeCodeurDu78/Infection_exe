@@ -12,105 +12,6 @@
 ---
 
 ## 🔥 Priorité CRITIQUE
-
-### 1. ParticleManager - Effets Visuels
-
-**Pourquoi:** Le jeu a des sons mais manque de feedback visuel
-
-```gdscript
-# Scripts/Core/ParticleManager.gd
-extends Node2D
-
-var particle_scenes := {
-	"infection": preload("res://Scenes/Particles/InfectionParticles.tscn"),
-	"level_up": preload("res://Scenes/Particles/LevelUpParticles.tscn"),
-	"virus_hit": preload("res://Scenes/Particles/HitParticles.tscn"),
-	"mutation_activated": preload("res://Scenes/Particles/MutationParticles.tscn"),
-	"scan_wave": preload("res://Scenes/Particles/ScanWaveParticles.tscn"),
-}
-
-func _ready():
-	EventBus.infection_completed.connect(_spawn_infection_particles)
-	EventBus.virus_leveled_up.connect(_spawn_level_up_particles)
-	EventBus.virus_damaged.connect(_spawn_hit_particles)
-	EventBus.mutation_activated.connect(_spawn_mutation_particles)
-	EventBus.scan_launched.connect(_spawn_scan_particles)
-
-func spawn_particle(type: String, position: Vector2, scale_factor: float = 1.0):
-	if type not in particle_scenes:
-		return
-	
-	var particle = particle_scenes[type].instantiate()
-	particle.global_position = position
-	particle.scale *= scale_factor
-	get_tree().current_scene.add_child(particle)
-	
-	# Auto-cleanup after emission
-	particle.finished.connect(particle.queue_free)
-```
-
-**Particules à créer:**
-- ✨ Infection (vert néon, data corruption)
-- ⬆️ Level up (explosion de code binaire)
-- 💥 Virus hit (glitch rouge)
-- 🧬 Mutation activated (spirale ADN)
-- 📡 Scan wave (onde radar)
-- ⚡ Dash trail (traînée du virus)
-- 🌊 Propagation (onde d'infection)
-
----
-
-### 2. ScreenShakeManager - Camera Shake
-
-**Pourquoi:** AudioManager émet déjà des screen shake requests via EventBus
-
-```gdscript
-# Scripts/Core/ScreenShakeManager.gd
-extends Node
-
-var trauma := 0.0
-var trauma_power := 2.0
-var decay := 1.5
-
-var max_offset := Vector2(50, 50)
-var max_rotation := 10.0
-
-@onready var camera: Camera2D = get_viewport().get_camera_2d()
-var original_position := Vector2.ZERO
-
-func _ready():
-	EventBus.screen_shake_requested.connect(_on_shake_requested)
-	if camera:
-		original_position = camera.offset
-
-func _process(delta):
-	if trauma > 0:
-		trauma = max(trauma - decay * delta, 0.0)
-		_apply_shake()
-
-func _on_shake_requested(intensity: float, duration: float):
-	add_trauma(intensity)
-
-func add_trauma(amount: float):
-	trauma = min(trauma + amount, 1.0)
-
-func _apply_shake():
-	if not camera:
-		return
-	
-	var shake = pow(trauma, trauma_power)
-	camera.offset.x = original_position.x + max_offset.x * shake * randf_range(-1, 1)
-	camera.offset.y = original_position.y + max_offset.y * shake * randf_range(-1, 1)
-	camera.rotation_degrees = max_rotation * shake * randf_range(-1, 1)
-```
-
-**Événements à connecter:**
-- Infection complète (léger)
-- Level up (moyen)
-- Virus touché (fort)
-- Scan lancé (moyen)
-- Mutation explosive activée (très fort)
-
 ---
 
 ### 3. NotificationManager - Toast/Popup System
@@ -639,20 +540,6 @@ func _physics_process(delta):
 		trail.remove_point(0)
 ```
 
-**Shader pour le Virus (Glow):**
-```glsl
-shader_type canvas_item;
-
-uniform vec4 glow_color : source_color = vec4(0.0, 1.0, 0.5, 1.0);
-uniform float glow_intensity : hint_range(0.0, 2.0) = 1.0;
-
-void fragment() {
-	vec4 tex = texture(TEXTURE, UV);
-	COLOR = tex;
-	COLOR.rgb += glow_color.rgb * glow_intensity * tex.a;
-}
-```
-
 **Post-Processing (Glitch Effect):**
 ```gdscript
 # Scripts/Core/PostProcessing.gd
@@ -1059,10 +946,9 @@ func save_session():
 ## 🎯 Objectifs Mis à Jour
 
 ### Court Terme (1-2 semaines)
-- [ ] **ParticleManager** (CRITIQUE)
-- [ ] **ScreenShakeManager** (CRITIQUE)
+- [x] **ParticleManager** (CRITIQUE)
+- [x] **ScreenShakeManager** (CRITIQUE)
 - [ ] **NotificationManager** (CRITIQUE)
-- [ ] Tester toutes les mutations
 - [ ] AchievementManager
 - [ ] Améliorer effets visuels
 
@@ -1079,6 +965,7 @@ func save_session():
 - [ ] Mini-map
 - [ ] Skins pour le virus
 - [ ] Système de difficulté
+- [ ] Tester toutes les mutations
 - [ ] Stats détaillées
 - [ ] Mode multijoueur local
 - [ ] Éditeur de niveaux
@@ -1088,12 +975,8 @@ func save_session():
 
 ## 🚀 Quick Wins (Facile et Impactant)
 
-1. **ParticleManager** - 2-3h, impact visuel ÉNORME
 2. **NotificationManager** - 1-2h, feedback immédiat
-3. **ScreenShakeManager** - 1h, sensation de puissance
 4. **Trail du virus** - 30min, polish visuel
-5. **Glow shader** - 1h, style cyber amélioré
-
 ---
 
 ## 🎨 Pattern à Suivre pour les Mutations

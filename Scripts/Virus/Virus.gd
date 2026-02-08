@@ -14,6 +14,7 @@ const VISIBLE_ALPHA := 1.0
 # ========================
 # EXPORTS
 # ========================
+@export var max_health := 100
 @export var base_speed := 400.0
 @export var infection_rate := 1.0
 @export var discretion := 1.0
@@ -117,6 +118,14 @@ func stop_dash() -> void:
 # ========================
 # CLEANUP
 # ========================
+func take_damage(amount: int) -> void:
+	"""Handle taking damage from antivirus"""
+	EventBus.virus_damaged.emit(amount)
+	max_health -= amount
+	if max_health <= 0:
+		_exit_tree()
+	# Optional: Add visual feedback for damage here
+
 func _exit_tree() -> void:
 	# Notify GameManager
 	if GameManager:

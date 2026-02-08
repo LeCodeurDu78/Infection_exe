@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://3mcnep8rd5d"]
+
+[ext_resource type="Shader" uid="uid://bcje5ikoe522k" path="res://Assets/Shaders/VirusGlowIntense.gdshader" id="1"]
+
+[resource]
+shader = ExtResource("1")
+shader_parameter/glow_color = Color(0.2, 1, 1, 1)
+shader_parameter/glow_intensity = 2.5
+shader_parameter/glow_spread = 2.0
+shader_parameter/pulse_speed = 8.0
+shader_parameter/pulse_min = 0.5
+shader_parameter/pulse_max = 2.0
+shader_parameter/enable_wave = true
+shader_parameter/wave_speed = 5.0
+shader_parameter/wave_amplitude = 0.3
+shader_parameter/enable_distortion = false
+shader_parameter/distortion_amount = 0.02

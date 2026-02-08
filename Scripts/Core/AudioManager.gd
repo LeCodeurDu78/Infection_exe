@@ -105,7 +105,7 @@ func _on_infection_completed(_position: Vector2, points: int) -> void:
 func _on_virus_level_up(new_level: int) -> void:
 	play_sfx("level_up")
 
-func _on_virus_damaged(amount: int, remaining: int) -> void:
+func _on_virus_damaged(amount: int) -> void:
 	play_sfx("virus_hit")
 
 func _on_virus_destroyed() -> void:

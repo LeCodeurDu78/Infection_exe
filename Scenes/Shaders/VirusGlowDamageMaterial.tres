@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cndvpinaqj85"]
+
+[ext_resource type="Shader" uid="uid://dmuq6es13vbma" path="res://Assets/Shaders/VirusGlowDamage.gdshader" id="1"]
+
+[resource]
+shader = ExtResource("1")
+shader_parameter/glow_color = Color(1, 0.2, 0.2, 1)
+shader_parameter/glow_intensity = 1.5
+shader_parameter/flash_intensity = 0.8
+shader_parameter/flash_speed = 10.0
+shader_parameter/enable_glitch = true
+shader_parameter/glitch_intensity = 0.05

@@ -12,6 +12,7 @@ func _ready() -> void:
 	
 func _on_start_button_pressed() -> void:
 	"""Start the game"""
+	 # Notify GameManager to start the game
 	get_tree().change_scene_to_file("res://Scenes/Main/Main.tscn") 
 
 func _on_options_button_pressed() -> void:

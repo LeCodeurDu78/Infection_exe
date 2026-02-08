@@ -14,6 +14,7 @@ enum State { WANDER, CHASE }
 @export var base_speed := 200.0
 @export var scan_scene: PackedScene
 @export var scan_cooldown := 4.0
+@export var damage := 75
 @export var detection_radius := Vector2(20, 20)
 
 # ========================
@@ -97,6 +98,7 @@ func _perform_scan() -> void:
 	scan.global_position = chase_target.global_position
 	get_parent().add_child(scan)
 	
+	EventBus.emit_screen_shake(0.5, 0.2)
 	EventBus.scan_launched.emit(chase_target.global_position, scan.scale)
 
 # ========================
@@ -162,4 +164,6 @@ func _on_threat_level_changed(_old_level: GameManager.ThreatLevel, _new_level: G
 func _on_body_entered(body: Node) -> void:
 	"""Handle collision with virus"""
 	if body.is_in_group("virus"):
-		body.queue_free()
+		EventBus.emit_screen_shake(0.75, 0.2)
+		body.take_damage(damage)
+		queue_free()

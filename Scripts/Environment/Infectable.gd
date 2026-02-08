@@ -59,6 +59,7 @@ func _complete_infection() -> void:
 		return
 	
 	is_infected = true
+	EventBus.emit_screen_shake(0.25, 0.2)
 	GameManager.on_target_infected(position, points_worth)
 	
 	# Visual feedback or destruction
