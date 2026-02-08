@@ -90,17 +90,6 @@ func return_object(obj: Node) -> void
 - Pool pour particules d'infection
 - Pool pour effets visuels
 
-#### 5. Data Manager
-```gdscript
-# Scripts/Core/DataManager.gd
-extends Node
-
-func save_game(slot: int) -> bool
-func load_game(slot: int) -> bool
-func get_high_scores() -> Array
-func save_settings(settings: Dictionary) -> void
-```
-
 #### 6. Transitions de Scène
 ```gdscript
 # Scripts/Core/SceneTransition.gd
@@ -184,7 +173,7 @@ func unlock_next_zone() -> void
 - [ ] Tester toutes les mutations
 - [x] Ajouter sons/musique
 - [ ] Ajouter effets visuels (particules)
-- [ ] Créer menu d'options
+- [x] Créer menu d'options
 
 ### Moyen Terme (1-2 mois)
 - [ ] Système de sauvegarde

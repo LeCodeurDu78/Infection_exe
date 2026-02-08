@@ -1,3 +1,6 @@
+SpinBox
+LineEdit
+TextEdit
 MarginContainer
 VBoxContainer
 OptionButton
@@ -10,5 +13,3 @@ Control
 HSeparator
 VScrollBar
 ScrollContainer
-TabBar
-HSlider

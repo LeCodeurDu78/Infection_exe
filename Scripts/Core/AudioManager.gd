@@ -242,10 +242,8 @@ func set_master_volume(volume: float) -> void:
 
 func set_music_volume(volume: float) -> void:
 	"""Set music volume (0.0 - 1.0)"""
-	print("Setting music volume to %f" % volume)
 	music_player.volume_db = linear_to_db(volume)
 
 func set_sfx_volume(volume: float) -> void:
 	"""Set SFX volume (0.0 - 1.0)"""
-	print("Setting SFX volume to %f" % volume)
 	sfx_player.volume_db = linear_to_db(volume)

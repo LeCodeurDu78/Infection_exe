@@ -1,2 +1,3 @@
-res://Scripts/UI/HotkeyRebindButton.gd
-res://addons/save_and_load/SaveManager.gd
+res://Scripts/UI/OptionsMenu.gd
+res://Scripts/Core/AudioManager.gd
+res://Scenes/UI/OptionsMenu.tscn
