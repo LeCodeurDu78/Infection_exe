@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://q1u6iegmnief"]
+
+[ext_resource type="Script" uid="uid://dwndakl0j78w3" path="res://addons/save_and_load/SaveManager.gd" id="1_cungw"]
+
+[node name="SaveManager" type="Node" unique_id=1627072084]
+script = ExtResource("1_cungw")
+
+[node name="Timer" type="Timer" parent="." unique_id=731589090]
+wait_time = 60.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -56,8 +56,8 @@ func _physics_process(_delta: float) -> void:
 func _handle_movement() -> void:
 	"""Handle player input and movement"""
 	var input_direction := Input.get_vector(
-		"ui_left", "ui_right",
-		"ui_up", "ui_down"
+		"move_left", "move_right",
+		"move_up", "move_down"
 	)
 	
 	velocity = input_direction * base_speed

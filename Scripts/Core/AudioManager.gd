@@ -96,55 +96,55 @@ func _connect_events() -> void:
 
 # Infection events
 func _on_infection_started(target: Node, points: int) -> void:
-	play_sfx("infection_start", 0.6)
+	play_sfx("infection_start")
 
 func _on_infection_completed(target: Node, points: int) -> void:
-	play_sfx("infection_complete", 0.8)
+	play_sfx("infection_complete")
 
 # Virus events
 func _on_virus_level_up(new_level: int) -> void:
-	play_sfx("level_up", 1.0)
+	play_sfx("level_up")
 
 func _on_virus_damaged(amount: int, remaining: int) -> void:
-	play_sfx("virus_hit", 0.7)
+	play_sfx("virus_hit")
 
 func _on_virus_destroyed() -> void:
 	# Play dramatic death sound
-	play_sfx("virus_hit", 1.0)
+	play_sfx("virus_hit")
 
 # Mutation events
 func _on_mutation_unlocked(mutation: Mutation) -> void:
-	play_sfx("mutation_unlock", 0.8)
+	play_sfx("mutation_unlock")
 
 func _on_mutation_activated(mutation: Mutation) -> void:
-	play_sfx("button_click", 0.5)
+	play_sfx("button_click")
 
 func _on_mutation_used(mutation_name: String) -> void:
 	# Could play specific sounds based on mutation type
-	play_sfx("button_click", 0.4)
+	play_sfx("button_click")
 
 # Antivirus events
 func _on_virus_detected(antivirus: Node2D, virus: Node2D) -> void:
-	play_sfx("virus_detected", 0.9)
+	play_sfx("virus_detected")
 
 func _on_scan_launched(position: Vector2, scale: Vector2) -> void:
-	play_sfx("scan_launch", 0.7)
+	play_sfx("scan_launch")
 
 # Threat level events
 func _on_threat_level_changed(old_level: int, new_level: int) -> void:
 	if new_level == GameManager.ThreatLevel.CRITICAL:
 		# Switch to more intense music
-		play_music("boss", 2.0)
+		play_music("boss")
 	elif new_level == GameManager.ThreatLevel.LOW:
 		# Back to normal music
-		play_music("gameplay", 2.0)
+		play_music("gameplay")
 
 # Game state events
 func _on_start_menu() -> void:
-	play_music("menu", 1.0)
+	play_music("menu")
 
 func _on_game_started() -> void:
-	play_music("gameplay", 1.0)
+	play_music("gameplay")
 
 func _on_game_won(infection_percent: float, time: float) -> void:
 	stop_music(1.0)
@@ -155,8 +155,8 @@ func _on_game_lost(reason: String) -> void:
 	# Could play defeat sound
 
 # Direct audio requests
-func _on_sfx_requested(sound_name: String, volume: float) -> void:
-	play_sfx(sound_name, volume)
+func _on_sfx_requested(sound_name: String) -> void:
+	play_sfx(sound_name)
 
 func _on_music_requested(track_name: String, fade_duration: float) -> void:
 	play_music(track_name, fade_duration)
@@ -167,7 +167,7 @@ func _on_music_stopped(fade_duration: float) -> void:
 # ========================
 # AUDIO PLAYBACK
 # ========================
-func play_sfx(sound_name: String, volume: float = 1.0) -> void:
+func play_sfx(sound_name: String) -> void:
 	"""Play a sound effect"""
 	if sound_name not in sfx_library:
 		push_warning("AudioManager: SFX '%s' not found" % sound_name)
@@ -175,7 +175,6 @@ func play_sfx(sound_name: String, volume: float = 1.0) -> void:
 	
 	var sound: Resource = sfx_library[sound_name]
 	sfx_player.stream = sound
-	sfx_player.volume_db = linear_to_db(volume)
 	sfx_player.play()
 
 func play_music(track_name: String, fade_duration: float = 1.0) -> void:
@@ -224,10 +223,12 @@ func _fade_out_music(duration: float) -> void:
 
 func _fade_in_music(duration: float) -> void:
 	"""Fade in current music"""
+	var last_volume := music_player.volume_db
 	music_player.volume_db = -80.0
 	var tween := create_tween()
 	tween.tween_property(music_player, "volume_db", 0.0, duration)
 	await tween.finished
+	music_player.volume_db = last_volume # Restore original volume after fade in
 
 # ========================
 # UTILITY
@@ -241,14 +242,10 @@ func set_master_volume(volume: float) -> void:
 
 func set_music_volume(volume: float) -> void:
 	"""Set music volume (0.0 - 1.0)"""
-	AudioServer.set_bus_volume_db(
-		AudioServer.get_bus_index("Music"),
-		linear_to_db(volume)
-	)
+	print("Setting music volume to %f" % volume)
+	music_player.volume_db = linear_to_db(volume)
 
 func set_sfx_volume(volume: float) -> void:
 	"""Set SFX volume (0.0 - 1.0)"""
-	AudioServer.set_bus_volume_db(
-		AudioServer.get_bus_index("SFX"),
-		linear_to_db(volume)
-	)
+	print("Setting SFX volume to %f" % volume)
+	sfx_player.volume_db = linear_to_db(volume)

@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://crcov7qb4r3ot"]
+
+[ext_resource type="PackedScene" uid="uid://rrnwgea8tg5g" path="res://Scenes/UI/Options/HotkeyRebindButton.tscn" id="1_5wf40"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xihfp"]
+
+[node name="Controls" type="TabBar" unique_id=310560803]
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=975151824]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 29
+theme_override_constants/margin_top = 29
+theme_override_constants/margin_right = 29
+theme_override_constants/margin_bottom = 29
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=92104608]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer" unique_id=1281242033]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1375200716]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xihfp")
+
+[node name="HotkeyRebindButton" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1687884797 instance=ExtResource("1_5wf40")]
+layout_mode = 2
+action_name = "move_up"
+
+[node name="HotkeyRebindButton2" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1134594567 instance=ExtResource("1_5wf40")]
+layout_mode = 2
+action_name = "move_down"
+
+[node name="HotkeyRebindButton3" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=204419125 instance=ExtResource("1_5wf40")]
+layout_mode = 2
+
+[node name="HotkeyRebindButton4" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=936797516 instance=ExtResource("1_5wf40")]
+layout_mode = 2
+action_name = "move_right"
+
+[node name="HotkeyRebindButton5" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=263916405 instance=ExtResource("1_5wf40")]
+layout_mode = 2
+action_name = "mutation1"
+
+[node name="HotkeyRebindButton6" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1665629410 instance=ExtResource("1_5wf40")]
+layout_mode = 2
+action_name = "mutation2"
+
+[node name="HotkeyRebindButton7" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=171077907 instance=ExtResource("1_5wf40")]
+layout_mode = 2
+action_name = "mutation3"
+
+[node name="HotkeyRebindButton8" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=498073480 instance=ExtResource("1_5wf40")]
+layout_mode = 2
+action_name = "mutation4"
+
+[node name="HotkeyRebindButton9" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=637545952 instance=ExtResource("1_5wf40")]
+layout_mode = 2
+action_name = "mutation5"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1048825271]
+layout_mode = 2
+theme_override_constants/separation = 32
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xihfp")

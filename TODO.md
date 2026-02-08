@@ -1,19 +1,5 @@
 # 📝 TODO - Améliorations Futures
 
-## ⚠️ Fichiers Non Refactorisés
-
-### Mutations Individuelles (36 fichiers)
-
-La plupart des mutations dans `Scripts/MutationsAvailable/` n'ont pas été refactorisées individuellement. Seules les plus problématiques ont été corrigées:
-
-✅ **Refactorisé:**
-- `InvisibleMutation.gd` - Noms de variables améliorés
-
-❌ **Non vérifiés:**
-- Les 35 autres mutations
-
-**Action recommandée:** Appliquez le même pattern que `InvisibleMutation.gd` si vous modifiez ces fichiers.
-
 ### Pattern à Suivre pour les Mutations
 
 ```gdscript
@@ -66,28 +52,6 @@ func get_max_cooldown() -> float:
 
 ---
 
-## 🔄 Migrations à Vérifier
-
-### Scènes à Mettre à Jour
-
-Les **scènes** peuvent contenir des références aux anciens noms de propriétés:
-
-1. **Scenes/Virus/Virus.tscn**
-   - Vérifiez que les animations/scripts visuels n'utilisent pas `actual_level`
-   - Vérifiez que les scripts n'utilisent pas `invisible` directement
-
-2. **Scenes/Enemies/Antivirus.tscn**
-   - Vérifiez les connexions de signaux
-   - Assurez-vous que `DetectionArea` est bien configuré
-
-3. **Scenes/UI/HUD.tscn**
-   - Vérifiez que les références aux nœuds correspondent
-
-4. **Scenes/UI/MutationUI.tscn**
-   - Vérifiez la structure des boutons
-
----
-
 ## ✨ Améliorations Recommandées
 
 ### Priorité Haute
@@ -105,16 +69,6 @@ const DIFFICULTY := {
     "normal": {...},
     "hard": {...}
 }
-```
-
-#### 3. Audio Manager
-```gdscript
-# Scripts/Core/AudioManager.gd
-extends Node
-
-func play_sfx(sound_name: String) -> void
-func play_music(track_name: String) -> void
-func stop_music() -> void
 ```
 
 ### Priorité Moyenne
@@ -224,50 +178,11 @@ func complete_zone(zone_name: String) -> void
 func unlock_next_zone() -> void
 ```
 
----
-
-## 🐛 Bugs Potentiels à Surveiller
-
-### 1. Timers Non Nettoyés
-**Fichier:** `Infectable.gd`
-**Problème:** Si un Infectable est détruit pendant qu'il a un Timer actif, le Timer pourrait ne pas être libéré.
-**Solution actuelle:** Timer est ajouté comme enfant et devrait être auto-nettoyé.
-
-### 2. Signaux Non Déconnectés
-**Fichiers:** Plusieurs
-**Problème:** Certains signaux connectés manuellement pourraient ne pas être déconnectés.
-**Solution:** Vérifier `_exit_tree()` dans tous les scripts qui connectent des signaux.
-
-### 3. Références Invalides Après queue_free()
-**Fichier:** `Antivirus.gd`, `ScanZone.gd`
-**Problème:** Références à `chase_target` ou autres nodes qui peuvent être détruits.
-**Solution actuelle:** Utilisation de `is_instance_valid()`.
-
----
-
-## 📊 Métriques de Code
-
-### Avant Refactorisation
-- Chemins hardcodés: ~10
-- Détections par nom: ~8
-- États en string: 3
-- Code dupliqué: Moyen
-- Documentation: Faible
-
-### Après Refactorisation
-- Chemins hardcodés: 0 ✅
-- Détections par nom: 0 ✅
-- États en string: 0 ✅
-- Code dupliqué: Faible ✅
-- Documentation: Élevée ✅
-
----
-
 ## 🎯 Objectifs Futurs
 
 ### Court Terme (1-2 semaines)
 - [ ] Tester toutes les mutations
-- [ ] Ajouter sons/musique
+- [x] Ajouter sons/musique
 - [ ] Ajouter effets visuels (particules)
 - [ ] Créer menu d'options
 
@@ -295,12 +210,3 @@ func unlock_next_zone() -> void
 ### Patterns de Design
 - [Game Programming Patterns](https://gameprogrammingpatterns.com/)
 - [Godot Recipes](https://kidscancode.org/godot_recipes/4.x/)
-
-### Communauté
-- [Godot Discord](https://discord.gg/godotengine)
-- [Reddit r/godot](https://www.reddit.com/r/godot/)
-
----
-
-**Dernière mise à jour:** 2026-02-06  
-**Prochaine révision:** À chaque milestone majeur

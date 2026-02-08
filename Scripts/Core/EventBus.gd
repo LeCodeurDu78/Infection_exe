@@ -81,7 +81,7 @@ signal camera_focus_requested(target: Node2D, duration: float)
 # ========================
 # AUDIO EVENTS
 # ========================
-signal sfx_requested(sound_name: String, volume: float)
+signal sfx_requested(sound_name: String)
 signal music_requested(track_name: String, fade_duration: float)
 signal music_stopped(fade_duration: float)
 signal audio_volume_changed(bus_name: String, volume: float)

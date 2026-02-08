@@ -1,0 +1,209 @@
+[gd_scene format=3 uid="uid://ciaoouw77jkjo"]
+
+[ext_resource type="Script" uid="uid://c3ntx28fkvufp" path="res://Scripts/UI/OptionsMenu.gd" id="1_xihfp"]
+[ext_resource type="PackedScene" uid="uid://crcov7qb4r3ot" path="res://Scenes/UI/Options/Controls.tscn" id="3_qcylp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y7da1"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_xihfp"]
+font_size = 30
+
+[node name="OptionsMenu" type="Control" unique_id=856815269]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xihfp")
+
+[node name="Label" type="Label" parent="." unique_id=486309977]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 12.0
+offset_right = 1105.0
+offset_bottom = 67.0
+text = "Options"
+label_settings = SubResource("LabelSettings_y7da1")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=59911370]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 605.0
+offset_right = 1140.0
+offset_bottom = 636.0
+size_flags_vertical = 10
+text = "EXIT"
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=1927227356]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 92.00001
+offset_right = 1103.9792
+offset_bottom = 575.8054
+scale = Vector2(1.0009567, 0.99006754)
+size_flags_vertical = 3
+tab_alignment = 1
+current_tab = 0
+
+[node name="Sounds" type="TabBar" parent="TabContainer" unique_id=2069213527]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MasterLabel" type="Label" parent="TabContainer/Sounds" unique_id=1243826517]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -109.89487
+offset_top = 27.581854
+offset_right = 110.1051
+offset_bottom = 69.581856
+grow_horizontal = 2
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_xihfp")
+
+[node name="MasterSlider" type="HSlider" parent="TabContainer/Sounds" unique_id=258112177]
+layout_mode = 0
+offset_left = 200.80789
+offset_top = 96.26404
+offset_right = 900.1388
+offset_bottom = 112.26404
+value = 50.0
+
+[node name="MusicLabel" type="Label" parent="TabContainer/Sounds" unique_id=819018802]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -109.89493
+offset_top = 157.87599
+offset_right = 110.1051
+offset_bottom = 199.87599
+grow_horizontal = 2
+text = "Music Volume"
+label_settings = SubResource("LabelSettings_xihfp")
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="TabContainer/Sounds" unique_id=171524224]
+layout_mode = 0
+offset_left = 200.80789
+offset_top = 232.61836
+offset_right = 900.1388
+offset_bottom = 248.61836
+value = 50.0
+
+[node name="SFXLabel" type="Label" parent="TabContainer/Sounds" unique_id=923990283]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -109.89493
+offset_top = 317.46106
+offset_right = 110.1051
+offset_bottom = 359.46106
+grow_horizontal = 2
+text = "SFX Volume"
+label_settings = SubResource("LabelSettings_xihfp")
+horizontal_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="TabContainer/Sounds" unique_id=728233477]
+layout_mode = 0
+offset_left = 200.80789
+offset_top = 387.15326
+offset_right = 900.1388
+offset_bottom = 403.15326
+value = 50.0
+
+[node name="Controls" parent="TabContainer" unique_id=310560803 instance=ExtResource("3_qcylp")]
+visible = false
+layout_mode = 2
+
+[node name="Graphics" type="TabBar" parent="TabContainer" unique_id=325102507]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Graphics" unique_id=781557592]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 29
+theme_override_constants/margin_top = 29
+theme_override_constants/margin_right = 29
+theme_override_constants/margin_bottom = 29
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Graphics/MarginContainer" unique_id=223013971]
+layout_mode = 2
+
+[node name="WindowMode" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/VBoxContainer" unique_id=50182244]
+layout_mode = 2
+alignment = 1
+
+[node name="OptionName" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowMode" unique_id=1422953228]
+custom_minimum_size = Vector2(400, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Window Mode"
+vertical_alignment = 1
+
+[node name="VSlider" type="VSeparator" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowMode" unique_id=1967274079]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 200
+
+[node name="OptionButton" type="OptionButton" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowMode" unique_id=661973698]
+custom_minimum_size = Vector2(210, 30)
+layout_mode = 2
+selected = 1
+fit_to_longest_item = false
+item_count = 4
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
+popup/item_2/text = "Borderless Fullscreen"
+popup/item_2/id = 2
+popup/item_3/text = "Borderless Windowed"
+popup/item_3/id = 3
+
+[node name="Resolution" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/VBoxContainer" unique_id=1313302533]
+layout_mode = 2
+alignment = 1
+
+[node name="OptionName" type="Label" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/Resolution" unique_id=1946901451]
+custom_minimum_size = Vector2(400, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Resolution"
+vertical_alignment = 1
+
+[node name="VSlider" type="VSeparator" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/Resolution" unique_id=860887837]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 200
+
+[node name="OptionButton" type="OptionButton" parent="TabContainer/Graphics/MarginContainer/VBoxContainer/Resolution" unique_id=49098690]
+custom_minimum_size = Vector2(210, 30)
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "1152 x 648"
+popup/item_0/id = 0
+popup/item_1/text = "1280 x 720"
+popup/item_1/id = 1
+popup/item_2/text = "1920 x 1080"
+popup/item_2/id = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_exit_button_pressed"]
+[connection signal="value_changed" from="TabContainer/Sounds/MasterSlider" to="." method="_on_master_volume_changed"]
+[connection signal="value_changed" from="TabContainer/Sounds/MusicSlider" to="." method="_on_music_volume_changed"]
+[connection signal="value_changed" from="TabContainer/Sounds/SFXSlider" to="." method="_on_sfx_volume_changed"]
+[connection signal="item_selected" from="TabContainer/Graphics/MarginContainer/VBoxContainer/WindowMode/OptionButton" to="." method="_on_window_mode_selected"]
+[connection signal="item_selected" from="TabContainer/Graphics/MarginContainer/VBoxContainer/Resolution/OptionButton" to="." method="_on_resolution_selected"]
