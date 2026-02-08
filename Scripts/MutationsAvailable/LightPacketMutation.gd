@@ -41,6 +41,7 @@ func release(virus):
 		timer = duration
 		virus.start_dash(power, dir)
 		on_cooldown = true
+		EventBus.mutation_activated.emit(self)
 	charge = 0.0
 
 func get_cooldown() -> float:

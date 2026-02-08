@@ -37,7 +37,7 @@ func _ready() -> void:
 
 func _connect_events() -> void:
 	"""Connect to game events"""
-	EventBus.virus_leveled_up.connect(_on_level_up)
+	EventBus.mutation_ui_closed.connect(_on_level_up)
 	EventBus.virus_damaged.connect(_on_damaged)
 	EventBus.mutation_activated.connect(_on_mutation_activated)
 
@@ -57,20 +57,20 @@ func _process(delta: float) -> void:
 # EVENT HANDLERS
 # ========================
 
-func _on_level_up(new_level: int) -> void:
+func _on_level_up(_new_level: int) -> void:
 	"""Flash intense glow on level up"""
 	_apply_material("intense")
 	intense_timer = 2.0 # 2 seconds of intense glow
 
-func _on_damaged(amount: int) -> void:
+func _on_damaged(_amount: int) -> void:
 	"""Flash red damage glow"""
 	_apply_material("damage")
 	damage_timer = 0.5 # 0.5 seconds of damage glow
 
-func _on_mutation_activated(mutation: Mutation) -> void:
+func _on_mutation_activated(_mutation: Mutation) -> void:
 	"""Brief intense glow on mutation activation"""
 	_apply_material("intense")
-	intense_timer = 1.0 # 1 second
+	intense_timer = 0.2 # 0.2 second
 
 # ========================
 # MATERIAL MANAGEMENT

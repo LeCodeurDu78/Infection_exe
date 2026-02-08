@@ -83,13 +83,13 @@ func _level_up() -> void:
 	xp -= get_xp_for_next_level()
 	current_level += 1
 	
-	EventBus.virus_leveled_up.emit(current_level)
-	EventBus.emit_notification("Level Up! Level %d" % current_level, "success")
-	EventBus.emit_screen_shake(0.5, 0.2)
-	
 	# Unlock new mutations
 	if has_node("MutationManager"):
 		$MutationManager.unlock_mutations()
+
+	EventBus.virus_leveled_up.emit(current_level)
+	EventBus.emit_notification("Level Up! Level %d" % current_level, "success")
+	EventBus.emit_screen_shake(0.5, 0.2)
 
 func get_xp_for_next_level() -> int:
 	"""Returns XP required for next level"""
@@ -104,6 +104,7 @@ func set_invisibility(_visible: bool) -> void:
 	"""Toggle invisibility state"""
 	is_invisible = _visible
 	modulate.a = INVISIBLE_ALPHA if is_invisible else VISIBLE_ALPHA
+	get_node("GlowController").set_stealth_mode(is_invisible)
 
 func start_dash(speed: float, direction: Vector2) -> void:
 	"""Activate dash ability"""

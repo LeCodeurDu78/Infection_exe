@@ -29,6 +29,7 @@ EventBus="*uid://cfgqrqdt7ro71"
 AudioManager="*uid://r1ltoi4mblh2"
 SaveManager="*uid://dwndakl0j78w3"
 ParticleManager="*uid://xdax4v7pffxk"
+ScreenShakeManager="*uid://d24i0ry1mexm6"
 
 [global_group]
 
