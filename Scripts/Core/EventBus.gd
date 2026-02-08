@@ -56,6 +56,7 @@ signal threat_level_warning(level: GameManager.ThreatLevel)
 # GAME STATE EVENTS
 # ========================
 signal start_menu
+signal pause_menu
 signal game_started
 signal game_paused
 signal game_resumed

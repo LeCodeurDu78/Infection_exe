@@ -12,3 +12,8 @@ res://Scenes/Enemies/Antivirus.tscn
 res://Scripts/Enemies/Antivirus.gd
 res://Scenes/Environment/File.tscn
 res://Scenes/Main/Main.tscn
+res://Scenes/UI/Options/Controls.tscn
+res://Scenes/UI/PauseMenu.tscn
+res://Scripts/Virus/Virus.gd
+res://Scripts/Core/AudioManager.gd
+res://Scripts/UI/PauseMenu.gd

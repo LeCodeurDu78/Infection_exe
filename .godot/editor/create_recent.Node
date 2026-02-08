@@ -1,3 +1,4 @@
+Control
 CollisionShape2D
 Node2D
 SpinBox
@@ -11,5 +12,3 @@ VSeparator
 VSlider
 Label
 HBoxContainer
-Control
-HSeparator

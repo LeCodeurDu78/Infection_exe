@@ -98,7 +98,7 @@ func _connect_events() -> void:
 func _on_infection_started(target: Node, points: int) -> void:
 	play_sfx("infection_start")
 
-func _on_infection_completed(target: Node, points: int) -> void:
+func _on_infection_completed(_position: Vector2, points: int) -> void:
 	play_sfx("infection_complete")
 
 # Virus events

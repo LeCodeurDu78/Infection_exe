@@ -48,6 +48,10 @@ func _physics_process(_delta: float) -> void:
 		return
 	
 	_handle_movement()
+
+	if Input.is_action_just_pressed("pause"):
+		EventBus.pause_menu.emit()
+
 	move_and_slide()
 
 # ========================
@@ -65,7 +69,7 @@ func _handle_movement() -> void:
 # ========================
 # LEVELING
 # ========================
-func add_xp(infected: Infectable, points: int) -> void:
+func add_xp(_position: Vector2, points: int) -> void:
 	"""Add XP and check for level up"""
 	xp += points
 	EventBus.virus_xp_gained.emit(points, xp)
@@ -95,10 +99,10 @@ func get_xp_for_next_level() -> int:
 # ========================
 # ABILITIES
 # ========================
-func set_invisibility(visible: bool) -> void:
+func set_invisibility(_visible: bool) -> void:
 	"""Toggle invisibility state"""
-	is_invisible = visible
-	modulate.a = INVISIBLE_ALPHA if visible else VISIBLE_ALPHA
+	is_invisible = _visible
+	modulate.a = INVISIBLE_ALPHA if is_invisible else VISIBLE_ALPHA
 
 func start_dash(speed: float, direction: Vector2) -> void:
 	"""Activate dash ability"""

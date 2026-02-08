@@ -67,6 +67,10 @@ action_name = "mutation4"
 layout_mode = 2
 action_name = "mutation5"
 
+[node name="HotkeyRebindButton10" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1141162719 instance=ExtResource("1_5wf40")]
+layout_mode = 2
+action_name = "pause"
+
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1048825271]
 layout_mode = 2
 theme_override_constants/separation = 32

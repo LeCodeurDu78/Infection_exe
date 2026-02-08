@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://uhrkdkdwvlhc"]
+
+[ext_resource type="PackedScene" uid="uid://ciaoouw77jkjo" path="res://Scenes/UI/OptionsMenu.tscn" id="1_eod5q"]
+[ext_resource type="Script" uid="uid://i72sbaxskxii" path="res://Scripts/UI/PauseMenu.gd" id="1_n4i8v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_n4i8v"]
+font_size = 60
+font_color = Color(0, 0.49019608, 0, 1)
+
+[node name="PauseMenu" type="Control" unique_id=194784121]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n4i8v")
+
+[node name="Container" type="Control" parent="." unique_id=772286355]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Container" unique_id=1364032414]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -188.0
+offset_right = 188.0
+offset_bottom = 83.0
+grow_horizontal = 2
+text = "Pause"
+label_settings = SubResource("LabelSettings_n4i8v")
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Container" unique_id=1055882906]
+layout_mode = 0
+offset_left = 418.0
+offset_top = 204.0
+offset_right = 741.0
+offset_bottom = 287.0
+text = "Resume"
+
+[node name="OptionsButton" type="Button" parent="Container" unique_id=311234806]
+layout_mode = 0
+offset_left = 418.0
+offset_top = 358.0
+offset_right = 741.0
+offset_bottom = 441.0
+text = "Options"
+
+[node name="SaveQuitButton" type="Button" parent="Container" unique_id=727561674]
+layout_mode = 0
+offset_left = 418.0
+offset_top = 504.0
+offset_right = 741.0
+offset_bottom = 587.0
+text = "Save and Quit"
+
+[node name="OptionsMenu" parent="." unique_id=856815269 instance=ExtResource("1_eod5q")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="Container/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Container/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="Container/SaveQuitButton" to="." method="_on_save_and_quit_button_pressed"]
