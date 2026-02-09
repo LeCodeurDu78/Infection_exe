@@ -28,7 +28,6 @@ func apply(virus: Node2D) -> void:
 	is_active = true
 	remaining_active_time = active_duration
 	virus.set_invisibility(true)
-	EventBus.emit_notification("Invisibility Activated", "info")
 
 # ========================
 # UPDATE

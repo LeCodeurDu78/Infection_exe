@@ -139,7 +139,6 @@ func activate_mutation(mutation: Mutation) -> void:
 	# Emit events
 	EventBus.mutation_activated.emit(mutation)
 	EventBus.mutation_ui_closed.emit(mutation)
-	EventBus.emit_notification("Mutation Activated: %s" % mutation.name, "success")
 
 # ========================
 # COOLDOWN INFO (for UI)

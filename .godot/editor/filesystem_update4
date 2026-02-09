@@ -1,6 +1,10 @@
-res://Scenes/Virus/Virus.tscn
+res://Scenes/UI/Notification.tscn
+res://Scripts/Core/NotificationManager.gd
+res://Scenes/Main/Main.tscn
 res://Assets/Shaders/GlitchShader.gdshader
+res://Scripts/UI/DebugConsole.gd
+res://Scenes/UI/DebugConsole.tscn
+res://Scripts/Mutations/MutationManager.gd
 res://Scripts/Virus/Virus.gd
-res://Scripts/Virus/GlowController.gd
 res://Scenes/UI/HUD.tscn
-res://Scripts/UI/HUD.gd
+res://Scripts/MutationsAvailable/InvisibleMutation.gd

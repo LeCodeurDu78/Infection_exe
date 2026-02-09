@@ -1,362 +1,206 @@
-# 🎨 ParticleManager pour Infection.exe
+# 🎮 GAME DESIGN DOCUMENT (GDD)
 
-## Vue d'Ensemble
-
-Système complet de particules avec **7 effets visuels** connectés automatiquement à EventBus.
-
-**Installation:** 5 minutes  
-**Impact visuel:** ⭐⭐⭐⭐⭐  
-**Performance:** Léger (~300 particules max)
+## Nom du jeu
+**Infection.exe**
 
 ---
 
-## 🎯 Particules Incluses
+## 1. Pitch du jeu
 
-### 1. 💚 Infection Particles
-**Quand:** Fichier infecté  
-**Couleur:** Vert néon (`#00FF66`)  
-**Style:** Glitch numérique montant  
-**Quantité:** 32 particules  
-**Durée:** 0.8s  
+*Virus Inside* est un jeu **2D action / stratégie** dans lequel le joueur incarne un **virus informatique** évoluant à l’intérieur d’un ordinateur. Le but est de **se propager, muter et prendre le contrôle du système**, tout en évitant un **antivirus intelligent et adaptatif**.
 
-```
-     ↑ ✨ ↑
-   ↑ ✨ ✨ ↑
-  ↑ ✨ 📄 ✨ ↑
-   ↑ ✨ ↑
-```
-
-**Événement:** `EventBus.infection_completed`
+Le jeu mélange **réflexes**, **prise de décision**, **gestion du risque** et **montée en puissance**.
 
 ---
 
-### 2. 💙 Level Up Particles
-**Quand:** Le virus monte de niveau  
-**Couleur:** Cyan (`#33FFFF`)  
-**Style:** Explosion de code binaire  
-**Quantité:** 64 particules  
-**Durée:** 1.5s  
+## 2. Plateforme & moteur
 
-```
-  ✨     ✨
-    ✨ ✨
-✨  🦠 LEVEL UP!  ✨
-    ✨ ✨
-  ✨     ✨
-```
-
-**Événement:** `EventBus.virus_leveled_up`
+- **Plateforme** : PC
+- **Moteur** : Godot 4.5
+- **Vue** : 2D, top-down
+- **Contrôles** : Clavier (manette possible plus tard)
 
 ---
 
-### 3. ❤️ Hit Particles
-**Quand:** Le virus prend des dégâts  
-**Couleur:** Rouge (`#FF3333`)  
-**Style:** Glitch chaotique  
-**Quantité:** 24 particules  
-**Durée:** 0.5s  
+## 3. Objectif du joueur
 
-```
-  ⚡ ⚡
-⚡ 🦠 ⚡ HIT!
-  ⚡ ⚡
-```
+### Objectif principal
+- Infecter **100 % du noyau (Core)** de l’ordinateur
+- Neutraliser ou dépasser l’antivirus
 
-**Événement:** `EventBus.virus_damaged`
+### Objectifs secondaires
+- Infecter un maximum de fichiers
+- Débloquer toutes les mutations
+- Survivre le plus longtemps possible
 
 ---
 
-### 4. 💜 Mutation Particles
-**Quand:** Mutation activée  
-**Couleur:** Magenta (`#FF00FF`)  
-**Style:** Spirale ADN  
-**Quantité:** 40 particules  
-**Durée:** 1.2s  
+## 4. Gameplay Core Loop
 
-```
-    ✨
-  ✨ ✨ ✨
-✨ 🧬 🦠 🧬 ✨
-  ✨ ✨ ✨
-    ✨
-```
+1. Le joueur se déplace dans une zone
+2. Il infecte des éléments
+3. Il gagne des ressources
+4. Il améliore son virus (mutations)
+5. L’antivirus devient plus agressif
+6. Le joueur prend des risques pour progresser
+7. Accès à de nouvelles zones
 
-**Événement:** `EventBus.mutation_activated`
+➡️ Boucle répétée jusqu’à la victoire ou la défaite
 
 ---
 
-### 5. 🧡 Scan Wave Particles
-**Quand:** Antivirus lance un scan  
-**Couleur:** Orange (`#FF9933`)  
-**Style:** Onde radar expansive  
-**Quantité:** 48 particules  
-**Durée:** 1.0s  
+## 5. Contrôles
 
-```
-      ───────
-    ──       ──
-   │    📡    │
-    ──  SCAN ──
-      ───────
-```
-
-**Événement:** `EventBus.scan_launched`
+- **Déplacement** : ZQSD / WASD / Flèches
+- **Infecter** : Contact ou touche dédiée
+- **Pouvoirs** : Touches 1, 2, 3
+- **Pause** : Échap
 
 ---
 
-### 6. 💚 Dash Trail Particles
-**Quand:** Le virus dash  
-**Couleur:** Vert foncé (`#00CC66`)  
-**Style:** Traînée vaporeuse  
-**Quantité:** 16 particules  
-**Durée:** 0.4s  
+## 6. Le Virus (joueur)
 
-```
-🦠 ═══ ··· ··
-    DASH!
-```
+### Statistiques
+- Vitesse
+- Taux d’infection
+- Discrétion
+- Résistance
 
-**Usage:** `ParticleManager.spawn_dash_trail(position)`
-
----
-
-### 7. 💚 Propagation Particles
-**Quand:** Infection se propage  
-**Couleur:** Vert (`#00FF66`)  
-**Style:** Onde radiale  
-**Quantité:** 36 particules  
-**Durée:** 1.0s  
-
-```
-     ⎯⎯⎯
-   ⎯     ⎯
-  ⎯  📄  ⎯
-   ⎯     ⎯
-     ⎯⎯⎯
-```
-
-**Événement:** `EventBus.infection_completed` (en plus de Infection)
+### Particularités
+- Fragile mais rapide
+- Peut se dupliquer
+- Peut muter
 
 ---
 
-## 📦 Structure des Fichiers
+## 7. Système d’infection
 
-```
-Infection_exe/
-│
-├── Scripts/Core/
-│   └── ParticleManager.gd          ← Script principal (Autoload)
-│
-└── Scenes/Particles/
-    ├── InfectionParticles.tscn     ← Vert, infection
-    ├── LevelUpParticles.tscn       ← Cyan, level up
-    ├── HitParticles.tscn           ← Rouge, dégâts
-    ├── MutationParticles.tscn      ← Magenta, mutation
-    ├── ScanWaveParticles.tscn      ← Orange, scan
-    ├── DashTrailParticles.tscn     ← Vert foncé, dash
-    └── PropagationParticles.tscn   ← Vert, propagation
-```
+### Éléments infectables
+- Fichiers
+- Dossiers
+- Processus
+- Nœuds réseau
+- Noyau (final)
+
+### Effets d’une infection
+- Change l’état visuel
+- Produit des ressources
+- Peut propager l’infection
 
 ---
 
-## 🚀 Installation Express
+## 8. Zones du jeu
 
-### 1️⃣ Copier les Fichiers
-Copiez tout dans votre projet Godot
+### 1. Zone Fichiers
+- Facile
+- Peu défendue
+- Faible gain
 
-### 2️⃣ Ajouter l'Autoload
-Project Settings → Autoload → Add `Scripts/Core/ParticleManager.gd`
+### 2. Zone Processus
+- Éléments mobiles
+- Infection plus difficile
+- Gain moyen
 
-### 3️⃣ Jouer !
-Les particules apparaissent automatiquement via EventBus ✨
+### 3. Zone Réseau
+- Propagation en chaîne
+- Très rentable
+- Fortement surveillée
 
-**Voir `INSTALLATION.md` pour les détails complets**
-
----
-
-## 🎮 Connexions Automatiques
-
-Le ParticleManager écoute automatiquement:
-
-| Événement EventBus | Particule(s) | Déclencheur |
-|-------------------|--------------|-------------|
-| `infection_started` | Infection (petit) | Contact avec fichier |
-| `infection_completed` | Infection + Propagation | Fichier infecté |
-| `virus_leveled_up` | Level Up | Gain de niveau |
-| `virus_damaged` | Hit | Dégâts reçus |
-| `mutation_activated` | Mutation | Mutation choisie |
-| `scan_launched` | Scan Wave | Antivirus scanne |
-
-**Aucune configuration requise !** Tout fonctionne out-of-the-box.
+### 4. Noyau (Core)
+- Zone finale
+- Antivirus maximal
+- Objectif de victoire
 
 ---
 
-## 🎨 Palette de Couleurs
+## 9. Antivirus (ennemis)
 
-Toutes les particules suivent le thème cyber néon:
+### Types
+- Antivirus mobile (chasse)
+- Scan de zone
+- Firewall
+- Nettoyage système
 
-| Couleur | Hex | Usage |
-|---------|-----|-------|
-| Vert Néon | `#00FF66` | Infection, Propagation |
-| Cyan | `#33FFFF` | Level Up |
-| Rouge | `#FF3333` | Dégâts |
-| Magenta | `#FF00FF` | Mutations |
-| Orange | `#FF9933` | Scans |
-| Vert Foncé | `#00CC66` | Trails |
-
----
-
-## ⚡ Performance
-
-| Métrique | Valeur |
-|----------|--------|
-| Particules par événement | 16-64 |
-| Particules max simultanées | ~300 |
-| Impact CPU | < 1ms |
-| Impact GPU | Minimal |
-| Compatible mobile | Oui ✓ |
-
-**Optimisation:** Pool de particules disponible (voir INSTALLATION.md)
+### Intelligence adaptative
+- Analyse le comportement du joueur
+- Augmente la difficulté dynamiquement
 
 ---
 
-## 🔧 Customisation Rapide
+## 10. Mutations (progression)
 
-### Changer une Couleur
+### Ressource
+- Points de mutation gagnés via infection
 
-1. Ouvrez la scène `.tscn` dans Godot
-2. Sélectionnez `GPUParticles2D`
-3. Process Material → Color → Changez !
+### Exemples de mutations
+- Infection plus rapide
+- Invisibilité temporaire
+- Propagation automatique
+- Contrôle à distance
+- Infection explosive
 
-### Augmenter/Réduire la Quantité
-
-1. Sélectionnez `GPUParticles2D`
-2. Amount → Changez (16-128)
-
-### Modifier la Vitesse
-
-1. Process Material → Initial Velocity
-2. Min/Max → Ajustez
+Le joueur choisit son style de jeu.
 
 ---
 
-## 🎯 Aperçu Visuel
+## 11. Risque / Récompense
 
-### Infection en Action
-```
-Avant:           Pendant:         Après:
-  📄              ↑ ✨ ↑            ✅
-(normal)        ✨ 📄 ✨         (infecté)
-                  ↑ ✨ ↑
-```
-
-### Level Up en Action
-```
-    Niveau 1           →           Niveau 2
-       🦠                         ✨ 🆙 ✨
-                                   🦠
-                              (explosion cyan!)
-```
-
-### Scan en Action
-```
-   Antivirus détecte         →        Scan lancé
-        🛡️                          ═══🔴═══
-        🦠                           🦠 (danger!)
-```
+- Zones sûres : progression lente
+- Zones dangereuses : progression rapide
+- Le joueur décide quand prendre des risques
 
 ---
 
-## 📊 Comparaison Avant/Après
+## 12. Défaite
 
-### Avant ParticleManager
-```
-Fichier infecté: 📄 → ✅
-(Aucun feedback visuel)
-```
-
-### Après ParticleManager
-```
-Fichier infecté: 📄 → ✨💚✨ → ⚡💚⚡ → ✅
-                    (infection)  (propagation)
-```
-
-**Différence:** Énorme ! Le jeu passe de plat à vivant. 🚀
+- Virus principal supprimé
+- Plus aucune copie active
+- Nettoyage total du système
 
 ---
 
-## 🏆 Quick Wins
+## 13. Victoire
 
-### Ce que vous obtenez en 5 minutes:
-
-✅ **7 effets de particules** professionnels  
-✅ **Connexion automatique** via EventBus  
-✅ **Cleanup automatique** (pas de fuite mémoire)  
-✅ **Performance optimisée** (< 1ms)  
-✅ **Facilement personnalisable** (couleurs, vitesses)  
-✅ **Thème cyber cohérent** (néon + glitch)  
+- Noyau infecté à 100 %
+- Antivirus neutralisé
+- Contrôle total de l’ordinateur
 
 ---
 
-## 🔜 Prochaines Étapes
+## 14. Direction artistique
 
-Une fois les particules installées, ajoutez:
-
-1. **ScreenShakeManager** (1h) - Ajoute du punch
-2. **NotificationManager** (1-2h) - Messages visuels
-3. **Trail2D du Virus** (30min) - Traînée continue
-4. **Glow Shader** (1h) - Effet néon sur le virus
-
-**Total:** ~3-4h pour un feedback visuel complet ✨
+- Style minimaliste
+- Couleurs néon
+- Fond sombre
+- Effets de glitch et scanlines
 
 ---
 
-## 📚 Documentation
+## 15. Ambiance sonore
 
-- **INSTALLATION.md** - Guide d'installation détaillé
-- **ParticleManager.gd** - Code commenté
-- Chaque scène `.tscn` - Format texte lisible
-
----
-
-## 🎮 Compatibilité
-
-| Feature | Support |
-|---------|---------|
-| Godot 4.x | ✅ |
-| Godot 3.x | ⚠️ (nécessite conversion) |
-| EventBus | ✅ Requis |
-| GameManager | ✅ Requis |
-| Mobile | ✅ |
-| Web | ✅ |
-| Desktop | ✅ |
+- Sons digitaux
+- Effets de corruption
+- Musique synth / cyber
 
 ---
 
-## 🐛 Support
+## 16. Rejouabilité
 
-**Problème ?** Voir INSTALLATION.md → Section Troubleshooting
-
-**Questions ?** Vérifiez que:
-- ParticleManager est dans Autoload
-- EventBus fonctionne
-- Les fichiers .tscn existent dans Scenes/Particles/
+- Carte semi-aléatoire
+- Mutations différentes à chaque partie
+- Antivirus imprévisible
 
 ---
 
-## 📈 Impact Visuel
+## 17. Vision finale
 
-### Avant
-Gameplay: ⭐⭐ (plat, manque de feedback)
-
-### Après
-Gameplay: ⭐⭐⭐⭐⭐ (vivant, explosif, satisfaisant)
-
-**ROI:** Énorme pour 5 minutes de setup ! 🚀
+*Virus Inside* doit donner au joueur la sensation de :
+- Survie intelligente
+- Montée en puissance
+- Chaos contrôlé
+- Lutte contre un système vivant
 
 ---
 
-**Version:** 1.0.0  
-**Date:** 2026-02-08  
-**Créé pour:** Infection.exe  
-**Licence:** Inclus avec votre projet
+**Document évolutif – destiné à guider le développement du jeu**
+

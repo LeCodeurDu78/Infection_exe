@@ -79,6 +79,7 @@ offset_bottom = 70.0
 alignment = 1
 
 [node name="MutationCooldown5" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=919000181]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 step = 0.1
 value = 75.0
@@ -90,6 +91,7 @@ tint_under = Color(0, 0.54901963, 0, 1)
 tint_progress = Color(0, 0, 0, 0.84313726)
 
 [node name="MutationCooldown4" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=465915357]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 step = 0.1
 value = 75.0
@@ -101,6 +103,7 @@ tint_under = Color(0, 0.54901963, 0, 1)
 tint_progress = Color(0, 0, 0, 0.84313726)
 
 [node name="MutationCooldown3" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=659561590]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 step = 0.1
 value = 75.0
@@ -112,6 +115,7 @@ tint_under = Color(0, 0.54901963, 0, 1)
 tint_progress = Color(0, 0, 0, 0.84313726)
 
 [node name="MutationCooldown2" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=2096868223]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 step = 0.1
 value = 75.0
@@ -123,6 +127,7 @@ tint_under = Color(0, 0.54901963, 0, 1)
 tint_progress = Color(0, 0, 0, 0.84313726)
 
 [node name="MutationCooldown1" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=547339981]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 step = 0.1
 value = 75.0

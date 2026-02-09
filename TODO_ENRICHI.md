@@ -1,75 +1,5 @@
 # 📝 TODO - Améliorations Futures
 
-## ✅ Déjà Implémenté
-
-- [x] AudioManager avec EventBus
-- [x] SaveManager (options, keybindings)
-- [x] Menu d'options complet (graphiques, résolution, volumes)
-- [x] Système de sons et musiques
-- [x] Addon glitch_intro
-- [x] Keybinding personnalisable (partiellement)
-
----
-
-## 🔥 Priorité CRITIQUE
----
-
-### 3. NotificationManager - Toast/Popup System
-
-**Pourquoi:** EventBus.emit_notification() existe mais n'est pas implémenté visuellement
-
-```gdscript
-# Scripts/UI/NotificationManager.gd
-extends CanvasLayer
-
-const NOTIFICATION_SCENE = preload("res://Scenes/UI/Notification.tscn")
-
-var notification_queue: Array[Dictionary] = []
-var active_notifications: Array[Control] = []
-const MAX_VISIBLE := 3
-const SPACING := 10.0
-
-func _ready():
-	EventBus.notification_shown.connect(_on_notification_requested)
-
-func _on_notification_requested(message: String, type: String):
-	show_notification(message, type)
-
-func show_notification(message: String, type: String = "info"):
-	var notification = NOTIFICATION_SCENE.instantiate()
-	notification.setup(message, type)
-	add_child(notification)
-	active_notifications.append(notification)
-	
-	# Position stacked
-	_reposition_notifications()
-	
-	# Auto-remove after duration
-	await get_tree().create_timer(3.0).timeout
-	_remove_notification(notification)
-
-func _reposition_notifications():
-	var y_offset = 20.0
-	for notif in active_notifications:
-		notif.position = Vector2(20, y_offset)
-		y_offset += notif.size.y + SPACING
-```
-
-**Créer une scène Notification.tscn:**
-- Panel avec ColorRect pour le background
-- Label pour le message
-- Icon selon le type (info=ℹ️, success=✅, warning=⚠️, error=❌)
-- Animation d'apparition (slide depuis la droite)
-- Animation de disparition (fade out)
-
-**Types de notifications:**
-- `info` - Bleu (informations générales)
-- `success` - Vert (achievements, level up)
-- `warning` - Orange (menace critique)
-- `error` - Rouge (game over, erreurs)
-
----
-
 ## ⭐ Priorité HAUTE
 
 ### 4. Système de Progression / Achievements
@@ -905,7 +835,7 @@ func save_session():
 - [x] **ScreenShakeManager** (CRITIQUE)
 - [ ] **NotificationManager** (CRITIQUE)
 - [ ] AchievementManager
-- [ ] Améliorer effets visuels
+- [x] Améliorer effets visuels
 
 ### Moyen Terme (1-2 mois)
 - [ ] Système de zones / levels
@@ -931,7 +861,6 @@ func save_session():
 ## 🚀 Quick Wins (Facile et Impactant)
 
 2. **NotificationManager** - 1-2h, feedback immédiat
-4. **Trail du virus** - 30min, polish visuel
 ---
 
 ## 🎨 Pattern à Suivre pour les Mutations

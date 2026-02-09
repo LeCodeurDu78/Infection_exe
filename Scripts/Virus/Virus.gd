@@ -88,7 +88,6 @@ func _level_up() -> void:
 		$MutationManager.unlock_mutations()
 
 	EventBus.virus_leveled_up.emit(current_level)
-	EventBus.emit_notification("Level Up! Level %d" % current_level, "success")
 	EventBus.emit_screen_shake(0.5, 0.2)
 
 func get_xp_for_next_level() -> int:
