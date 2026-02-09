@@ -6,6 +6,7 @@ extends Control
 # ========================
 # NODE REFERENCES
 # ========================
+@onready var healthBar: ProgressBar = $Health/HealthBar
 @onready var xp_label: Label = $Infection/XPLabel
 @onready var threat_label: Label = $Infection/ThreatLabel
 @onready var cooldown_container: Control = $MutationsCooldowns
@@ -37,6 +38,7 @@ func _ready() -> void:
 	add_to_group("hud")
 	call_deferred("_find_mutation_manager")
 	EventBus.game_started.emit()
+	EventBus.virus_damaged.connect(_update_health_bar_display)
 
 func _find_mutation_manager() -> void:
 	"""Find mutation manager in scene"""
@@ -63,6 +65,15 @@ func _update_threat_display() -> void:
 	var threat_level := GameManager.get_threat_level()
 	threat_label.text = THREAT_TEXTS.get(threat_level, "Menace : INCONNUE")
 	threat_label.modulate = THREAT_COLORS.get(threat_level, Color.WHITE)
+	
+
+# ========================
+# THREAT DISPLAY
+# ========================
+func _update_health_bar_display(_amount: int, _remaining_health: int) -> void:
+	"""Update threat level label and color"""
+	print("Updating health bar: ", _remaining_health)
+	healthBar.value = _remaining_health
 
 # ========================
 # COOLDOWN DISPLAY

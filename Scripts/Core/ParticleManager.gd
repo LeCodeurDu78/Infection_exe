@@ -61,7 +61,7 @@ func _on_virus_level_up(_new_level: int) -> void:
 	if is_instance_valid(GameManager.virus_node):
 		spawn_particle("level_up", GameManager.virus_node.global_position, 1.5)
 
-func _on_virus_damaged(amount: int) -> void:
+func _on_virus_damaged(amount: int, _remaining_health: int) -> void:
 	if is_instance_valid(GameManager.virus_node):
 		var intensity = clamp(amount / 20.0, 0.5, 2.0)
 		spawn_particle("virus_hit", GameManager.virus_node.global_position, intensity)

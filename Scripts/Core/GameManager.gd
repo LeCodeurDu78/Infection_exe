@@ -90,11 +90,6 @@ func _check_win_condition() -> void:
 	if get_infection_percent() >= 100.0:
 		EventBus.game_won.emit(100.0, 0.0)  # TODO: Add time tracking
 
-func on_virus_destroyed() -> void:
-	"""Called when the virus is destroyed"""
-	EventBus.game_lost.emit("virus_destroyed")
-	EventBus.virus_destroyed.emit()
-
 # ========================
 # VIRUS DATA (for UI)
 # ========================

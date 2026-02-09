@@ -57,12 +57,12 @@ func _process(delta: float) -> void:
 # EVENT HANDLERS
 # ========================
 
-func _on_level_up(_new_level: int) -> void:
+func _on_level_up(_mutation: Mutation) -> void:
 	"""Flash intense glow on level up"""
 	_apply_material("intense")
 	intense_timer = 2.0 # 2 seconds of intense glow
 
-func _on_damaged(_amount: int) -> void:
+func _on_damaged(_amount: int, _remaining_health: int) -> void:
 	"""Flash red damage glow"""
 	_apply_material("damage")
 	damage_timer = 0.5 # 0.5 seconds of damage glow

@@ -8,8 +8,6 @@ extends CharacterBody2D
 # ========================
 const XP_LEVELS := [20, 40, 60, 80, 100]
 const MAX_LEVEL := 5
-const INVISIBLE_ALPHA := 0.4
-const VISIBLE_ALPHA := 1.0
 
 # ========================
 # EXPORTS
@@ -18,6 +16,7 @@ const VISIBLE_ALPHA := 1.0
 @export var base_speed := 400.0
 @export var infection_rate := 1.0
 @export var discretion := 1.0
+@export var max_lenght_trail := 20
 
 # ========================
 # STATE
@@ -25,6 +24,7 @@ const VISIBLE_ALPHA := 1.0
 var current_level := 1
 var xp := 0
 var is_invisible := false
+var current_health := max_health
 
 # Dash state
 var is_dashing := false
@@ -103,7 +103,6 @@ func get_xp_for_next_level() -> int:
 func set_invisibility(_visible: bool) -> void:
 	"""Toggle invisibility state"""
 	is_invisible = _visible
-	modulate.a = INVISIBLE_ALPHA if is_invisible else VISIBLE_ALPHA
 	get_node("GlowController").set_stealth_mode(is_invisible)
 
 func start_dash(speed: float, direction: Vector2) -> void:
@@ -121,13 +120,10 @@ func stop_dash() -> void:
 # ========================
 func take_damage(amount: int) -> void:
 	"""Handle taking damage from antivirus"""
-	EventBus.virus_damaged.emit(amount)
-	max_health -= amount
-	if max_health <= 0:
-		_exit_tree()
-	# Optional: Add visual feedback for damage here
+	current_health -= amount
+	EventBus.virus_damaged.emit(amount, current_health)
+	if current_health <= 0:
+		EventBus.virus_destroyed.emit(self)
+		queue_free()
 
-func _exit_tree() -> void:
-	# Notify GameManager
-	if GameManager:
-		GameManager.on_virus_destroyed()
+	# Optional: Add visual feedback for damage here (e.g., flash red, play sound, etc.)

@@ -1,8 +1,6 @@
-res://Scenes/UI/PauseMenu.tscn
-res://Scenes/Shaders/VirusGlowMaterial.tres
+res://Scenes/Virus/Virus.tscn
+res://Assets/Shaders/GlitchShader.gdshader
 res://Scripts/Virus/Virus.gd
-res://Scenes/Shaders/VirusGlowIntenseMaterial.tres
-res://Scripts/MutationsAvailable/InvisibleMutation.gd
-res://Scripts/MutationsAvailable/LightPacketMutation.gd
 res://Scripts/Virus/GlowController.gd
-res://Scripts/Mutations/MutationManager.gd
+res://Scenes/UI/HUD.tscn
+res://Scripts/UI/HUD.gd

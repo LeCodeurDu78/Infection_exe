@@ -524,51 +524,6 @@ func show_tutorial(id: String):
 
 ---
 
-### 10. Amélioration des Effets Visuels
-
-**Trail du Virus:**
-```gdscript
-# Dans Virus.gd
-@onready var trail = $Trail
-
-func _physics_process(delta):
-	# Existing code...
-	
-	# Update trail
-	trail.add_point(global_position)
-	if trail.get_point_count() > 20:
-		trail.remove_point(0)
-```
-
-**Post-Processing (Glitch Effect):**
-```gdscript
-# Scripts/Core/PostProcessing.gd
-extends CanvasLayer
-
-@onready var glitch_shader = $ColorRect.material
-
-func _ready():
-	EventBus.virus_damaged.connect(_trigger_glitch)
-	EventBus.threat_level_changed.connect(_update_glitch_intensity)
-
-func _trigger_glitch(amount: int, remaining: int):
-	# Temporarily increase glitch
-	glitch_shader.set_shader_parameter("intensity", 0.5)
-	await get_tree().create_timer(0.2).timeout
-	glitch_shader.set_shader_parameter("intensity", 0.1)
-
-func _update_glitch_intensity(old: int, new: int):
-	match new:
-		GameManager.ThreatLevel.LOW:
-			glitch_shader.set_shader_parameter("intensity", 0.0)
-		GameManager.ThreatLevel.MEDIUM:
-			glitch_shader.set_shader_parameter("intensity", 0.1)
-		GameManager.ThreatLevel.CRITICAL:
-			glitch_shader.set_shader_parameter("intensity", 0.3)
-```
-
----
-
 ## 🎨 Priorité BASSE (Polish)
 
 ### 11. Cinématiques

@@ -95,43 +95,43 @@ func _connect_events() -> void:
 # ========================
 
 # Infection events
-func _on_infection_started(target: Node, points: int) -> void:
+func _on_infection_started(_target: Node, _points: int) -> void:
 	play_sfx("infection_start")
 
-func _on_infection_completed(_position: Vector2, points: int) -> void:
+func _on_infection_completed(_position: Vector2, _points: int) -> void:
 	play_sfx("infection_complete")
 
 # Virus events
-func _on_virus_level_up(new_level: int) -> void:
+func _on_virus_level_up(_new_level: int) -> void:
 	play_sfx("level_up")
 
-func _on_virus_damaged(amount: int) -> void:
+func _on_virus_damaged(_amount: int, _remaining_health: int) -> void:
 	play_sfx("virus_hit")
 
-func _on_virus_destroyed() -> void:
+func _on_virus_destroyed(_virus: Node2D) -> void:
 	# Play dramatic death sound
 	play_sfx("virus_hit")
 
 # Mutation events
-func _on_mutation_unlocked(mutation: Mutation) -> void:
+func _on_mutation_unlocked(_mutation: Mutation) -> void:
 	play_sfx("mutation_unlock")
 
-func _on_mutation_activated(mutation: Mutation) -> void:
+func _on_mutation_activated(_mutation: Mutation) -> void:
 	play_sfx("button_click")
 
-func _on_mutation_used(mutation_name: String) -> void:
+func _on_mutation_used(_mutation_name: String) -> void:
 	# Could play specific sounds based on mutation type
 	play_sfx("button_click")
 
 # Antivirus events
-func _on_virus_detected(antivirus: Node2D, virus: Node2D) -> void:
+func _on_virus_detected(_antivirus: Node2D, _virus: Node2D) -> void:
 	play_sfx("virus_detected")
 
-func _on_scan_launched(position: Vector2, scale: Vector2) -> void:
+func _on_scan_launched(_position: Vector2, _scale: Vector2) -> void:
 	play_sfx("scan_launch")
 
 # Threat level events
-func _on_threat_level_changed(old_level: int, new_level: int) -> void:
+func _on_threat_level_changed(_old_level: int, new_level: int) -> void:
 	if new_level == GameManager.ThreatLevel.CRITICAL:
 		# Switch to more intense music
 		play_music("boss")
@@ -146,11 +146,11 @@ func _on_start_menu() -> void:
 func _on_game_started() -> void:
 	play_music("gameplay")
 
-func _on_game_won(infection_percent: float, time: float) -> void:
+func _on_game_won(_infection_percent: float, _time: float) -> void:
 	stop_music(1.0)
 	# Could play victory jingle
 
-func _on_game_lost(reason: String) -> void:
+func _on_game_lost(_reason: String) -> void:
 	stop_music(1.0)
 	# Could play defeat sound
 

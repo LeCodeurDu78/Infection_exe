@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://bwdie8itbhlxs"]
 
 [ext_resource type="Script" uid="uid://0p0hrgwaiugp" path="res://Scripts/UI/HUD.gd" id="1_omqfp"]
-[ext_resource type="Texture2D" uid="uid://c2bc75we5mmgu" path="res://Assets/Sprites/UI/progress-bar-circle.png" id="2_xaom8"]
-[ext_resource type="Texture2D" uid="uid://c65s8in3mujr0" path="res://Assets/Sprites/UI/progress-bar-frame.png" id="3_4bm6u"]
+[ext_resource type="Texture2D" uid="uid://ftngxwx1iwhw" path="res://Assets/Sprites/UI/progress-bar-circle.png" id="2_xaom8"]
+[ext_resource type="Texture2D" uid="uid://w5j5ukjqi6jv" path="res://Assets/Sprites/UI/progress-bar-frame.png" id="3_4bm6u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xaom8"]
+bg_color = Color(0.039215688, 0.039215688, 0.039215688, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bm6u"]
+bg_color = Color(0.24313726, 0, 0, 1)
 
 [node name="HUD" type="Control" unique_id=358781637]
 layout_mode = 3
@@ -13,6 +19,35 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_omqfp")
 
+[node name="Health" type="Control" parent="." unique_id=51140905]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Health" unique_id=1632823022]
+layout_mode = 1
+offset_right = 41.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 30
+text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="Health" unique_id=1460042685]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -35.0
+offset_right = 292.0
+offset_bottom = 3.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_xaom8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4bm6u")
+value = 100.0
+show_percentage = false
+
 [node name="Infection" type="Control" parent="." unique_id=1424472759]
 anchors_preset = 0
 offset_right = 40.0
@@ -20,16 +55,19 @@ offset_bottom = 40.0
 
 [node name="XPLabel" type="Label" parent="Infection" unique_id=967292221]
 layout_mode = 1
-offset_right = 147.0
-offset_bottom = 23.0
+offset_left = 1.0
+offset_top = 44.0
+offset_right = 148.0
+offset_bottom = 67.0
 text = "Infection : 100%"
 uppercase = true
 
 [node name="ThreatLabel" type="Label" parent="Infection" unique_id=615003444]
 layout_mode = 0
-offset_top = 23.0
-offset_right = 156.0
-offset_bottom = 46.0
+offset_left = 1.0
+offset_top = 67.0
+offset_right = 157.0
+offset_bottom = 90.0
 text = "Menace : CRITIQUE "
 uppercase = true
 

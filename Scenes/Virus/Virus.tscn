@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cb8nw3fx0gnae" path="res://Scripts/Virus/Virus.gd" id="1_msxgm"]
 [ext_resource type="Script" uid="uid://nijid8chg33l" path="res://Scripts/Mutations/MutationManager.gd" id="2_aog2q"]
+[ext_resource type="Script" uid="uid://not3fy6yn8et" path="res://Scripts/Core/PostProcessing.gd" id="2_ecshj"]
+[ext_resource type="Material" uid="uid://detn11h4m1ois" path="res://Scenes/Shaders/GlitchShader.tres" id="3_ecshj"]
 [ext_resource type="Script" uid="uid://cln4bqbrsdeut" path="res://Scripts/Mutations/Mutation.gd" id="3_xlukx"]
 [ext_resource type="Resource" uid="uid://lsg5k3cjsfum" path="res://Mutations/InvisibleMutation.tres" id="4_lbsxr"]
 [ext_resource type="Resource" uid="uid://dd028x8dqkbvn" path="res://Mutations/SpeedMutation.tres" id="5_mf8yx"]
@@ -9,6 +11,11 @@
 [ext_resource type="Resource" uid="uid://bmghdqudmqv68" path="res://Mutations/DiscretionMutation.tres" id="7_mf8yx"]
 [ext_resource type="Texture2D" uid="uid://cbhf15355fami" path="res://Assets/Sprites/Virus/virus.png" id="8_mf8yx"]
 [ext_resource type="Script" uid="uid://dw82sn3bxmpmp" path="res://Scripts/Virus/GlowController.gd" id="8_rsnpu"]
+[ext_resource type="Script" uid="uid://cam6cwqlkxi1m" path="res://addons/trail_2d/trail_2d.gd" id="12_5q86q"]
+
+[sub_resource type="Gradient" id="Gradient_5q86q"]
+offsets = PackedFloat32Array(0, 0.9784689, 0.98564595)
+colors = PackedColorArray(0.039215688, 0.039215688, 0.039215688, 1, 0.11417582, 0.42996532, 0.05516465, 1, 0.11713132, 0.44537166, 0.05579348, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_msxgm"]
 radius = 47.042534
@@ -19,9 +26,37 @@ radius = 72.00694
 [node name="Virus" type="CharacterBody2D" unique_id=1741660789 groups=["virus"]]
 script = ExtResource("1_msxgm")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=313566490]
+modulate = Color(0, 0.47843137, 0, 1)
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("8_mf8yx")
+
+[node name="Trail2D" type="Line2D" parent="." unique_id=1005636894]
+z_index = -1
+width = 50.0
+default_color = Color(0.22352941, 1, 0.078431375, 1)
+gradient = SubResource("Gradient_5q86q")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("12_5q86q")
+metadata/_custom_type_script = "uid://cam6cwqlkxi1m"
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=566886992]
 zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D" unique_id=116253966]
+script = ExtResource("2_ecshj")
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer" unique_id=1507644570]
+material = ExtResource("3_ecshj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MutationManager" type="Node2D" parent="." unique_id=1431755883]
 script = ExtResource("2_aog2q")
@@ -30,12 +65,6 @@ available_mutations = Array[ExtResource("3_xlukx")]([ExtResource("4_lbsxr"), Ext
 [node name="GlowController" type="Node2D" parent="." unique_id=1779126060 node_paths=PackedStringArray("virus_sprite")]
 script = ExtResource("8_rsnpu")
 virus_sprite = NodePath("../Sprite2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=313566490]
-modulate = Color(0, 0.47843137, 0, 1)
-texture_filter = 1
-scale = Vector2(4, 4)
-texture = ExtResource("8_mf8yx")
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1592964847]
 shape = SubResource("CircleShape2D_msxgm")
