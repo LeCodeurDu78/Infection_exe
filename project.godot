@@ -43,6 +43,8 @@ virus=""
 hud=""
 mutation_ui=""
 HotkeyRebindButton=""
+antivirus=""
+infectables=""
 
 [input]
 

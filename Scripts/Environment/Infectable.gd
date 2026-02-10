@@ -73,6 +73,11 @@ func cancel_infection() -> void:
 		infection_timer.queue_free()
 		infection_timer = null
 
+func instant_infect() -> void:
+	"""Immediately infect without timer (used for testing/debug)"""
+	if not is_infected:
+		_complete_infection()
+
 # ========================
 # DETECTION
 # ========================

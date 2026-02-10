@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://3ow7f5no8ndm"]
+
+[ext_resource type="Script" uid="uid://dftrly1khv2g0" path="res://Scripts/Debug/DebugConsole.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.05, 0.05, 0.08, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.224, 1, 0.078, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input"]
+bg_color = Color(0.1, 0.1, 0.15, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.224, 1, 0.078, 0.5)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="DebugConsole" type="Control" unique_id=662760112]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Panel" type="Panel" parent="." unique_id=1828136506]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=916363850]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1419850525]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=608114744]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.224, 1, 0.078, 1)
+theme_override_font_sizes/font_size = 20
+text = "🐛 DEBUG CONSOLE"
+
+[node name="Subtitle" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=2080488290]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 12
+text = "Press F1 to close | Type 'help' for commands | Use ↑↓ for history"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=873029688]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="OutputScroll" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=563185894]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Output" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/OutputScroll" unique_id=2134480033]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+theme_override_colors/default_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+scroll_following = true
+selection_enabled = true
+
+[node name="InputContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=768581213]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Prompt" type="Label" parent="Panel/MarginContainer/VBoxContainer/InputContainer" unique_id=2034652817]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.224, 1, 0.078, 1)
+theme_override_font_sizes/font_size = 16
+text = ">"
+
+[node name="Input" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/InputContainer" unique_id=291018259]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/caret_color = Color(0.224, 1, 0.078, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input")
+placeholder_text = "Enter command..."
+caret_blink = true

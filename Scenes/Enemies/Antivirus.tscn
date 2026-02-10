@@ -14,7 +14,7 @@ height = 54.666668
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2s5a"]
 size = Vector2(4.4461565, 22.32857)
 
-[node name="Antivirus" type="CharacterBody2D" unique_id=984074734]
+[node name="Antivirus" type="CharacterBody2D" unique_id=984074734 groups=["antivirus"]]
 modulate = Color(1, 0, 0, 1)
 scale = Vector2(2, 2)
 script = ExtResource("1_cuva4")

@@ -26,6 +26,7 @@ signal virus_destroyed
 # ========================
 # MUTATION EVENTS
 # ========================
+signal unlock_all_mutations
 signal mutation_unlocked(mutation: Mutation)
 signal mutation_activated(mutation: Mutation)
 signal mutation_deactivated(mutation: Mutation)
@@ -38,6 +39,7 @@ signal mutation_cooldown_finished(mutation_name: String)
 # ========================
 # ANTIVIRUS EVENTS
 # ========================
+signal spawn_antivirus(count: int)
 signal antivirus_spawned(antivirus: Node2D, position: Vector2)
 signal antivirus_despawned(antivirus: Node2D)
 signal antivirus_detected_virus(antivirus: Node2D, virus: Node2D)

@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://cftigmhgqn0o5"]
 
 [ext_resource type="Script" uid="uid://bmvsm2wwfdhrt" path="res://Scripts/Environment/Infectable.gd" id="1_a1sfu"]
-[ext_resource type="Texture2D" uid="uid://c57gmrid7ke0b" path="res://addons/2d_shapes/Rectangle.svg" id="2_7ul6t"]
+[ext_resource type="Texture2D" uid="uid://c5xq8mje0nids" path="res://addons/2d_shapes/Rectangle.svg" id="2_7ul6t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l6nyw"]
 size = Vector2(40, 41)
 
-[node name="File" type="Area2D" unique_id=1434683303]
+[node name="Folder" type="Area2D" unique_id=1434683303 groups=["infectables"]]
 modulate = Color(1, 1, 0, 1)
 scale = Vector2(3, 3)
 script = ExtResource("1_a1sfu")

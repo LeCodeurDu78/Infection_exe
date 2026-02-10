@@ -6,8 +6,8 @@ extends CharacterBody2D
 # ========================
 # CONSTANTS
 # ========================
-const XP_LEVELS := [20, 40, 60, 80, 100]
-const MAX_LEVEL := 5
+@export var XP_LEVELS := [20, 40, 60, 80, 100]
+@export var MAX_LEVEL := 5
 
 # ========================
 # EXPORTS
@@ -30,6 +30,8 @@ var current_health := max_health
 var is_dashing := false
 var dash_velocity := Vector2.ZERO
 
+var invulnerable := false
+
 # ========================
 # LIFECYCLE
 # ========================
@@ -47,6 +49,9 @@ func _physics_process(_delta: float) -> void:
 		velocity = dash_velocity
 		move_and_slide()
 		return
+
+	if invulnerable:
+		current_health = 999999 
 	
 	_handle_movement()
 

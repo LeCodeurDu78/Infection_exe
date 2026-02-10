@@ -23,6 +23,7 @@ var active_antiviruses: Array[Node] = []
 func _ready() -> void:
 	# Connect to EventBus
 	EventBus.threat_level_changed.connect(_on_threat_level_changed)
+	EventBus.spawn_antivirus.connect(_spawn_antivirus)
 	
 	# Initial spawn
 	_update_antivirus_count()
@@ -36,26 +37,27 @@ func _update_antivirus_count() -> void:
 	
 	# Spawn more if needed
 	while active_antiviruses.size() < target_count:
-		_spawn_antivirus()
+		_spawn_antivirus(1)
 	
 	# Remove excess if needed
 	while active_antiviruses.size() > target_count:
 		_remove_antivirus()
 
-func _spawn_antivirus() -> void:
+func _spawn_antivirus(count: int) -> void:
 	"""Spawn a single antivirus at random spawn point"""
 	if not antivirus_scene or spawn_points.is_empty():
 		push_warning("AntivirusManager: Cannot spawn - missing scene or spawn points")
 		return
 	
-	var antivirus := antivirus_scene.instantiate()
-	var spawn_point: Variant = spawn_points.pick_random()
-	antivirus.global_position = spawn_point.global_position
+	for i in range(count):
+		var antivirus := antivirus_scene.instantiate()
+		var spawn_point: Variant = spawn_points.pick_random()
+		antivirus.global_position = spawn_point.global_position
+		
+		add_child(antivirus)
+		active_antiviruses.append(antivirus)
 	
-	add_child(antivirus)
-	active_antiviruses.append(antivirus)
-	
-	EventBus.antivirus_spawned.emit(antivirus, spawn_point.global_position)
+		EventBus.antivirus_spawned.emit(antivirus, spawn_point.global_position)
 
 func _remove_antivirus() -> void:
 	"""Remove one antivirus from the scene"""

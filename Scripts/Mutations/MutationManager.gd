@@ -36,6 +36,7 @@ func _ready() -> void:
 	
 	# Find UI reference (will be set by UI when it's ready)
 	call_deferred("_find_ui")
+	EventBus.unlock_all_mutations.connect(unlock_all_mutations)
 
 func _find_ui() -> void:
 	"""Find mutation UI in the scene tree"""
@@ -114,6 +115,12 @@ func _show_mutation_choice() -> void:
 # ========================
 # ACTIVATION
 # ========================
+
+func unlock_all_mutations() -> void:
+	"""Unlock and immediately activate a mutation (used for testing/debug)"""
+	for mutation in available_mutations:
+		activate_mutation(mutation)
+
 func activate_mutation(mutation: Mutation) -> void:
 	"""Activate a chosen mutation"""
 	if mutation in active_mutations:
