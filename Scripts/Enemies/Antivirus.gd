@@ -139,6 +139,13 @@ func _update_chase() -> void:
 	var direction := (chase_target.global_position - global_position).normalized()
 	velocity = direction * base_speed * _get_speed_multiplier()
 
+func slow_down(enable: bool) -> void:
+	"""Apply or remove slowing effect"""
+	if enable:
+		base_speed *= 0.5
+	else:
+		base_speed *= 2.0
+
 # ========================
 # DIFFICULTY
 # ========================

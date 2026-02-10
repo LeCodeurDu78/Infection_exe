@@ -1,11 +1,10 @@
 extends Mutation
 class_name NetworkTunnelMutation
 
-@export var cooldown: float = 0.0
-@export var duration: float = 0.0
+@export var infection_zone_multiplier := 1.2
 
-func apply(virus):
-	pass
+func ready(virus):
+	virus.infection_zone.scale *= infection_zone_multiplier 
 
 func remove(virus):
-	pass
+	virus.infection_zone.scale /= infection_zone_multiplier 

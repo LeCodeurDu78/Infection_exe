@@ -1,11 +1,20 @@
 extends Mutation
 class_name FinalMutagenesisMutation
 
-@export var cooldown: float = 0.0
-@export var duration: float = 0.0
+@export var multiplier := 1.2
 
-func apply(virus):
-	pass
+func ready(virus):
+	virus.max_health *= multiplier
+	virus.base_speed *= multiplier
+	virus.infection_rate *= multiplier
+	virus.discretion *= multiplier
+
+	EventBus.virus_max_health.emit(virus.max_health)
 
 func remove(virus):
-	pass
+	virus.max_health /= multiplier
+	virus.base_speed /= multiplier
+	virus.infection_rate /= multiplier
+	virus.discretion /= multiplier
+
+	EventBus.virus_max_health.emit(virus.max_health)

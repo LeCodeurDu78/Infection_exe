@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="FloodingMutation" format=3 uid="uid://mutation_flooding"]
+[gd_resource type="Resource" script_class="FloodingMutation" format=3 uid="uid://cql8r6jyejf0m"]
 
-[ext_resource type="Script" uid="uid://floodob2tfyw2" path="res://Scripts/MutationsAvailable/FloodingMutation.gd" id="1_flooding"]
+[ext_resource type="Script" uid="uid://drhxbbb64dk30" path="res://Scripts/MutationsAvailable/FloodingMutation.gd" id="1_flooding"]
 
 [resource]
 script = ExtResource("1_flooding")
 name = "Flooding"
 description = "Slows enemies"
-unlock_points = 30
+level_min = 2
+level_max = 5

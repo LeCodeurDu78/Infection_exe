@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="RebootMutation" format=3 uid="uid://mutation_reboot"]
+[gd_resource type="Resource" script_class="RebootMutation" format=3 uid="uid://vuypgpkoeagi"]
 
-[ext_resource type="Script" uid="uid://ddxc4vxn3wxr" path="res://Scripts/MutationsAvailable/RebootMutation.gd" id="1_reboot"]
+[ext_resource type="Script" uid="uid://8kjdoukyvhgg" path="res://Scripts/MutationsAvailable/RebootMutation.gd" id="1_reboot"]
 
 [resource]
 script = ExtResource("1_reboot")
 name = "Reboot"
 description = "Automatically revives once (partial HP), single use"
-unlock_points = 60
+level_min = 2
+level_max = 20

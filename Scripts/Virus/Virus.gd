@@ -6,8 +6,9 @@ extends CharacterBody2D
 # ========================
 # CONSTANTS
 # ========================
-@export var XP_LEVELS := [80, 200, 400, 700, 1100, 1600, 2200, 3000, 4000, 5500,
-						 7500, 10000, 13000, 17000, 22000, 30000, 40000, 55000, 75000, 100000]
+@export var XP_LEVELS := [20, 50, 100, 200, 400, 800, 1500, 3000, 5000, 10000,
+						 20000, 40000, 80000, 150000, 300000, 500000, 1000000,
+						 2000000, 4000000] # XP required for each level up to MAX_LEVEL
 @export var MAX_LEVEL := 20
 
 # ========================
@@ -17,7 +18,7 @@ extends CharacterBody2D
 @export var base_speed := 400.0
 @export var infection_rate := 1.0
 @export var discretion := 1.0
-@export var max_lenght_trail := 20
+@export var xp_multiplier := 1.0
 
 # ========================
 # STATE
@@ -32,6 +33,10 @@ var is_dashing := false
 var dash_velocity := Vector2.ZERO
 
 var invulnerable := false
+@onready var infection_zone := $InfectionZone
+
+var shield_active := false
+var shield_health := 0
 
 # ========================
 # LIFECYCLE
@@ -79,7 +84,7 @@ func _handle_movement() -> void:
 # ========================
 func add_xp(_position: Vector2, points: int) -> void:
 	"""Add XP and check for level up"""
-	xp += points
+	xp += int(points * xp_multiplier) 
 	EventBus.virus_xp_gained.emit(points, xp)
 	
 	while current_level < MAX_LEVEL and xp >= get_xp_for_next_level():
@@ -125,10 +130,32 @@ func stop_dash() -> void:
 # ========================
 func take_damage(amount: int) -> void:
 	"""Handle taking damage from antivirus"""
-	current_health -= amount
-	EventBus.virus_damaged.emit(amount, current_health)
-	if current_health <= 0:
-		EventBus.virus_destroyed.emit(self)
-		queue_free()
+	var actual_damage = amount
 
-	# Optional: Add visual feedback for damage here (e.g., flash red, play sound, etc.)
+	# Check if shield is active
+	if shield_active and has_node("MutationManager"):
+		var mutation_manager = get_node("MutationManager")
+		for mutation in mutation_manager.active_mutations:
+			if mutation is ViralShieldMutation:
+				actual_damage = mutation.absorb_damage(amount)
+				break
+	
+	if actual_damage <= 0:
+		return  # All damage absorbed
+
+	current_health -= actual_damage
+	EventBus.virus_damaged.emit(actual_damage, current_health)
+	if current_health <= 0:
+		var is_reboot = false
+
+		for mutation in $MutationManager.active_mutations:
+			if mutation.name == "Reboot":
+				$MutationManager.remove_mutation(mutation)
+				is_reboot = true
+
+		if not is_reboot:
+			EventBus.virus_destroyed.emit(self)
+			queue_free()
+		else:
+			current_health = max_health * 0.5
+			EventBus.virus_healed.emit(max_health * 0.5, current_health)

@@ -40,6 +40,7 @@ func _ready() -> void:
 	EventBus.game_started.emit()
 	EventBus.virus_damaged.connect(_update_health_bar_display)
 	EventBus.virus_healed.connect(_update_health_bar_display)
+	EventBus.virus_max_health.connect(_update_max_health_bar)
 
 func _find_mutation_manager() -> void:
 	"""Find mutation manager in scene"""
@@ -74,6 +75,10 @@ func _update_threat_display() -> void:
 func _update_health_bar_display(_amount: int, _remaining_health: int) -> void:
 	"""Update threat level label and color"""
 	healthBar.value = _remaining_health
+
+func _update_max_health_bar(max_health: int):
+	healthBar.max_value = max_health
+	healthBar.size.x = max_health * 2.5
 
 # ========================
 # COOLDOWN DISPLAY

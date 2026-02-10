@@ -6,4 +6,5 @@
 script = ExtResource("1_data_corruption")
 name = "Data Corruption"
 description = "Infected nodes grant +15% mutation points"
-unlock_points = 30
+level_min = 2
+level_max = 4

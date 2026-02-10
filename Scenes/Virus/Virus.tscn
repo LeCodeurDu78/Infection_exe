@@ -11,14 +11,18 @@
 [ext_resource type="Resource" uid="uid://bmghdqudmqv68" path="res://Mutations/DiscretionMutation.tres" id="7_mf8yx"]
 [ext_resource type="Texture2D" uid="uid://cbhf15355fami" path="res://Assets/Sprites/Virus/virus.png" id="8_mf8yx"]
 [ext_resource type="Script" uid="uid://dw82sn3bxmpmp" path="res://Scripts/Virus/GlowController.gd" id="8_rsnpu"]
-[ext_resource type="Script" uid="uid://cam6cwqlkxi1m" path="res://addons/trail_2d/trail_2d.gd" id="12_5q86q"]
 [ext_resource type="Resource" uid="uid://bnrqafdk3610u" path="res://Mutations/BasicEchoMutation.tres" id="12_pwqus"]
 [ext_resource type="Resource" uid="uid://cd2x5pdh501lj" path="res://Mutations/OverchargeMutation.tres" id="13_32ocs"]
 [ext_resource type="Resource" uid="uid://cfejbvfbrqki6" path="res://Mutations/RegenerationMutation.tres" id="14_l5p8d"]
-
-[sub_resource type="Gradient" id="Gradient_5q86q"]
-offsets = PackedFloat32Array(0, 0.9784689, 0.98564595)
-colors = PackedColorArray(0.039215688, 0.039215688, 0.039215688, 1, 0.11417582, 0.42996532, 0.05516465, 1, 0.11713132, 0.44537166, 0.05579348, 1)
+[ext_resource type="Resource" uid="uid://cql8r6jyejf0m" path="res://Mutations/FloodingMutation.tres" id="14_pwqus"]
+[ext_resource type="Resource" uid="uid://ciicfuru8kgpt" path="res://Mutations/FinalMutagenesisMutation.tres" id="15_qlltw"]
+[ext_resource type="Resource" uid="uid://dq11dg6fh76md" path="res://Mutations/AdaptiveMutation.tres" id="16_r37pn"]
+[ext_resource type="Resource" uid="uid://nv4hthfxqonf" path="res://Mutations/RapidInfectionMutation.tres" id="17_pg1iw"]
+[ext_resource type="Resource" uid="uid://18jtydc6tjnn" path="res://Mutations/DataCorruptionMutation.tres" id="18_r37pn"]
+[ext_resource type="Resource" uid="uid://vuypgpkoeagi" path="res://Mutations/RebootMutation.tres" id="19_pg1iw"]
+[ext_resource type="Resource" uid="uid://b4ndak424u3lp" path="res://Mutations/NetworkTunnelMutation.tres" id="20_v4132"]
+[ext_resource type="Resource" uid="uid://byewvhp31kojk" path="res://Mutations/ViralShieldMutation.tres" id="21_q8riq"]
+[ext_resource type="Texture2D" uid="uid://c4rn6yaa8hjoc" path="res://addons/2d_shapes/Ellipse.svg" id="23_5s7ki"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_msxgm"]
 radius = 47.042534
@@ -34,17 +38,6 @@ modulate = Color(0, 0.47843137, 0, 1)
 texture_filter = 1
 scale = Vector2(4, 4)
 texture = ExtResource("8_mf8yx")
-
-[node name="Trail2D" type="Line2D" parent="." unique_id=1005636894]
-z_index = -1
-width = 50.0
-default_color = Color(0.22352941, 1, 0.078431375, 1)
-gradient = SubResource("Gradient_5q86q")
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-script = ExtResource("12_5q86q")
-metadata/_custom_type_script = "uid://cam6cwqlkxi1m"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=566886992]
 zoom = Vector2(0.5, 0.5)
@@ -63,7 +56,7 @@ grow_vertical = 2
 
 [node name="MutationManager" type="Node2D" parent="." unique_id=1431755883]
 script = ExtResource("2_aog2q")
-available_mutations = Array[ExtResource("3_xlukx")]([ExtResource("4_lbsxr"), ExtResource("6_lbsxr"), ExtResource("5_mf8yx"), ExtResource("7_mf8yx"), ExtResource("12_pwqus"), ExtResource("13_32ocs"), ExtResource("14_l5p8d")])
+available_mutations = Array[ExtResource("3_xlukx")]([ExtResource("4_lbsxr"), ExtResource("6_lbsxr"), ExtResource("5_mf8yx"), ExtResource("7_mf8yx"), ExtResource("12_pwqus"), ExtResource("13_32ocs"), ExtResource("14_l5p8d"), ExtResource("14_pwqus"), ExtResource("15_qlltw"), ExtResource("16_r37pn"), ExtResource("17_pg1iw"), ExtResource("18_r37pn"), ExtResource("19_pg1iw"), ExtResource("20_v4132"), ExtResource("21_q8riq")])
 
 [node name="GlowController" type="Node2D" parent="." unique_id=1779126060 node_paths=PackedStringArray("virus_sprite")]
 script = ExtResource("8_rsnpu")
@@ -76,3 +69,10 @@ shape = SubResource("CircleShape2D_msxgm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InfectionZone" unique_id=61449171]
 shape = SubResource("CircleShape2D_aog2q")
+
+[node name="ViralShield" type="Sprite2D" parent="." unique_id=445372405]
+visible = false
+modulate = Color(1, 1, 0, 0.654902)
+position = Vector2(4.7683716e-06, 1.4305115e-06)
+scale = Vector2(8.125, 7)
+texture = ExtResource("23_5s7ki")

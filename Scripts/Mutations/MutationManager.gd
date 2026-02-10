@@ -16,6 +16,8 @@ var active_mutations: Array[Mutation] = []
 var mutation_keybinds: Dictionary = {}  # Mutation -> String
 var mutations_to_offer: Array[Mutation] = []
 
+var cooldown_multiplier := 1.0
+
 # ========================
 # CONSTANTS
 # ========================
@@ -97,7 +99,6 @@ func unlock_mutations() -> void:
 	# Show UI when enough mutations are available
 	if mutations_to_offer.size() >= MIN_MUTATIONS_FOR_CHOICE:
 		_show_mutation_choice()
-		print(mutations_to_offer)
 
 func _is_mutation_available(mutation: Mutation, level: int) -> bool:
 	"""Check if mutation is available at current level"""
@@ -148,6 +149,9 @@ func activate_mutation(mutation: Mutation) -> void:
 	# Emit events
 	EventBus.mutation_activated.emit(mutation)
 	EventBus.mutation_ui_closed.emit(mutation)
+
+func remove_mutation(mutation: Mutation):
+	active_mutations.erase(mutation)
 
 # ========================
 # COOLDOWN INFO (for UI)

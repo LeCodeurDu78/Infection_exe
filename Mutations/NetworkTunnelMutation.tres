@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="NetworkTunnelMutation" format=3 uid="uid://mutation_network_tunnel"]
+[gd_resource type="Resource" script_class="NetworkTunnelMutation" format=3 uid="uid://b4ndak424u3lp"]
 
-[ext_resource type="Script" uid="uid://bv0ftob2tfyw2" path="res://Scripts/MutationsAvailable/NetworkTunnelMutation.gd" id="1_network_tunnel"]
+[ext_resource type="Script" uid="uid://bio7c4tvwyjqy" path="res://Scripts/MutationsAvailable/NetworkTunnelMutation.gd" id="1_network_tunnel"]
 
 [resource]
 script = ExtResource("1_network_tunnel")
+infection_zone_multiplier = 1.5
 name = "Network Tunnel"
 description = "Increases range of remote attacks"
-unlock_points = 30
+level_min = 2
+level_max = 5

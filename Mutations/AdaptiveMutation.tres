@@ -6,4 +6,5 @@
 script = ExtResource("1_adaptive")
 name = "Adaptive Mutation"
 description = "At each level, grants a small random bonus (strength, speed, stealth)"
-unlock_points = 60
+level_min = 2
+level_max = 5

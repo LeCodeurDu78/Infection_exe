@@ -32,10 +32,6 @@ ParticleManager="*uid://xdax4v7pffxk"
 ScreenShakeManager="*uid://d24i0ry1mexm6"
 NotificationManager="*uid://xh5fld4iamxw"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/trail_2d/plugin.cfg")
-
 [global_group]
 
 virus_infection_zone=""

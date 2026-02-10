@@ -1,11 +1,12 @@
 extends Mutation
 class_name DataCorruptionMutation
 
-@export var cooldown: float = 0.0
-@export var duration: float = 0.0
+@export var xp_multiplier := 1.15
+var base_xp_multplier := 1.0
 
-func apply(virus):
-	pass
+func ready(_virus):
+	base_xp_multplier = _virus.xp_multiplier
+	_virus.xp_multiplier = xp_multiplier
 
-func remove(virus):
-	pass
+func remove(_virus):
+	_virus.xp_multiplier = base_xp_multplier

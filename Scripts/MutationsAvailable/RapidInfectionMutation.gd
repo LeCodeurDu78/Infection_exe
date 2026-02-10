@@ -1,11 +1,10 @@
 extends Mutation
 class_name RapidInfectionMutation
 
-@export var cooldown: float = 0.0
-@export var duration: float = 0.0
+@export var infection_rate_multiplier := 1.2
 
-func apply(virus):
-	pass
+func ready(virus):
+	virus.infection_rate *= infection_rate_multiplier
 
 func remove(virus):
-	pass
+	virus.infection_rate /= infection_rate_multiplier

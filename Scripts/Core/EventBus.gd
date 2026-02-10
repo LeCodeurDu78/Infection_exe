@@ -21,6 +21,7 @@ signal virus_xp_gained(amount: int, total_xp: int)
 signal virus_leveled_up(new_level: int)
 signal virus_damaged(amount: int, remaining_health: int)
 signal virus_healed(amount: int, current_health: int)
+signal virus_max_health(max_health: int)
 signal virus_destroyed
 
 # ========================

@@ -6,4 +6,4 @@
 script = ExtResource("1_system_hook")
 name = "System Hook"
 description = "Reduces active powers' cooldowns (-15%)"
-unlock_points = 20
+level_min = 2

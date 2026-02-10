@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FinalMutagenesisMutation" format=3 uid="uid://ciicfuru8kgpt"]
+[gd_resource type="Resource" format=3 uid="uid://ciicfuru8kgpt"]
 
 [ext_resource type="Script" uid="uid://cv6tpo22sej32" path="res://Scripts/MutationsAvailable/FinalMutagenesisMutation.gd" id="1_final_mutagenesis"]
 
@@ -6,4 +6,4 @@
 script = ExtResource("1_final_mutagenesis")
 name = "Final Mutagenesis"
 description = "Permanently increases all virus stats"
-unlock_points = 60
+level_min = 5

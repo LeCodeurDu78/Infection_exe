@@ -1,4 +1,5 @@
 extends Mutation
+class_name SpeedMutation
 
 @export var speed_multiplier := 1.2
 
