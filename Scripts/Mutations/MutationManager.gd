@@ -97,6 +97,7 @@ func unlock_mutations() -> void:
 	# Show UI when enough mutations are available
 	if mutations_to_offer.size() >= MIN_MUTATIONS_FOR_CHOICE:
 		_show_mutation_choice()
+		print(mutations_to_offer)
 
 func _is_mutation_available(mutation: Mutation, level: int) -> bool:
 	"""Check if mutation is available at current level"""
@@ -120,6 +121,7 @@ func unlock_all_mutations() -> void:
 	"""Unlock and immediately activate a mutation (used for testing/debug)"""
 	for mutation in available_mutations:
 		activate_mutation(mutation)
+		print("Unlocked mutation: %s" % mutation.name)
 
 func activate_mutation(mutation: Mutation) -> void:
 	"""Activate a chosen mutation"""

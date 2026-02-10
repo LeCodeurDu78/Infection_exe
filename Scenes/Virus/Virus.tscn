@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://cbhf15355fami" path="res://Assets/Sprites/Virus/virus.png" id="8_mf8yx"]
 [ext_resource type="Script" uid="uid://dw82sn3bxmpmp" path="res://Scripts/Virus/GlowController.gd" id="8_rsnpu"]
 [ext_resource type="Script" uid="uid://cam6cwqlkxi1m" path="res://addons/trail_2d/trail_2d.gd" id="12_5q86q"]
+[ext_resource type="Resource" uid="uid://bnrqafdk3610u" path="res://Mutations/BasicEchoMutation.tres" id="12_pwqus"]
+[ext_resource type="Resource" uid="uid://cd2x5pdh501lj" path="res://Mutations/OverchargeMutation.tres" id="13_32ocs"]
+[ext_resource type="Resource" uid="uid://cfejbvfbrqki6" path="res://Mutations/RegenerationMutation.tres" id="14_l5p8d"]
 
 [sub_resource type="Gradient" id="Gradient_5q86q"]
 offsets = PackedFloat32Array(0, 0.9784689, 0.98564595)
@@ -60,7 +63,7 @@ grow_vertical = 2
 
 [node name="MutationManager" type="Node2D" parent="." unique_id=1431755883]
 script = ExtResource("2_aog2q")
-available_mutations = Array[ExtResource("3_xlukx")]([ExtResource("4_lbsxr"), ExtResource("6_lbsxr"), ExtResource("5_mf8yx"), ExtResource("7_mf8yx")])
+available_mutations = Array[ExtResource("3_xlukx")]([ExtResource("4_lbsxr"), ExtResource("6_lbsxr"), ExtResource("5_mf8yx"), ExtResource("7_mf8yx"), ExtResource("12_pwqus"), ExtResource("13_32ocs"), ExtResource("14_l5p8d")])
 
 [node name="GlowController" type="Node2D" parent="." unique_id=1779126060 node_paths=PackedStringArray("virus_sprite")]
 script = ExtResource("8_rsnpu")

@@ -6,13 +6,14 @@ extends CharacterBody2D
 # ========================
 # CONSTANTS
 # ========================
-@export var XP_LEVELS := [20, 40, 60, 80, 100]
-@export var MAX_LEVEL := 5
+@export var XP_LEVELS := [80, 200, 400, 700, 1100, 1600, 2200, 3000, 4000, 5500,
+						 7500, 10000, 13000, 17000, 22000, 30000, 40000, 55000, 75000, 100000]
+@export var MAX_LEVEL := 20
 
 # ========================
 # EXPORTS
 # ========================
-@export var max_health := 100
+@export var max_health := 100.0
 @export var base_speed := 400.0
 @export var infection_rate := 1.0
 @export var discretion := 1.0
@@ -51,7 +52,8 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	if invulnerable:
-		current_health = 999999 
+		current_health = 999999.9
+		EventBus.virus_healed.emit(current_health)
 	
 	_handle_movement()
 
@@ -89,8 +91,7 @@ func _level_up() -> void:
 	current_level += 1
 	
 	# Unlock new mutations
-	if has_node("MutationManager"):
-		$MutationManager.unlock_mutations()
+	$MutationManager.unlock_mutations()
 
 	EventBus.virus_leveled_up.emit(current_level)
 	EventBus.emit_screen_shake(0.5, 0.2)

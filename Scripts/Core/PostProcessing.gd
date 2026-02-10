@@ -20,4 +20,4 @@ func _update_glitch_intensity(_old: int, _new: int):
 		GameManager.ThreatLevel.MEDIUM:
 			glitch_shader.set_shader_parameter("shake_rate", 0.1)
 		GameManager.ThreatLevel.CRITICAL:
-			glitch_shader.set_shader_parameter("shake_rate", 0.3)
+			glitch_shader.set_shader_parameter("shake_rate", 0.2)

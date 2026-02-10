@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="OverchargeMutation" format=3 uid="uid://mutation_overcharge"]
+[gd_resource type="Resource" script_class="OverchargeMutation" format=3 uid="uid://cd2x5pdh501lj"]
 
-[ext_resource type="Script" uid="uid://bv0dtobftfyw2" path="res://Scripts/MutationsAvailable/OverchargeMutation.gd" id="1_overcharge"]
+[ext_resource type="Script" uid="uid://holq0gt4etci" path="res://Scripts/MutationsAvailable/OverchargeMutation.gd" id="1_overcharge"]
 
 [resource]
 script = ExtResource("1_overcharge")
 name = "Overcharge"
 description = "Short sprint (1.5 s)"
-unlock_points = 10
+level_min = 3
+level_max = 5

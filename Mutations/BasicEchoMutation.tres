@@ -6,4 +6,5 @@
 script = ExtResource("1_basic_echo")
 name = "Basic Echo"
 description = "Sends a signal that reveals nearby enemy caches"
-unlock_points = 10
+level_min = 3
+level_max = 5
