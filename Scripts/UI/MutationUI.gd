@@ -16,9 +16,14 @@ var mutation_manager: MutationManager = null
 # ========================
 # NODE REFERENCES
 # ========================
-@onready var mutation_button_1: Button = $MutationButton1
-@onready var mutation_button_2: Button = $MutationButton2
-@onready var mutation_button_3: Button = $MutationButton3
+@onready var mutation_label_1: Label = $MutationsContainer/Mutation1Container/MarginContainer/VBoxContainer/Header/Title
+@onready var mutation_description_1: Label = $MutationsContainer/Mutation1Container/MarginContainer/VBoxContainer/Description
+
+@onready var mutation_label_2: Label = $MutationsContainer/Mutation2Container/MarginContainer/VBoxContainer/Header/Title
+@onready var mutation_description_2: Label = $MutationsContainer/Mutation2Container/MarginContainer/VBoxContainer/Description
+
+@onready var mutation_label_3: Label = $MutationsContainer/Mutation3Container/MarginContainer/VBoxContainer/Header/Title
+@onready var mutation_description_3: Label = $MutationsContainer/Mutation3Container/MarginContainer/VBoxContainer/Description
 
 # ========================
 # LIFECYCLE
@@ -46,21 +51,24 @@ func _populate_buttons() -> void:
 	var mutations := mutation_manager.mutations_to_offer
 	
 	# Button 1
-	if mutations.size() > 0 and mutation_button_1:
-		mutation_button_1.text = mutations[0].name
-		mutation_button_1.visible = true
+	if mutations.size() > 0 and mutation_label_1:
+		mutation_label_1.text = mutations[0].name
+		mutation_description_1.text = mutations[0].description
+		mutation_label_1.visible = true
 	
 	# Button 2
-	if mutations.size() > 1 and mutation_button_2:
-		mutation_button_2.text = mutations[1].name
-		mutation_button_2.visible = true
+	if mutations.size() > 1 and mutation_label_2:
+		mutation_label_2.text = mutations[1].name
+		mutation_description_2.text = mutations[1].description
+		mutation_label_2.visible = true
 	
 	# Button 3
-	if mutations.size() > 2 and mutation_button_3:
-		mutation_button_3.text = mutations[2].name
-		mutation_button_3.visible = true
+	if mutations.size() > 2 and mutation_label_3:
+		mutation_label_3.text = mutations[2].name
+		mutation_description_3.text = mutations[2].description
+		mutation_label_3.visible = true
 	else:
-		mutation_button_3.visible = false
+		mutation_label_3.visible = false
 
 func _show_ui() -> void:
 	"""Show UI and pause game"""

@@ -1,0 +1,305 @@
+[gd_scene format=3 uid="uid://b2hcdo4owv0eb"]
+
+[ext_resource type="Script" uid="uid://um004dmcachn" path="res://Scripts/UI/StartMenu.gd" id="1_r73nm"]
+[ext_resource type="FontFile" uid="uid://v8wjw715mca0" path="res://Assets/Fonts/font titles/Cyber Alert.otf" id="2_70545"]
+[ext_resource type="FontFile" uid="uid://du1x2p3jh7pht" path="res://Assets/Fonts/font text/Corptic DEMO.otf" id="2_fjoh0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.1, 0.1, 0.15, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.224, 1, 0.078, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.224, 1, 0.078, 0.6)
+shadow_size = 10
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+bg_color = Color(0.05, 0.05, 0.08, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.224, 1, 0.078, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.224, 1, 0.078, 0.2)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+bg_color = Color(0.224, 1, 0.078, 0.2)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.224, 1, 0.078, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.224, 1, 0.078, 0.8)
+shadow_size = 8
+
+[sub_resource type="Theme" id="Theme_buttons"]
+Button/colors/font_color = Color(0.224, 1, 0.078, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 22
+Button/styles/hover = SubResource("StyleBoxFlat_button_hover")
+Button/styles/normal = SubResource("StyleBoxFlat_button_normal")
+Button/styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.05, 0.05, 0.08, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.224, 1, 0.078, 0.3)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 72
+font_color = Color(0.224, 1, 0.078, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 12
+shadow_color = Color(0.224, 1, 0.078, 0.8)
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_subtitle"]
+font_color = Color(0.224, 1, 0.078, 0.7)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_version"]
+font_size = 12
+font_color = Color(0.224, 1, 0.078, 0.5)
+outline_size = 1
+outline_color = Color(0, 0, 0, 0.6)
+
+[node name="StartMenu" type="Control" unique_id=561783967]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_buttons")
+script = ExtResource("1_r73nm")
+
+[node name="GridPattern" type="Panel" parent="." unique_id=1917510699]
+modulate = Color(0.224, 1, 0.078, 0.05)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TitleContainer" type="VBoxContainer" parent="." unique_id=1779592376]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 80.0
+offset_right = 400.0
+offset_bottom = 280.0
+grow_horizontal = 2
+theme_override_constants/separation = 12
+
+[node name="GlitchBorder" type="PanelContainer" parent="TitleContainer" unique_id=451445856]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="TitleContainer/GlitchBorder" unique_id=629074544]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleContainer/GlitchBorder/MarginContainer" unique_id=193279596]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="MainTitle" type="Label" parent="TitleContainer/GlitchBorder/MarginContainer/VBoxContainer" unique_id=1524989136]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_70545")
+text = "INFECTION.EXE"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_trim_flags = 0
+justification_flags = 235
+
+[node name="Subtitle" type="Label" parent="TitleContainer/GlitchBorder/MarginContainer/VBoxContainer" unique_id=52837412]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fjoh0")
+text = "[ NEURAL NETWORK CORRUPTION SIMULATOR ]"
+label_settings = SubResource("LabelSettings_subtitle")
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="TitleContainer/GlitchBorder/MarginContainer/VBoxContainer" unique_id=1713223494]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatusLine" type="HBoxContainer" parent="TitleContainer/GlitchBorder/MarginContainer/VBoxContainer" unique_id=564384872]
+layout_mode = 2
+alignment = 1
+
+[node name="Icon1" type="Label" parent="TitleContainer/GlitchBorder/MarginContainer/VBoxContainer/StatusLine" unique_id=1018893093]
+layout_mode = 2
+text = "▶"
+label_settings = SubResource("LabelSettings_subtitle")
+
+[node name="Status" type="Label" parent="TitleContainer/GlitchBorder/MarginContainer/VBoxContainer/StatusLine" unique_id=1585672979]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fjoh0")
+text = " SYSTEM READY "
+label_settings = SubResource("LabelSettings_subtitle")
+
+[node name="Icon2" type="Label" parent="TitleContainer/GlitchBorder/MarginContainer/VBoxContainer/StatusLine" unique_id=1889918995]
+layout_mode = 2
+text = "◀"
+label_settings = SubResource("LabelSettings_subtitle")
+
+[node name="MenuContainer" type="VBoxContainer" parent="." unique_id=1426972179]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -3.0
+offset_right = 200.0
+offset_bottom = 297.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="StartButton" type="Button" parent="MenuContainer" unique_id=273173788]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fjoh0")
+text = "INITIATE INFECTION"
+
+[node name="OptionsButton" type="Button" parent="MenuContainer" unique_id=1571336128]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fjoh0")
+text = "SYSTEM CONFIGURATION"
+
+[node name="AchievementsButton" type="Button" parent="MenuContainer" unique_id=29049689]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fjoh0")
+text = "ACHIEVEMENTS"
+
+[node name="ExitButton" type="Button" parent="MenuContainer" unique_id=1847094890]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fjoh0")
+text = "TERMINATE PROCESS"
+
+[node name="BottomInfo" type="VBoxContainer" parent="." unique_id=818053306]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="VersionInfo" type="HBoxContainer" parent="BottomInfo" unique_id=1205044716]
+layout_mode = 2
+
+[node name="Left" type="Label" parent="BottomInfo/VersionInfo" unique_id=1028690143]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "◢ v1.0.0-ALPHA"
+label_settings = SubResource("LabelSettings_version")
+
+[node name="Right" type="Label" parent="BottomInfo/VersionInfo" unique_id=1283224803]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BUILD_2026 ◣"
+label_settings = SubResource("LabelSettings_version")
+horizontal_alignment = 2
+
+[node name="DecorativeLines" type="Control" parent="." unique_id=1976570459]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="TopLeftCorner" type="Panel" parent="DecorativeLines" unique_id=1042490547]
+modulate = Color(0.224, 1, 0.078, 0.3)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 120.0
+offset_bottom = 25.0
+mouse_filter = 2
+
+[node name="TopLeftCorner2" type="Panel" parent="DecorativeLines" unique_id=1884598694]
+modulate = Color(0.224, 1, 0.078, 0.3)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 25.0
+offset_bottom = 120.0
+mouse_filter = 2
+
+[node name="TopRightCorner" type="Panel" parent="DecorativeLines" unique_id=1921355555]
+modulate = Color(0.224, 1, 0.078, 0.3)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 25.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="TopRightCorner2" type="Panel" parent="DecorativeLines" unique_id=2097342244]
+modulate = Color(0.224, 1, 0.078, 0.3)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -25.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 120.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[connection signal="pressed" from="MenuContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="MenuContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="MenuContainer/AchievementsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="MenuContainer/ExitButton" to="." method="_on_QuitButton_pressed"]

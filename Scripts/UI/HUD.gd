@@ -6,10 +6,14 @@ extends Control
 # ========================
 # NODE REFERENCES
 # ========================
-@onready var healthBar: ProgressBar = $Health/HealthBar
-@onready var xp_label: Label = $Infection/XPLabel
-@onready var threat_label: Label = $Infection/ThreatLabel
-@onready var cooldown_container: Control = $MutationsCooldowns
+@onready var infection_label: Label = $InfoPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/InfectionLabel
+@onready var threat_label: Label = $InfoPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/ThreatContainer/ThreatLabel
+
+@onready var healthBar: ProgressBar = $HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/HBoxContainer/ProgressBar
+@onready var level_label: Label = $HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/ThreatContainer/LevelLabel
+@onready var xp_label: Label = $HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/ThreatContainer/XPLabel
+
+@onready var cooldown_container: Control = $MutationsPanel/MarginContainer/VBoxContainer/MutationsCooldowns
 
 # ========================
 # CONSTANTS
@@ -49,6 +53,7 @@ func _find_mutation_manager() -> void:
 
 func _process(_delta: float) -> void:
 	_update_xp_display()
+	_update_infection_display()
 	_update_threat_display()
 	_update_cooldown_displays()
 
@@ -58,6 +63,10 @@ func _process(_delta: float) -> void:
 func _update_xp_display() -> void:
 	"""Update XP label"""
 	xp_label.text = "XP : " + GameManager.get_virus_xp_text()
+
+func _update_infection_display() -> void:
+	"""Update XP label"""
+	xp_label.text = "Infection : " + str(GameManager.get_infection_percent())
 
 # ========================
 # THREAT DISPLAY

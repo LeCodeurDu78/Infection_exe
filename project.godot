@@ -31,6 +31,8 @@ SaveManager="*uid://dwndakl0j78w3"
 ParticleManager="*uid://xdax4v7pffxk"
 ScreenShakeManager="*uid://d24i0ry1mexm6"
 NotificationManager="*uid://xh5fld4iamxw"
+ZoneManager="*uid://bn1qx11ea7dqt"
+AchievementManager="*uid://baas7o0koc8wv"
 
 [global_group]
 

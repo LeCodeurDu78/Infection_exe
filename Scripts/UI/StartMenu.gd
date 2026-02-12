@@ -13,13 +13,16 @@ func _ready() -> void:
 func _on_start_button_pressed() -> void:
 	"""Start the game"""
 	 # Notify GameManager to start the game
-	get_tree().change_scene_to_file("res://Scenes/Main/Main.tscn") 
+	ZoneManager.start_zone("files")
 
 func _on_options_button_pressed() -> void:
 	$OptionsMenu.visible = true
+	$Container.visible = false
+
+func _on_achievements_button_pressed() -> void:
+	$AchievementPanel.show_panel()
 	$Container.visible = false
 	
 func _on_exit_button_pressed() -> void:
 	"""Quit the game"""
 	get_tree().quit()
-

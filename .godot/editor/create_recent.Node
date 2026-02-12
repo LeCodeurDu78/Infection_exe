@@ -1,6 +1,10 @@
-Sprite2D
 Control
+Container
+VSeparator
 ProgressBar
+HBoxContainer
+Button
+Sprite2D
 Label
 TextureProgressBar
 Node2D
@@ -8,8 +12,3 @@ Line2D
 ColorRect
 CanvasLayer
 CollisionShape2D
-SpinBox
-LineEdit
-TextEdit
-MarginContainer
-VBoxContainer

@@ -1,0 +1,8 @@
+res://Scripts/test/MutationUI.tscn
+res://Assets/Shaders/GlitchShader.gdshader
+res://Scripts/test/HUD.tscn
+res://Scripts/UI/MutationUI.gd
+res://Scripts/UI/StartMenu.gd
+res://Scenes/UI/StartMenu.tscn
+res://Scripts/Environment/Infectable.gd
+res://Scripts/Virus/Virus.gd

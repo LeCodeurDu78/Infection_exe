@@ -43,6 +43,7 @@ signal mutation_cooldown_finished(mutation_name: String)
 signal spawn_antivirus(count: int)
 signal antivirus_spawned(antivirus: Node2D, position: Vector2)
 signal antivirus_despawned(antivirus: Node2D)
+signal antivirus_destroyed(antivirus: Node2D)
 signal antivirus_detected_virus(antivirus: Node2D, virus: Node2D)
 signal antivirus_lost_virus(antivirus: Node2D)
 signal scan_launched(position: Vector2, scale: Vector2)
@@ -68,11 +69,17 @@ signal game_lost(reason: String)
 signal game_reset
 
 # ========================
-# ZONE EVENTS
+# ZONE SIGNALS
 # ========================
 signal zone_entered(zone_name: String)
-signal zone_completed(zone_name: String, completion_percent: float)
+signal zone_completed(zone_name: String, infection_percent: float)
 signal zone_unlocked(zone_name: String)
+
+# ========================
+# ACHIEVEMENT SIGNALS
+# ========================
+signal achievement_unlocked(achievement_name: String)
+signal achievement_progress(achievement_name: String, progress: int, target: int)
 
 # ========================
 # UI EVENTS

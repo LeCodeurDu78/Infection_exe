@@ -58,7 +58,7 @@ func _physics_process(_delta: float) -> void:
 
 	if invulnerable:
 		current_health = 999999.9
-		EventBus.virus_healed.emit(current_health)
+		EventBus.virus_healed.emit(current_health, current_health)
 	
 	_handle_movement()
 

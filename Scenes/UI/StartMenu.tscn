@@ -2,12 +2,44 @@
 
 [ext_resource type="Script" uid="uid://um004dmcachn" path="res://Scripts/UI/StartMenu.gd" id="1_r73nm"]
 [ext_resource type="PackedScene" uid="uid://ciaoouw77jkjo" path="res://Scenes/UI/OptionsMenu.tscn" id="2_7sc2f"]
+[ext_resource type="FontFile" uid="uid://v8wjw715mca0" path="res://Assets/Fonts/font titles/Cyber Alert.otf" id="2_jeo11"]
+[ext_resource type="FontFile" uid="uid://du1x2p3jh7pht" path="res://Assets/Fonts/font text/Corptic DEMO.otf" id="3_kit3o"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/AchievementPanel.tscn" id="3_omsb3"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_7sc2f"]
-font_size = 60
-font_color = Color(0, 0.49019608, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kit3o"]
+bg_color = Color(0.05, 0.05, 0.08, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.224, 1, 0.078, 0.3)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_f3otk"]
+font_size = 72
+font_color = Color(0.224, 1, 0.078, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 12
+shadow_color = Color(0.224, 1, 0.078, 0.8)
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_u4h61"]
+font_color = Color(0.224, 1, 0.078, 0.7)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ij777"]
+font_size = 12
+font_color = Color(0.224, 1, 0.078, 0.5)
+outline_size = 1
+outline_color = Color(0, 0, 0, 0.6)
 
 [node name="StartMenu" type="Control" unique_id=561783967]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,7 +50,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_r73nm")
 
-[node name="Container" type="Control" parent="." unique_id=1597728337]
+[node name="GridPattern" type="Panel" parent="." unique_id=1373075394]
+modulate = Color(0.224, 1, 0.078, 0.05)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Container" type="Control" parent="." unique_id=1089829615]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,47 +67,205 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Container" unique_id=1524989136]
+[node name="TitleContainer" type="VBoxContainer" parent="Container" unique_id=1769294549]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -188.0
-offset_top = 12.0
-offset_right = 188.0
-offset_bottom = 95.0
+offset_left = -400.0
+offset_top = 58.0
+offset_right = 400.0
+offset_bottom = 258.0
 grow_horizontal = 2
-text = "Infection.exe"
-label_settings = SubResource("LabelSettings_7sc2f")
+theme_override_constants/separation = 12
 
-[node name="StartButton" type="Button" parent="Container" unique_id=273173788]
-layout_mode = 0
-offset_left = 418.0
-offset_top = 204.0
-offset_right = 741.0
-offset_bottom = 287.0
-text = "Start"
+[node name="GlitchBorder" type="PanelContainer" parent="Container/TitleContainer" unique_id=2118485007]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kit3o")
 
-[node name="OptionsButton" type="Button" parent="Container" unique_id=1571336128]
-layout_mode = 0
-offset_left = 418.0
-offset_top = 358.0
-offset_right = 741.0
-offset_bottom = 441.0
-text = "Options"
+[node name="MarginContainer" type="MarginContainer" parent="Container/TitleContainer/GlitchBorder" unique_id=1115337612]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
 
-[node name="ExitButton" type="Button" parent="Container" unique_id=1847094890]
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/TitleContainer/GlitchBorder/MarginContainer" unique_id=761973739]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="MainTitle" type="Label" parent="Container/TitleContainer/GlitchBorder/MarginContainer/VBoxContainer" unique_id=1764557515]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jeo11")
+text = "INFECTION.EXE"
+label_settings = SubResource("LabelSettings_f3otk")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_trim_flags = 0
+justification_flags = 235
+
+[node name="Subtitle" type="Label" parent="Container/TitleContainer/GlitchBorder/MarginContainer/VBoxContainer" unique_id=2020368171]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kit3o")
+text = "[ NEURAL NETWORK CORRUPTION SIMULATOR ]"
+label_settings = SubResource("LabelSettings_u4h61")
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="Container/TitleContainer/GlitchBorder/MarginContainer/VBoxContainer" unique_id=1921130676]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatusLine" type="HBoxContainer" parent="Container/TitleContainer/GlitchBorder/MarginContainer/VBoxContainer" unique_id=1441401500]
+layout_mode = 2
+alignment = 1
+
+[node name="Icon1" type="Label" parent="Container/TitleContainer/GlitchBorder/MarginContainer/VBoxContainer/StatusLine" unique_id=303696087]
+layout_mode = 2
+text = "▶"
+label_settings = SubResource("LabelSettings_u4h61")
+
+[node name="Status" type="Label" parent="Container/TitleContainer/GlitchBorder/MarginContainer/VBoxContainer/StatusLine" unique_id=2064859144]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kit3o")
+text = " SYSTEM READY "
+label_settings = SubResource("LabelSettings_u4h61")
+
+[node name="Icon2" type="Label" parent="Container/TitleContainer/GlitchBorder/MarginContainer/VBoxContainer/StatusLine" unique_id=121950067]
+layout_mode = 2
+text = "◀"
+label_settings = SubResource("LabelSettings_u4h61")
+
+[node name="MenuContainer" type="VBoxContainer" parent="Container" unique_id=181747388]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -34.0
+offset_right = 200.0
+offset_bottom = 266.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="StartButton" type="Button" parent="Container/MenuContainer" unique_id=1956430541]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kit3o")
+text = "INITIATE INFECTION"
+
+[node name="OptionsButton" type="Button" parent="Container/MenuContainer" unique_id=1774199354]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kit3o")
+text = "SYSTEM CONFIGURATION"
+
+[node name="AchievementsButton" type="Button" parent="Container/MenuContainer" unique_id=1203283722]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kit3o")
+text = "ACHIEVEMENTS"
+
+[node name="ExitButton" type="Button" parent="Container/MenuContainer" unique_id=2068959035]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kit3o")
+text = "TERMINATE PROCESS"
+
+[node name="BottomInfo" type="VBoxContainer" parent="." unique_id=1955121794]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="VersionInfo" type="HBoxContainer" parent="BottomInfo" unique_id=391686181]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Left" type="Label" parent="BottomInfo/VersionInfo" unique_id=2087578814]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "◢ v1.0.0-ALPHA"
+label_settings = SubResource("LabelSettings_ij777")
+
+[node name="Right" type="Label" parent="BottomInfo/VersionInfo" unique_id=337747319]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BUILD_2026 ◣"
+label_settings = SubResource("LabelSettings_ij777")
+horizontal_alignment = 2
+
+[node name="DecorativeLines" type="Control" parent="." unique_id=59405894]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="TopLeftCorner" type="Panel" parent="DecorativeLines" unique_id=1470196946]
+modulate = Color(0.224, 1, 0.078, 0.3)
 layout_mode = 0
-offset_left = 418.0
-offset_top = 504.0
-offset_right = 741.0
-offset_bottom = 587.0
-text = "Exit"
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 120.0
+offset_bottom = 25.0
+mouse_filter = 2
+
+[node name="TopLeftCorner2" type="Panel" parent="DecorativeLines" unique_id=1359385206]
+modulate = Color(0.224, 1, 0.078, 0.3)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 25.0
+offset_bottom = 120.0
+mouse_filter = 2
+
+[node name="TopRightCorner" type="Panel" parent="DecorativeLines" unique_id=1111254871]
+modulate = Color(0.224, 1, 0.078, 0.3)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 25.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="TopRightCorner2" type="Panel" parent="DecorativeLines" unique_id=919661604]
+modulate = Color(0.224, 1, 0.078, 0.3)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -25.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 120.0
+grow_horizontal = 0
+mouse_filter = 2
 
 [node name="OptionsMenu" parent="." unique_id=856815269 instance=ExtResource("2_7sc2f")]
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="Container/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="Container/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="Container/ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="AchievementPanel" parent="." unique_id=1401895905 instance=ExtResource("3_omsb3")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="Container/MenuContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Container/MenuContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="Container/MenuContainer/AchievementsButton" to="." method="_on_achievements_button_pressed"]
+[connection signal="pressed" from="Container/MenuContainer/ExitButton" to="." method="_on_exit_button_pressed"]
