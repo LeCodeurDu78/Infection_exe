@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://rrnwgea8tg5g"]
+
+[ext_resource type="Script" uid="uid://b3copx7j1ylbd" path="res://Scripts/UI/HotkeyRebindButton.gd" id="1_8exag"]
+[ext_resource type="FontFile" uid="uid://du1x2p3jh7pht" path="res://Assets/Fonts/font text/Corptic DEMO.otf" id="2_syeyh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_esydt"]
+font_size = 20
+font_color = Color(0.9, 0.9, 0.9, 1)
+outline_size = 1
+outline_color = Color(0, 0, 0, 0.8)
+
+[node name="Hotkey" type="HBoxContainer" unique_id=231458210]
+theme_override_constants/separation = 15
+script = ExtResource("1_8exag")
+action_name = ""
+
+[node name="Label" type="Label" parent="." unique_id=538210249]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_syeyh")
+text = "Hotkey"
+label_settings = SubResource("LabelSettings_esydt")
+
+[node name="VSlider" type="VSeparator" parent="." unique_id=990548407]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 200
+
+[node name="Button" type="Button" parent="." unique_id=604165786]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_syeyh")
+toggle_mode = true
+text = "Action"
+
+[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]

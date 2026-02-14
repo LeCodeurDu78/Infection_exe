@@ -1,8 +1,10 @@
-res://Scripts/test/MutationUI.tscn
+res://Scenes/Enemies/Antivirus.tscn
 res://Assets/Shaders/GlitchShader.gdshader
-res://Scripts/test/HUD.tscn
-res://Scripts/UI/MutationUI.gd
+res://Scenes/Debug/OptionsMenu.tscn
+res://Scripts/Enemies/Antivirus.gd
+res://Scenes/UI/OptionsMenu.tscn
+res://Scenes/UI/Options/HotkeyRebindButton.tscn
+res://Scripts/UI/OptionsMenu.gd
+res://Scripts/UI/HotkeyRebindButton.gd
 res://Scripts/UI/StartMenu.gd
-res://Scenes/UI/StartMenu.tscn
-res://Scripts/Environment/Infectable.gd
-res://Scripts/Virus/Virus.gd
+res://Scripts/UI/PauseMenu.gd

@@ -34,6 +34,10 @@ NotificationManager="*uid://xh5fld4iamxw"
 ZoneManager="*uid://bn1qx11ea7dqt"
 AchievementManager="*uid://baas7o0koc8wv"
 
+[display]
+
+window/size/mode=3
+
 [global_group]
 
 virus_infection_zone=""

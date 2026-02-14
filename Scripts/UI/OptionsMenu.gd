@@ -3,6 +3,21 @@ extends Control
 ## Options Menu
 ## Options menu with resoliution, volume, and keybindings options
 
+@onready var resolutionOption: OptionButton = $MarginContainer/MainPanel/MarginContainer/VBoxContainer/ContentPanel/MarginContainer/Content/GraphicsSection/Resolution/OptionButton
+@onready var windowModeOption: OptionButton = $MarginContainer/MainPanel/MarginContainer/VBoxContainer/ContentPanel/MarginContainer/Content/GraphicsSection/WindowMode/OptionButton
+@onready var maxFPSOption: SpinBox = $MarginContainer/MainPanel/MarginContainer/VBoxContainer/ContentPanel/MarginContainer/Content/GraphicsSection/MaxFPS/OptionButton
+@onready var vsyncOption: OptionButton = $MarginContainer/MainPanel/MarginContainer/VBoxContainer/ContentPanel/MarginContainer/Content/GraphicsSection/VSync/OptionButton
+@onready var particlesOption: OptionButton = $MarginContainer/MainPanel/MarginContainer/VBoxContainer/ContentPanel/MarginContainer/Content/GraphicsSection/Particles/OptionButton
+@onready var screenShakeOption: OptionButton = $MarginContainer/MainPanel/MarginContainer/VBoxContainer/ContentPanel/MarginContainer/Content/GraphicsSection/ScreenShake/OptionButton
+
+@onready var masterOption: Slider = $MarginContainer/MainPanel/MarginContainer/VBoxContainer/ContentPanel/MarginContainer/Content/AudioSection/MasterVolume/Slider
+@onready var musicOption: Slider = $MarginContainer/MainPanel/MarginContainer/VBoxContainer/ContentPanel/MarginContainer/Content/AudioSection/MusicVolume/Slider
+@onready var sfxOption: Slider = $MarginContainer/MainPanel/MarginContainer/VBoxContainer/ContentPanel/MarginContainer/Content/AudioSection/SFXVolume/Slider
+
+@onready var audioSection: VBoxContainer = $MarginContainer/MainPanel/MarginContainer/VBoxContainer/ContentPanel/MarginContainer/Content/AudioSection
+@onready var graphicsSection: VBoxContainer = $MarginContainer/MainPanel/MarginContainer/VBoxContainer/ContentPanel/MarginContainer/Content/GraphicsSection
+@onready var controlsSection: VBoxContainer = $MarginContainer/MainPanel/MarginContainer/VBoxContainer/ContentPanel/MarginContainer/Content/ControlsSection
+
 # ========================
 # GRAPHICS
 # ========================
@@ -17,30 +32,18 @@ func _ready() -> void:
 		monitor_fps = 60
 	var max_fps = SaveManager.data.options.get("max_fps", monitor_fps)
 
-	var master_volume = SaveManager.data.options.get("master_volume", 50)
-	var music_volume = SaveManager.data.options.get("music_volume", 50)
-	var sfx_volume = SaveManager.data.options.get("sfx_volume", 50)
+	var master_volume = SaveManager.data.options.get("master_volume", 100)
+	var music_volume = SaveManager.data.options.get("music_volume", 80)
+	var sfx_volume = SaveManager.data.options.get("sfx_volume", 90)
 
-	$TabContainer/Graphics/MarginContainer/VBoxContainer/WindowMode/OptionButton.selected = window_mode_index
-	_on_window_mode_selected(window_mode_index) # Apply the window mode on startup
+	resolutionOption.selected = resolution_index
+	windowModeOption.selected = window_mode_index
+	vsyncOption.selected = vsync_index
+	maxFPSOption.value = float(max_fps)
 
-	$TabContainer/Graphics/MarginContainer/VBoxContainer/Resolution/OptionButton.selected = resolution_index
-	_on_resolution_selected(resolution_index) # Apply the resolution on startup
-
-	$TabContainer/Graphics/MarginContainer/VBoxContainer/Vsync/OptionButton.selected = vsync_index
-	_on_vsync_selected(vsync_index)
-
-	$TabContainer/Graphics/MarginContainer/VBoxContainer/MaxFPS/OptionSpin.value = float(max_fps)
-	set_max_fps(float(max_fps)) # Apply the max FPS on startup
-
-	$TabContainer/Sounds/MasterSlider.value = master_volume
-	_on_master_volume_changed(master_volume) # Apply the master volume on startup
-
-	$TabContainer/Sounds/MusicSlider.value = music_volume
-	_on_music_volume_changed(music_volume) # Apply the music volume on startup
-
-	$TabContainer/Sounds/SFXSlider.value = sfx_volume
-	_on_sfx_volume_changed(sfx_volume) # Apply the SFX volume on startup
+	masterOption.value = master_volume
+	musicOption.value = music_volume
+	sfxOption.value = sfx_volume
 
 func _on_window_mode_selected(index: int) -> void:
 	"""Change the window mode based on the selected index"""
@@ -59,7 +62,6 @@ func _on_window_mode_selected(index: int) -> void:
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
 
 	SaveManager.data.options["window_mode"] = index
-	SaveManager.save_data() # Save the options data after changing the window mode
 
 func _on_resolution_selected(index: int) -> void:
 	"""Change the resolution based on the selected index"""
@@ -75,7 +77,6 @@ func _on_resolution_selected(index: int) -> void:
 
 	DisplayServer.window_set_size(res)
 	SaveManager.data.options["resolution"] = index
-	SaveManager.save_data() # Save the options data after changing the resolution
 
 func _on_vsync_selected(index: int) -> void:
 	if index == 0: # Disabled (default)
@@ -86,13 +87,11 @@ func _on_vsync_selected(index: int) -> void:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	
 	SaveManager.data.options["vsync"] = index
-	SaveManager.save_data()
 
 func set_max_fps(_value: float) -> void:
 	var value = int(_value)
 	Engine.max_fps = value if value < 500 else 0
 	SaveManager.data.options["max_fps"] = Engine.max_fps if value < 500 else 500
-	SaveManager.save_data()
 
 # ========================
 # SOUND 
@@ -101,22 +100,38 @@ func set_max_fps(_value: float) -> void:
 func _on_master_volume_changed(value: float) -> void:
 	AudioManager.set_master_volume(value / 100.0) # Adjust master volume in AudioManager
 	SaveManager.data.options["master_volume"] = value
-	SaveManager.save_data() # Save the options data after changing the master volume
 
 func _on_music_volume_changed(value: float) -> void:
 	AudioManager.set_music_volume(value / 100.0) # Adjust music volume in AudioManager
 	SaveManager.data.options["music_volume"] = value
-	SaveManager.save_data() # Save the options data after changing the music volume
 
 func _on_sfx_volume_changed(value: float) -> void:
 	AudioManager.set_sfx_volume(value / 100.0) # Adjust SFX volume in AudioManager
 	SaveManager.data.options["sfx_volume"] = value
-	SaveManager.save_data() # Save the options data after changing the SFX volume
 
+func _on_audio_tab_pressed():
+	audioSection.visible = true
+	graphicsSection.visible = false
+	controlsSection.visible = false
+
+func _on_graphics_tab_pressed():
+	audioSection.visible = false
+	graphicsSection.visible = true
+	controlsSection.visible = false
+
+func _on_controls_tab_pressed():
+	audioSection.visible = false
+	graphicsSection.visible = false
+	controlsSection.visible = true
+
+func _on_save_button_pressed() -> void:
+	"""Save the current options data and exit the Option Menu"""
+	SaveManager.save_data()
+	EventBus.emit_notification("Options Saved", "success") 
 
 func _on_exit_button_pressed() -> void:
 	"""Exit the Option Menu and return to the Start Menu"""
 	if get_parent().has_node("Container"):
 		get_parent().get_node("Container").visible = true
 
-	visible = false
+	queue_free()

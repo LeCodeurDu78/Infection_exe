@@ -6,6 +6,7 @@ extends Control
 # ========================
 # BUTTON CALLBACKS
 # ========================
+@onready var options = preload("res://Scenes/UI/OptionsMenu.tscn")
 
 func _ready() -> void:
 	EventBus.start_menu.emit() # Notify AudioManager to play menu music
@@ -16,7 +17,9 @@ func _on_start_button_pressed() -> void:
 	ZoneManager.start_zone("files")
 
 func _on_options_button_pressed() -> void:
-	$OptionsMenu.visible = true
+	SaveManager.load_data()
+	var panel = options.instantiate()
+	add_child(panel)
 	$Container.visible = false
 
 func _on_achievements_button_pressed() -> void:

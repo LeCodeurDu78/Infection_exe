@@ -1,14 +1,47 @@
 [gd_scene format=3 uid="uid://bwdie8itbhlxs"]
 
 [ext_resource type="Script" uid="uid://0p0hrgwaiugp" path="res://Scripts/UI/HUD.gd" id="1_omqfp"]
+[ext_resource type="FontFile" uid="uid://du1x2p3jh7pht" path="res://Assets/Fonts/font text/Corptic DEMO.otf" id="2_4bm6u"]
 [ext_resource type="Texture2D" uid="uid://ftngxwx1iwhw" path="res://Assets/Sprites/UI/progress-bar-circle.png" id="2_xaom8"]
 [ext_resource type="Texture2D" uid="uid://w5j5ukjqi6jv" path="res://Assets/Sprites/UI/progress-bar-frame.png" id="3_4bm6u"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xaom8"]
-bg_color = Color(0.039215688, 0.039215688, 0.039215688, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ykvyr"]
+bg_color = Color(0.05, 0.05, 0.08, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.224, 1, 0.078, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0.224, 1, 0.078, 0.5)
+shadow_size = 8
+shadow_offset = Vector2(0, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bm6u"]
-bg_color = Color(0.24313726, 0, 0, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_lelo4"]
+font_size = 18
+font_color = Color(0.224, 1, 0.078, 0.7)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ree7"]
+font_size = 18
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_d2sja"]
+font_size = 18
+font_color = Color(0.224, 1, 0.078, 0.7)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4i0y"]
+bg_color = Color(0.17254902, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yenib"]
+bg_color = Color(0.8862745, 0, 0, 1)
 
 [node name="HUD" type="Control" unique_id=358781637]
 layout_mode = 3
@@ -19,121 +52,231 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_omqfp")
 
-[node name="Health" type="Control" parent="." unique_id=51140905]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="InfoPanel" type="PanelContainer" parent="." unique_id=1926678367]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 207.0
+offset_bottom = 100.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ykvyr")
 
-[node name="Label" type="Label" parent="Health" unique_id=1632823022]
-layout_mode = 1
-offset_right = 41.0
-offset_bottom = 44.0
-theme_override_font_sizes/font_size = 30
-text = "HP"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="MarginContainer" type="MarginContainer" parent="InfoPanel" unique_id=1575212045]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 12
 
-[node name="HealthBar" type="ProgressBar" parent="Health" unique_id=1460042685]
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoPanel/MarginContainer" unique_id=305491400]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Infection" type="Control" parent="InfoPanel/MarginContainer/VBoxContainer" unique_id=1217339182]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="InfectionContainer" type="VBoxContainer" parent="InfoPanel/MarginContainer/VBoxContainer/Infection" unique_id=1000642185]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 45.0
-offset_top = -35.0
-offset_right = 295.0
-offset_bottom = 3.0
-grow_vertical = 0
-theme_override_styles/background = SubResource("StyleBoxFlat_xaom8")
-theme_override_styles/fill = SubResource("StyleBoxFlat_4bm6u")
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="InfectionLabel" type="Label" parent="InfoPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer" unique_id=1770647937]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4bm6u")
+text = "INFECTION : 100%"
+label_settings = SubResource("LabelSettings_lelo4")
+uppercase = true
+
+[node name="ThreatContainer" type="HBoxContainer" parent="InfoPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer" unique_id=135865395]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ThreatLabel" type="Label" parent="InfoPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/ThreatContainer" unique_id=643079460]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_4bm6u")
+text = "MENACE : CRITIQUE"
+label_settings = SubResource("LabelSettings_1ree7")
+uppercase = true
+
+[node name="HealthPanel" type="PanelContainer" parent="." unique_id=971371488]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 20.0
+offset_right = 559.0
+offset_bottom = 100.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ykvyr")
+
+[node name="MarginContainer" type="MarginContainer" parent="HealthPanel" unique_id=1209286754]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HealthPanel/MarginContainer" unique_id=1160400935]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Infection" type="Control" parent="HealthPanel/MarginContainer/VBoxContainer" unique_id=2102465457]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="InfectionContainer" type="VBoxContainer" parent="HealthPanel/MarginContainer/VBoxContainer/Infection" unique_id=1740978088]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer" unique_id=1925361783]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/HBoxContainer" unique_id=588630259]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4bm6u")
+text = "Hp"
+label_settings = SubResource("LabelSettings_d2sja")
+uppercase = true
+
+[node name="VSeparator" type="VSeparator" parent="HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/HBoxContainer" unique_id=158110736]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/HBoxContainer" unique_id=1615949106]
+custom_minimum_size = Vector2(250, 30)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_i4i0y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yenib")
 value = 100.0
 show_percentage = false
 
-[node name="Infection" type="Control" parent="." unique_id=1424472759]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="ThreatContainer" type="HBoxContainer" parent="HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer" unique_id=1428103392]
+layout_mode = 2
+theme_override_constants/separation = 8
 
-[node name="XPLabel" type="Label" parent="Infection" unique_id=967292221]
+[node name="LevelLabel" type="Label" parent="HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/ThreatContainer" unique_id=1653883978]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_4bm6u")
+text = "Level : 20"
+label_settings = SubResource("LabelSettings_d2sja")
+uppercase = true
+
+[node name="VSeparator" type="VSeparator" parent="HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/ThreatContainer" unique_id=287144076]
+layout_mode = 2
+
+[node name="XPLabel" type="Label" parent="HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/ThreatContainer" unique_id=412928532]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_4bm6u")
+text = "XP : 4000000/4000000"
+label_settings = SubResource("LabelSettings_d2sja")
+uppercase = true
+
+[node name="MutationsPanel" type="PanelContainer" parent="." unique_id=1825374756]
 layout_mode = 1
-offset_left = 1.0
-offset_top = 44.0
-offset_right = 148.0
-offset_bottom = 67.0
-text = "Infection : 100%"
-uppercase = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -420.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 120.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ykvyr")
 
-[node name="ThreatLabel" type="Label" parent="Infection" unique_id=615003444]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 67.0
-offset_right = 157.0
-offset_bottom = 90.0
-text = "Menace : CRITIQUE "
-uppercase = true
+[node name="MarginContainer" type="MarginContainer" parent="MutationsPanel" unique_id=888012288]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 12
 
-[node name="MutationsCooldowns" type="HBoxContainer" parent="." unique_id=1790901363]
-layout_mode = 0
-offset_left = 785.0
-offset_right = 1152.0
-offset_bottom = 70.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MutationsPanel/MarginContainer" unique_id=1532865904]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MutationsCooldowns" type="HBoxContainer" parent="MutationsPanel/MarginContainer/VBoxContainer" unique_id=338310337]
+layout_mode = 2
+theme_override_constants/separation = 12
 alignment = 1
 
-[node name="MutationCooldown5" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=919000181]
-modulate = Color(1, 1, 1, 0)
+[node name="MutationCooldown1" type="TextureProgressBar" parent="MutationsPanel/MarginContainer/VBoxContainer/MutationsCooldowns" unique_id=1273230798]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 step = 0.1
 value = 75.0
 fill_mode = 5
+nine_patch_stretch = true
 texture_under = ExtResource("2_xaom8")
 texture_over = ExtResource("3_4bm6u")
 texture_progress = ExtResource("2_xaom8")
-tint_under = Color(0, 0.54901963, 0, 1)
-tint_progress = Color(0, 0, 0, 0.84313726)
+tint_under = Color(0.224, 1, 0.078, 0.3)
+tint_over = Color(0.224, 1, 0.078, 1)
+tint_progress = Color(0.224, 1, 0.078, 1)
 
-[node name="MutationCooldown4" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=465915357]
-modulate = Color(1, 1, 1, 0)
+[node name="MutationCooldown2" type="TextureProgressBar" parent="MutationsPanel/MarginContainer/VBoxContainer/MutationsCooldowns" unique_id=1455585479]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 step = 0.1
 value = 75.0
 fill_mode = 5
+nine_patch_stretch = true
 texture_under = ExtResource("2_xaom8")
 texture_over = ExtResource("3_4bm6u")
 texture_progress = ExtResource("2_xaom8")
-tint_under = Color(0, 0.54901963, 0, 1)
-tint_progress = Color(0, 0, 0, 0.84313726)
+tint_under = Color(0.224, 1, 0.078, 0.3)
+tint_over = Color(0.224, 1, 0.078, 1)
+tint_progress = Color(0.224, 1, 0.078, 1)
 
-[node name="MutationCooldown3" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=659561590]
-modulate = Color(1, 1, 1, 0)
+[node name="MutationCooldown3" type="TextureProgressBar" parent="MutationsPanel/MarginContainer/VBoxContainer/MutationsCooldowns" unique_id=361450806]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 step = 0.1
 value = 75.0
 fill_mode = 5
+nine_patch_stretch = true
 texture_under = ExtResource("2_xaom8")
 texture_over = ExtResource("3_4bm6u")
 texture_progress = ExtResource("2_xaom8")
-tint_under = Color(0, 0.54901963, 0, 1)
-tint_progress = Color(0, 0, 0, 0.84313726)
+tint_under = Color(0.224, 1, 0.078, 0.3)
+tint_over = Color(0.224, 1, 0.078, 1)
+tint_progress = Color(0.224, 1, 0.078, 1)
 
-[node name="MutationCooldown2" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=2096868223]
-modulate = Color(1, 1, 1, 0)
+[node name="MutationCooldown4" type="TextureProgressBar" parent="MutationsPanel/MarginContainer/VBoxContainer/MutationsCooldowns" unique_id=1952893474]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 step = 0.1
 value = 75.0
 fill_mode = 5
+nine_patch_stretch = true
 texture_under = ExtResource("2_xaom8")
 texture_over = ExtResource("3_4bm6u")
 texture_progress = ExtResource("2_xaom8")
-tint_under = Color(0, 0.54901963, 0, 1)
-tint_progress = Color(0, 0, 0, 0.84313726)
+tint_under = Color(0.224, 1, 0.078, 0.3)
+tint_over = Color(0.224, 1, 0.078, 1)
+tint_progress = Color(0.224, 1, 0.078, 1)
 
-[node name="MutationCooldown1" type="TextureProgressBar" parent="MutationsCooldowns" unique_id=547339981]
-modulate = Color(1, 1, 1, 0)
+[node name="MutationCooldown5" type="TextureProgressBar" parent="MutationsPanel/MarginContainer/VBoxContainer/MutationsCooldowns" unique_id=1195810255]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 step = 0.1
 value = 75.0
 fill_mode = 5
+nine_patch_stretch = true
 texture_under = ExtResource("2_xaom8")
 texture_over = ExtResource("3_4bm6u")
 texture_progress = ExtResource("2_xaom8")
-tint_under = Color(0, 0.60784316, 0, 1)
-tint_progress = Color(0, 0, 0, 0.84313726)
+tint_under = Color(0.224, 1, 0.078, 0.3)
+tint_over = Color(0.224, 1, 0.078, 1)
+tint_progress = Color(0.224, 1, 0.078, 1)

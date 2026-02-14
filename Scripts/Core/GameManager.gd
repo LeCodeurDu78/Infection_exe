@@ -54,7 +54,9 @@ func get_infection_percent() -> float:
 	"""Returns the percentage of infected targets (0-100)"""
 	if total_infectables == 0:
 		return 0.0
-	return (float(infected_count) / float(total_infectables)) * 100.0
+	var value = (float(infected_count) / float(total_infectables)) * 100.0
+	value = "%.2f" % value
+	return float(value)
 
 # ========================
 # THREAT LEVEL

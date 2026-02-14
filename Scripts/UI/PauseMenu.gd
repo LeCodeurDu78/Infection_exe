@@ -6,13 +6,15 @@ extends Control
 # ========================
 # BUTTON CALLBACKS
 # ========================
+@onready var options = preload("res://Scenes/UI/OptionsMenu.tscn")
+
 func _ready() -> void:
 	EventBus.pause_menu.connect(_on_pause_menu_opened)
 
 func _on_pause_menu_opened() -> void:
 	"""Called when pause menu is opened"""
-	print("test")
-	visible = true
+	var panel = options.instantiate()
+	add_child(panel)
 	get_tree().paused = true
 
 func _on_resume_button_pressed() -> void:

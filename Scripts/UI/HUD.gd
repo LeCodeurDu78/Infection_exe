@@ -10,6 +10,8 @@ extends Control
 @onready var threat_label: Label = $InfoPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/ThreatContainer/ThreatLabel
 
 @onready var healthBar: ProgressBar = $HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/HBoxContainer/ProgressBar
+@onready var healthPanel: Container = $HealthPanel
+
 @onready var level_label: Label = $HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/ThreatContainer/LevelLabel
 @onready var xp_label: Label = $HealthPanel/MarginContainer/VBoxContainer/Infection/InfectionContainer/ThreatContainer/XPLabel
 
@@ -45,6 +47,7 @@ func _ready() -> void:
 	EventBus.virus_damaged.connect(_update_health_bar_display)
 	EventBus.virus_healed.connect(_update_health_bar_display)
 	EventBus.virus_max_health.connect(_update_max_health_bar)
+	EventBus.virus_leveled_up.connect(_update_level_display)
 
 func _find_mutation_manager() -> void:
 	"""Find mutation manager in scene"""
@@ -60,13 +63,17 @@ func _process(_delta: float) -> void:
 # ========================
 # XP DISPLAY
 # ========================
+func _update_level_display(new_level: int) -> void:
+	"""Update Level label"""
+	level_label.text = "Level : " + str(new_level)
+
 func _update_xp_display() -> void:
 	"""Update XP label"""
 	xp_label.text = "XP : " + GameManager.get_virus_xp_text()
 
 func _update_infection_display() -> void:
-	"""Update XP label"""
-	xp_label.text = "Infection : " + str(GameManager.get_infection_percent())
+	"""Update Infection label"""
+	infection_label.text = "Infection : " + str(GameManager.get_infection_percent())
 
 # ========================
 # THREAT DISPLAY
@@ -76,7 +83,6 @@ func _update_threat_display() -> void:
 	var threat_level := GameManager.get_threat_level()
 	threat_label.text = THREAT_TEXTS.get(threat_level, "Menace : INCONNUE")
 	threat_label.modulate = THREAT_COLORS.get(threat_level, Color.WHITE)
-	
 
 # ========================
 # THREAT DISPLAY
@@ -88,6 +94,7 @@ func _update_health_bar_display(_amount: int, _remaining_health: int) -> void:
 func _update_max_health_bar(max_health: int):
 	healthBar.max_value = max_health
 	healthBar.size.x = max_health * 2.5
+	healthPanel.size.x = max_health * 2.8
 
 # ========================
 # COOLDOWN DISPLAY

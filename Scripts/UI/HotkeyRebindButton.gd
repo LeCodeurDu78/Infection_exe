@@ -1,8 +1,8 @@
 class_name HotkeyRebindButton
 extends Control
 
-@onready var label = $HBoxContainer/ActionName as Label
-@onready var button = $HBoxContainer/ActionButton as Button
+@onready var label = $Label as Label
+@onready var button = $Button as Button
 
 @export var action_name : String = "move_left"
 
@@ -95,7 +95,6 @@ func rebind_action_key(event) -> void:
 	reset_buttons()
 
 	SaveManager.data.options.keysbiding[action_name] = event.physical_keycode
-	SaveManager.save_data()
 
 func reset_buttons():
 	for i in get_tree().get_nodes_in_group("HotkeyRebindButton"):

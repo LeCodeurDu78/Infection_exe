@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://firewall_001"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/Firewall.gd" id="1_firewall"]
+[ext_resource type="Texture2D" uid="uid://c5xq8mje0nids" path="res://addons/2d_shapes/Rectangle.svg" id="2_rect"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_firewall"]
+size = Vector2(150, 20)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_firewall"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(75, 10, 1)
+angle_min = -45.0
+angle_max = 45.0
+direction = Vector3(0, -1, 0)
+spread = 30.0
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, -20, 0)
+scale_min = 2.0
+scale_max = 4.0
+color = Color(1, 0.3, 0, 1)
+hue_variation_min = -0.1
+hue_variation_max = 0.1
+
+[node name="Firewall" type="StaticBody2D" groups=["firewall"]]
+z_index = 10
+script = ExtResource("1_firewall")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 0.9)
+scale = Vector2(10, 1.5)
+texture = ExtResource("2_rect")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_firewall")
+
+[node name="DamageArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("RectangleShape2D_firewall")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_firewall")
+lifetime = 1.2
+explosiveness = 0.3
