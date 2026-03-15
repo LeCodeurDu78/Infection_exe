@@ -1,10 +1,3 @@
-res://Scenes/Enemies/Antivirus.tscn
-res://Assets/Shaders/GlitchShader.gdshader
-res://Scenes/Debug/OptionsMenu.tscn
-res://Scripts/Enemies/Antivirus.gd
-res://Scenes/UI/OptionsMenu.tscn
-res://Scenes/UI/Options/HotkeyRebindButton.tscn
-res://Scripts/UI/OptionsMenu.gd
-res://Scripts/UI/HotkeyRebindButton.gd
-res://Scripts/UI/StartMenu.gd
-res://Scripts/UI/PauseMenu.gd
+res://Scenes/Entities/Viruses/VirusBase.tscn
+res://Autoloads/NetworkManager.gd
+res://Scripts/UI/Lobby.gd

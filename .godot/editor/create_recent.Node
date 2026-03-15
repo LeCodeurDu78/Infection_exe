@@ -1,3 +1,8 @@
+TileMapLayer
+TileMap
+Parallax2D
+TextureRect
+Sprite2D
 Container
 MarginContainer
 VBoxContainer
@@ -7,8 +12,3 @@ HBoxContainer
 VSlider
 VSeparator
 Control
-SpinBox
-ProgressBar
-Button
-Sprite2D
-Label

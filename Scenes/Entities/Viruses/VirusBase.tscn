@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://tdja0783lid"]
+
+[ext_resource type="Script" uid="uid://dpjr8xvibx2tn" path="res://Scripts/Entities/Viruses/VirusBase.gd" id="1_virusbase"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+height = 24.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitbox"]
+radius = 12.0
+height = 26.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hurtbox"]
+radius = 12.0
+height = 26.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sync"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:current_hp")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:is_dead")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:facing_direction")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="VirusBase" type="CharacterBody2D" unique_id=1875889827]
+collision_layer = 2
+script = ExtResource("1_virusbase")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=766107505]
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=606192833]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=232911503]
+
+[node name="HitBox" type="Area2D" parent="." unique_id=282187066]
+collision_layer = 2
+collision_mask = 3
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=2137713604]
+shape = SubResource("CapsuleShape2D_hitbox")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1449239449]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=2011843775]
+shape = SubResource("CapsuleShape2D_hurtbox")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=145614894]
+replication_config = SubResource("SceneReplicationConfig_sync")

@@ -1,0 +1,224 @@
+[gd_scene load_steps=2 format=3 uid="uid://lobby001"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Lobby.gd" id="1_lobby"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_lobby")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.04, 0.06, 0.04, 1.0)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_top = 40.0
+offset_bottom = 80.0
+text = "VIRUS.EXE"
+horizontal_alignment = 1
+
+[node name="Panels" type="Node" parent="."]
+
+[node name="PanelMain" type="PanelContainer" parent="Panels"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -90.0
+offset_right = 140.0
+offset_bottom = 90.0
+
+[node name="VBox" type="VBoxContainer" parent="Panels/PanelMain"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BtnHost" type="Button" parent="Panels/PanelMain/VBox"]
+layout_mode = 2
+text = "Héberger une partie"
+custom_minimum_size = Vector2(280, 48)
+
+[node name="BtnJoin" type="Button" parent="Panels/PanelMain/VBox"]
+layout_mode = 2
+text = "Rejoindre une partie"
+custom_minimum_size = Vector2(280, 48)
+
+[node name="BtnQuit" type="Button" parent="Panels/PanelMain/VBox"]
+layout_mode = 2
+text = "✖  Quitter"
+custom_minimum_size = Vector2(280, 48)
+
+[node name="PanelHost" type="PanelContainer" parent="Panels"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -250.0
+offset_right = 180.0
+offset_bottom = 250.0
+
+[node name="VBox" type="VBoxContainer" parent="Panels/PanelHost"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LabelTitle" type="Label" parent="Panels/PanelHost/VBox"]
+text = "Héberger"
+horizontal_alignment = 1
+
+[node name="LabelVirus" type="Label" parent="Panels/PanelHost/VBox"]
+text = "Choix du virus :"
+
+[node name="VirusOptions" type="OptionButton" parent="Panels/PanelHost/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 36)
+
+[node name="LabelPort" type="Label" parent="Panels/PanelHost/VBox"]
+text = "Port d'écoute :"
+
+[node name="PortField" type="LineEdit" parent="Panels/PanelHost/VBox"]
+layout_mode = 2
+placeholder_text = "7777"
+custom_minimum_size = Vector2(0, 36)
+max_length = 5
+
+[node name="BtnConfirmHost" type="Button" parent="Panels/PanelHost/VBox"]
+layout_mode = 2
+text = "Lancer le serveur"
+custom_minimum_size = Vector2(0, 44)
+
+[node name="HSep1" type="HSeparator" parent="Panels/PanelHost/VBox"]
+layout_mode = 2
+
+[node name="LabelPlayers" type="Label" parent="Panels/PanelHost/VBox"]
+text = "Joueurs connectés :"
+
+[node name="PlayerList" type="VBoxContainer" parent="Panels/PanelHost/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
+
+[node name="HSep2" type="HSeparator" parent="Panels/PanelHost/VBox"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Panels/PanelHost/VBox"]
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="BtnStart" type="Button" parent="Panels/PanelHost/VBox"]
+layout_mode = 2
+text = "Démarrer la partie"
+custom_minimum_size = Vector2(0, 44)
+visible = false
+disabled = true
+
+[node name="BtnBack" type="Button" parent="Panels/PanelHost/VBox"]
+layout_mode = 2
+text = "Retour"
+custom_minimum_size = Vector2(0, 36)
+
+[node name="PanelJoin" type="PanelContainer" parent="Panels"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -210.0
+offset_right = 180.0
+offset_bottom = 210.0
+
+[node name="VBox" type="VBoxContainer" parent="Panels/PanelJoin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LabelTitle" type="Label" parent="Panels/PanelJoin/VBox"]
+text = "Rejoindre"
+horizontal_alignment = 1
+
+[node name="LabelVirus" type="Label" parent="Panels/PanelJoin/VBox"]
+text = "Choix du virus :"
+
+[node name="VirusOptions" type="OptionButton" parent="Panels/PanelJoin/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 36)
+
+[node name="LabelIp" type="Label" parent="Panels/PanelJoin/VBox"]
+text = "Adresse IP du serveur :"
+
+[node name="IpField" type="LineEdit" parent="Panels/PanelJoin/VBox"]
+layout_mode = 2
+placeholder_text = "127.0.0.1"
+custom_minimum_size = Vector2(0, 36)
+
+[node name="LabelPort" type="Label" parent="Panels/PanelJoin/VBox"]
+text = "Port :"
+
+[node name="PortField" type="LineEdit" parent="Panels/PanelJoin/VBox"]
+layout_mode = 2
+placeholder_text = "7777"
+custom_minimum_size = Vector2(0, 36)
+max_length = 5
+
+[node name="HSep" type="HSeparator" parent="Panels/PanelJoin/VBox"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Panels/PanelJoin/VBox"]
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="BtnConnect" type="Button" parent="Panels/PanelJoin/VBox"]
+layout_mode = 2
+text = "Se connecter"
+custom_minimum_size = Vector2(0, 44)
+
+[node name="BtnBack" type="Button" parent="Panels/PanelJoin/VBox"]
+layout_mode = 2
+text = "Retour"
+custom_minimum_size = Vector2(0, 36)
+
+[node name="PanelWaiting" type="PanelContainer" parent="Panels"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -70.0
+offset_right = 180.0
+offset_bottom = 70.0
+
+[node name="VBox" type="VBoxContainer" parent="Panels/PanelWaiting"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="WaitingLabel" type="Label" parent="Panels/PanelWaiting/VBox"]
+text = "En attente du démarrage…"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="BtnDisconnect" type="Button" parent="Panels/PanelWaiting/VBox"]
+layout_mode = 2
+text = "Se déconnecter"
+custom_minimum_size = Vector2(0, 36)

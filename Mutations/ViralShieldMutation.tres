@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="ViralShieldMutation" format=3 uid="uid://byewvhp31kojk"]
-
-[ext_resource type="Script" uid="uid://v6gex6na6y3u" path="res://Scripts/MutationsAvailable/ViralShieldMutation.gd" id="1_viral_shield"]
-
-[resource]
-script = ExtResource("1_viral_shield")
-name = "Viral Shield"
-description = "Damage-absorbing shield for 5 s"
-level_min = 2
